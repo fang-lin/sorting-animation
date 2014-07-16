@@ -1,0 +1,19 @@
+{
+  "name": "sorting-algorithm",
+  "version": "0.1.0",
+  "authors": [
+    "IsaacFang <isaac.fang@grapecity.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.6.0",
+    "EaselJS": "*"
+  }
+}
