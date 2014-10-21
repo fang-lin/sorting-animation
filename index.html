@@ -2,9 +2,29 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <style>
+        #chart-wrap {
+            width: 640px;
+            height: 320px;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="bowers/underscore/underscore.js"></script>
+    <script src="bowers/jquery/dist/jquery.js"></script>
+    <script src="bowers/d3/d3.js"></script>
+
+    <script src="app/Chart.js"></script>
+    <script src="app/algorithm/bubbleSort.js"></script>
+    <script src="app/algorithm/insertSort.js"></script>
+    <script src="app/algorithm/binaryInsertSort.js"></script>
+    <script src="app/algorithm/quickSort.js"></script>
+    <script src="app/main.js"></script>
     <title></title>
 </head>
 <body>
-
+<!--<svg id="chart" width="640" height="240"></svg>-->
+<div id="chart-wrap">
+    <canvas id="chart" width="640" height="320"></canvas>
+</div>
 </body>
 </html>
