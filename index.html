@@ -3,10 +3,24 @@
 <head lang="en">
     <meta charset="UTF-8">
     <style>
-        #chart-wrap {
-            width: 640px;
-            height: 320px;
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+        }
+
+        #body {
+            width: 320px;
             margin: 0 auto;
+        }
+
+        #chart-wrap {
+            height: 320px;
+        }
+
+        #input-wrap,
+        #btns-wrap {
+            text-align: center;
         }
     </style>
     <script src="bowers/underscore/underscore.js"></script>
@@ -22,9 +36,19 @@
     <title></title>
 </head>
 <body>
-<!--<svg id="chart" width="640" height="240"></svg>-->
-<div id="chart-wrap">
-    <canvas id="chart" width="640" height="320"></canvas>
+<div id="body">
+    <div id="input-wrap">
+        <input type="number" id="interval-time" value="0"/>
+    </div>
+    <div id="chart-wrap">
+        <canvas id="chart" width="320" height="320"></canvas>
+    </div>
+    <div id="btns-wrap">
+        <button type="text" data-alg="bubbleSort">bubble</button>
+        <button type="text" data-alg="insertSort">insert</button>
+        <button type="text" data-alg="binaryInsertSort">binaryInsert</button>
+        <button type="text" data-alg="quickSort">quick</button>
+    </div>
 </div>
 </body>
 </html>

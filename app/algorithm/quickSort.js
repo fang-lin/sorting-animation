@@ -7,38 +7,39 @@
     window.quickSort = function (list) {
         var steps = [];
 
-        function _quickSort_(seq) {
-
-            console.log(seq);
+        function _quickSort_(list) {
 
 
-
-            if (seq.length > 1) {
-                var k = seq[0];
-                var x = [];
-                var y = [];
-
-                var len = seq.length;
+            if (list.length) {
+                var left = [],
+                    right = [];
+                var pivot = list[0],
+                    len = list.length;
 
                 for (var i = 1; i < len; i++) {
-                    if (seq[i] <= k) {
-                        x.push(seq[i]);
+                    if (list[i] < pivot) {
+                        left.push(list[i]);
                     } else {
-                        y.push(seq[i]);
+                        right.push(list[i]);
                     }
-
                 }
-                x = _quickSort_(x);
-                y = _quickSort_(y);
-                return x.concat(k, y);
+
+                console.log(left, pivot, right);
+
+                left = _quickSort_(left);
+                right = _quickSort_(right);
+
+                return left.concat(pivot, right);
             } else {
-                return seq;
+                return [];
             }
         }
 
 //        _quickSort_(list);
 
         steps.push(_quickSort_(list));
+
+//        console.log(list)
 
         return steps;
     }

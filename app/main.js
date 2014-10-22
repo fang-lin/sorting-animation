@@ -5,22 +5,30 @@
 
 $(function () {
     var chart = new Chart($('#chart'));
-
+    var intervalId, intervalTime = $('#interval-time').val() || 0;
     var list = [];
-    for (var i = 1; i <= 40; ++i) {
+    var len = 10;
+
+    for (var i = 1; i <= len; ++i) {
         list.push(i);
     }
 
-//    var queue = bubbleSort(_.shuffle(list));
-//    var queue = insertSort(_.shuffle(list));
-//    var queue = binaryInsertSort(_.shuffle(list));
-    var queue = quickSort(_.shuffle(list));
+    $('#btns-wrap>button').click(function (event) {
+        list = _.shuffle(list);
+        var alg = $(event.currentTarget).attr('data-alg');
+        var queue = window[alg](list);
 
-    var interval = setInterval(function () {
-        if (queue.length) {
-            chart.render(queue.shift());
-        } else {
-            clearInterval(interval);
-        }
-    }, 500);
+        clearInterval(intervalId);
+        intervalId = setInterval(function () {
+            if (queue.length) {
+                chart.render(queue.shift());
+            } else {
+                clearInterval(intervalId);
+            }
+        }, intervalTime);
+    });
+
+    $('#interval-time').change(function (event) {
+        intervalTime = $(event.currentTarget).val();
+    });
 });
