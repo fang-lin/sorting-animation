@@ -27,7 +27,7 @@
             list[j + 1] = tmp;
             steps.push(_.clone(list));
         }
-
+        steps.push(_.clone(list));
         return steps;
     }
 })(window);

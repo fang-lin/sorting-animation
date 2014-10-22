@@ -4,10 +4,10 @@
  */
 
 $(function () {
-    var chart = new Chart($('#chart'));
+    var len = 160;
+    var chart = new Chart($('#chart'), len);
     var intervalId, intervalTime = $('#interval-time').val() || 0;
     var list = [];
-    var len = 10;
 
     for (var i = 1; i <= len; ++i) {
         list.push(i);

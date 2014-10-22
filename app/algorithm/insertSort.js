@@ -6,18 +6,17 @@
 (function (window) {
     window.insertSort = function (list) {
         var steps = [],
-            tmp,
+            next,
             len = list.length;
 
         for (var i = 1; i < len; i++) {
-            tmp = list[i];
-            var j = i - 1;
-            while (j >= 0 && tmp < list[j]) {
+            next = list[i];
+
+            for (var j = i - 1; j >= 0 && next < list[j]; j--) {
                 list[j + 1] = list[j];
                 steps.push(_.clone(list));
-                j--;
             }
-            list[j + 1] = tmp;
+            list[j + 1] = next;
             steps.push(_.clone(list));
         }
 

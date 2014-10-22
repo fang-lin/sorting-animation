@@ -4,42 +4,46 @@
  */
 
 (function (window) {
+
     window.quickSort = function (list) {
-        var steps = [];
+        var steps = [],
+            len = list.length;
 
-        function _quickSort_(list) {
+        (function _quickSort_(list, left, right) {
+            var pivot, i, j,
+                tmp;
 
+            if (left < right) {
+                i = left;
+                j = right + 1;
+                pivot = list[left];
 
-            if (list.length) {
-                var left = [],
-                    right = [];
-                var pivot = list[0],
-                    len = list.length;
+                do {
+                    do
+                        i++;
+                    while (list[i] < pivot);
 
-                for (var i = 1; i < len; i++) {
-                    if (list[i] < pivot) {
-                        left.push(list[i]);
-                    } else {
-                        right.push(list[i]);
+                    do
+                        j--;
+                    while (list[j] > pivot);
+
+                    if (i < j) {
+                        tmp = list[i];
+                        list[i] = list[j];
+                        list[j] = tmp;
+                        steps.push(_.clone(list));
                     }
-                }
+                } while (i < j);
 
-                console.log(left, pivot, right);
+                tmp = list[left];
+                list[left] = list[j];
+                list[j] = tmp;
 
-                left = _quickSort_(left);
-                right = _quickSort_(right);
-
-                return left.concat(pivot, right);
-            } else {
-                return [];
+                steps.push(_.clone(list));
+                _quickSort_(list, left, j - 1);
+                _quickSort_(list, j + 1, right);
             }
-        }
-
-//        _quickSort_(list);
-
-        steps.push(_quickSort_(list));
-
-//        console.log(list)
+        })(list, 0, len - 1);
 
         return steps;
     }

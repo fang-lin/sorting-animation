@@ -15,8 +15,8 @@
                     tmp = list[j];
                     list[j] = list[j + 1];
                     list[j + 1] = tmp;
+                    steps.push(_.clone(list));
                 }
-                steps.push(_.clone(list));
             }
         }
 
