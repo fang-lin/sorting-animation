@@ -11,7 +11,7 @@
             len = list.length;
 
         function _merge_(low, mid, high) {
-            var tmp = [],
+            var ordered = [],
                 i = low,
                 j = mid + 1,
                 k = 0;
@@ -22,9 +22,9 @@
                     compare: [i, j]
                 });
                 if (list[i] <= list[j]) {
-                    tmp[k++] = list[i++];
+                    ordered[k++] = list[i++];
                 } else {
-                    tmp[k++] = list[j++];
+                    ordered[k++] = list[j++];
                 }
             }
             while (i <= mid) {
@@ -32,17 +32,17 @@
                     list: _.clone(list),
                     compare: [i]
                 });
-                tmp[k++] = list[i++];
+                ordered[k++] = list[i++];
             }
             while (j <= high) {
                 steps.push({
                     list: _.clone(list),
                     compare: [j]
                 });
-                tmp[k++] = list[j++];
+                ordered[k++] = list[j++];
             }
             for (k = 0, i = low; i <= high; k++, i++) {
-                list[i] = tmp[k];
+                list[i] = ordered[k];
                 steps.push({
                     list: _.clone(list),
                     swap: [i]
@@ -54,12 +54,9 @@
             var i;
             for (i = 0; i < n - 2 * len; i += 2 * len) {
                 _merge_(i, i + len - 1, i + 2 * len - 1);
-
             }
             if (i + len < n) {
                 _merge_(i, i + len - 1, n - 1);
-            } else {
-
             }
         }
 
