@@ -13,11 +13,21 @@
             next = list[i];
 
             for (var j = i - 1; j >= 0 && next < list[j]; j--) {
+                steps.push({
+                    list: _.clone(list),
+                    compare: [i, j]
+                });
                 list[j + 1] = list[j];
-                steps.push(_.clone(list));
+                steps.push({
+                    list: _.clone(list),
+                    swap: [j + 1]
+                });
             }
             list[j + 1] = next;
-            steps.push(_.clone(list));
+            steps.push({
+                list: _.clone(list),
+                swap: [j + 1]
+            });
         }
 
         return steps;

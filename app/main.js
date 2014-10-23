@@ -4,9 +4,9 @@
  */
 
 $(function () {
-    var len = 160;
+    var len = 320;
     var chart = new Chart($('#chart'), len);
-    var intervalId, intervalTime = $('#interval-time').val() || 0;
+    var setTimeoutId, intervalFn, intervalTime = $('#interval-time').val() || 0;
     var list = [];
 
     for (var i = 1; i <= len; ++i) {
@@ -18,14 +18,17 @@ $(function () {
         var alg = $(event.currentTarget).attr('data-alg');
         var queue = window[alg](list);
 
-        clearInterval(intervalId);
-        intervalId = setInterval(function () {
+        clearTimeout(setTimeoutId);
+        intervalFn = null;
+
+        (function intervalFn() {
             if (queue.length) {
                 chart.render(queue.shift());
-            } else {
-                clearInterval(intervalId);
+                setTimeoutId = setTimeout(function () {
+                    intervalFn();
+                }, intervalTime);
             }
-        }, intervalTime);
+        })();
     });
 
     $('#interval-time').change(function (event) {

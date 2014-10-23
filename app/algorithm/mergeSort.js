@@ -17,6 +17,10 @@
                 k = 0;
 
             while (i <= mid && j <= high) {
+                steps.push({
+                    list: _.clone(list),
+                    compare: [i, j]
+                });
                 if (list[i] <= list[j]) {
                     tmp[k++] = list[i++];
                 } else {
@@ -24,14 +28,25 @@
                 }
             }
             while (i <= mid) {
+                steps.push({
+                    list: _.clone(list),
+                    compare: [i]
+                });
                 tmp[k++] = list[i++];
             }
             while (j <= high) {
+                steps.push({
+                    list: _.clone(list),
+                    compare: [j]
+                });
                 tmp[k++] = list[j++];
             }
             for (k = 0, i = low; i <= high; k++, i++) {
                 list[i] = tmp[k];
-                steps.push(_.clone(list));
+                steps.push({
+                    list: _.clone(list),
+                    swap: [i]
+                });
             }
         }
 

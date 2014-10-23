@@ -19,19 +19,35 @@
                 pivot = list[left];
 
                 do {
-                    do
+                    do {
+                        steps.push({
+                            list: _.clone(list),
+                            compare: [pivot, i]
+                        });
                         i++;
-                    while (list[i] < pivot);
+                    } while (list[i] < pivot);
 
-                    do
+                    do {
+                        steps.push({
+                            list: _.clone(list),
+                            compare: [pivot, j]
+                        });
                         j--;
-                    while (list[j] > pivot);
+                    } while (list[j] > pivot);
+
+                    steps.push({
+                        list: _.clone(list),
+                        compare: [i, j]
+                    });
 
                     if (i < j) {
                         tmp = list[i];
                         list[i] = list[j];
                         list[j] = tmp;
-                        steps.push(_.clone(list));
+                        steps.push({
+                            list: _.clone(list),
+                            swap: [i, j]
+                        });
                     }
                 } while (i < j);
 
@@ -39,7 +55,10 @@
                 list[left] = list[j];
                 list[j] = tmp;
 
-                steps.push(_.clone(list));
+                steps.push({
+                    list: _.clone(list),
+                    swap: [left, j]
+                });
                 _quickSort_(list, left, j - 1);
                 _quickSort_(list, j + 1, right);
             }
