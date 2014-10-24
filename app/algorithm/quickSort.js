@@ -6,10 +6,9 @@
 (function (window) {
 
     window.quickSort = function (list) {
-        var steps = [],
-            len = list.length;
+        var steps = [];
 
-        (function _quickSort_(list, left, right) {
+        function _quickSort_(list, left, right) {
             var pivot, i, j,
                 tmp;
 
@@ -62,7 +61,9 @@
                 _quickSort_(list, left, j - 1);
                 _quickSort_(list, j + 1, right);
             }
-        })(list, 0, len - 1);
+        }
+
+        _quickSort_(list, 0, list.length - 1);
 
         return steps;
     }

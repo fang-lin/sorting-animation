@@ -42,7 +42,7 @@
             cWidth = this.width / list.length;
 
             list.forEach(function (num, i) {
-                canvas.fillStyle = '#666';
+                canvas.fillStyle = '#333';
                 if (compare && compare.indexOf(i) !== -1)
                     canvas.fillStyle = '#3f3';
                 if (swap && swap.indexOf(i) !== -1)
@@ -52,11 +52,13 @@
 
         } else {
             cWidth = this.width / ele.length;
-            canvas.fillStyle = '#666';
+            canvas.fillStyle = '#333';
             ele.forEach(function (num, i) {
                 canvas.fillRect(cWidth * i, height - cHeight * num, cWidth, cHeight * num);
             });
         }
+
+        return this;
     };
 
     window.Chart = Chart;

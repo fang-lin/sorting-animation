@@ -7,6 +7,84 @@
             margin: 0;
             padding: 0;
             font-size: 12px;
+            font-family: consolas, monospace;
+        }
+
+        .btns-wrap {
+            margin: 5px 0;
+        }
+
+        .btns-wrap:after {
+            content: ' ';
+            display: block;
+            clear: both;
+            line-height: 0;
+            font-size: 0;
+            height: 0;
+        }
+
+        .btns-wrap button {
+            font-size: 12px;
+            line-height: 18px;
+            font-family: consolas, monospace;
+            cursor: pointer;
+            color: #006544;
+            background: #eee;
+            outline: medium none;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: solid 1px #666;
+            /*margin: 0;*/
+            padding: 3px 0;
+            float: left;
+        }
+
+        .btns-wrap button:hover {
+            background: #a9debf;
+        }
+
+        .btns-wrap button.active {
+            color: #fff;
+            background: #219161;
+        }
+
+        .label-wrap {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .btns-wrap label:first-child,
+        .btns-wrap button:first-child {
+            -webkit-border-radius: 4px 0 0 4px;
+            -moz-border-radius: 4px 0 0 4px;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .btns-wrap label:last-child,
+        .btns-wrap button:last-child {
+            -webkit-border-radius: 0 4px 4px 0;
+            -moz-border-radius: 0 4px 4px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        button + button,
+        label + button,
+        button + label {
+            border-left: medium none !important;
+        }
+
+        #delay-wrap button,
+        #length-wrap button {
+            width: 16.66%;
+        }
+
+        .alg-wrap button {
+            width: 24.99%;
         }
 
         #body {
@@ -19,8 +97,12 @@
         }
 
         #input-wrap,
-        #btns-wrap {
+        .btns-wrap {
             text-align: center;
+            font-size: 0;
+            letter-spacing: 0;
+            word-spacing: 0;
+            border-collapse: collapse;
         }
     </style>
     <script src="bowers/underscore/underscore.js"></script>
@@ -38,19 +120,49 @@
 </head>
 <body>
 <div id="body">
-    <div id="input-wrap">
-        <input type="number" id="interval-time" value="0"/>
-    </div>
     <div id="chart-wrap">
         <canvas id="chart" width="320" height="320"></canvas>
     </div>
-    <div id="btns-wrap">
-        <button type="text" data-alg="bubbleSort">bubble</button>
-        <button type="text" data-alg="insertSort">insert</button>
-        <!--<button type="text" data-alg="binaryInsertSort">binaryInsert</button>-->
-        <button type="text" data-alg="quickSort">quick</button>
-        <button type="text" data-alg="mergeSort">merge</button>
-        <button type="text" data-alg="heapSort">heap</button>
+    <div class="btns-wrap">
+        <button type="text" id="play-btn" data-play="false">Play</button>
+    </div>
+    <div class="label-wrap">
+        <label for="length-wrap">Delay</label>
+    </div>
+    <div class="btns-wrap" id="delay-wrap">
+        <button type="text" class="delay-btn" data-delay="0">0</button>
+        <button type="text" class="delay-btn" data-delay="50">50</button>
+        <button type="text" class="delay-btn" data-delay="100">100</button>
+        <button type="text" class="delay-btn" data-delay="200">200</button>
+        <button type="text" class="delay-btn" data-delay="500">500</button>
+        <button type="text" class="delay-btn" data-delay="1000">1000</button>
+    </div>
+    <div class="label-wrap">
+        <label for="length-wrap">Length</label>
+    </div>
+    <div class="btns-wrap" id="length-wrap">
+        <button type="text" class="length-btn" data-length="10">10</button>
+        <button type="text" class="length-btn" data-length="20">20</button>
+        <button type="text" class="length-btn" data-length="40">40</button>
+        <button type="text" class="length-btn" data-length="80">80</button>
+        <button type="text" class="length-btn" data-length="160">160</button>
+        <button type="text" class="length-btn" data-length="320">320</button>
+    </div>
+    <div class="label-wrap">
+        <label>Algorithm</label>
+    </div>
+    <div class="btns-wrap alg-wrap">
+        <button type="text" data-alg="bubbleSort" class="alg-btn">Bubble</button>
+        <button type="text" data-alg="insertSort" class="alg-btn">Insert</button>
+        <!--<button type="text" data-alg="binaryInsertSort" class="alg-btn">binaryInsert</button>-->
+        <button type="text" data-alg="quickSort" class="alg-btn">Quick</button>
+        <button type="text" data-alg="mergeSort" class="alg-btn">Merge</button>
+    </div>
+    <div class="btns-wrap alg-wrap">
+        <button type="text" data-alg="heapSort" class="alg-btn">Heap</button>
+        <button type="text" data-alg="selectSort" class="alg-btn">Select</button>
+        <button type="text" data-alg="shellSort" class="alg-btn">Shell</button>
+        <button type="text" data-alg="shakerSort" class="alg-btn">Shaker</button>
     </div>
 </div>
 </body>
