@@ -7,7 +7,14 @@
             margin: 0;
             padding: 0;
             font-size: 12px;
-            font-family: consolas, monospace;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background: #eee;
+        }
+
+        #title {
+            font-size: 12px;
+            font-weight: normal;
+            text-align: center;
         }
 
         .btns-wrap {
@@ -26,10 +33,10 @@
         .btns-wrap button {
             font-size: 12px;
             line-height: 18px;
-            font-family: consolas, monospace;
+            font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
             cursor: pointer;
             color: #006544;
-            background: #eee;
+            background: #ffffff;
             outline: medium none;
             text-align: center;
             white-space: nowrap;
@@ -39,8 +46,7 @@
             -ms-user-select: none;
             user-select: none;
             border: solid 1px #666;
-            /*margin: 0;*/
-            padding: 3px 0;
+            padding: 2px 0;
             float: left;
         }
 
@@ -54,7 +60,7 @@
         }
 
         .label-wrap {
-            margin: 10px 0;
+            margin: 8px 0;
             text-align: center;
         }
 
@@ -79,8 +85,12 @@
         }
 
         #delay-wrap button,
-        #length-wrap button {
+        #count-wrap button {
             width: 16.66%;
+        }
+
+        #play-wrap button {
+            width: 33.32%;
         }
 
         .alg-wrap button {
@@ -94,15 +104,29 @@
 
         #chart-wrap {
             height: 320px;
+            padding: 8px 0;
         }
 
-        #input-wrap,
         .btns-wrap {
             text-align: center;
             font-size: 0;
             letter-spacing: 0;
             word-spacing: 0;
             border-collapse: collapse;
+        }
+
+        #copyright {
+            text-align: center;
+            color: #999999;
+        }
+
+        #copyright a {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        #copyright a:hover {
+            color: #219161;
         }
     </style>
     <script src="bowers/underscore/underscore.js"></script>
@@ -116,18 +140,37 @@
     <script src="app/algorithm/mergeSort.js"></script>
     <script src="app/algorithm/heapSort.js"></script>
     <script src="app/main.js"></script>
-    <title></title>
+    <title>Visual sorting algorithm</title>
 </head>
 <body>
 <div id="body">
+    <h1 id="title">Sorting Algorithm Animation</h1>
+
     <div id="chart-wrap">
         <canvas id="chart" width="320" height="320"></canvas>
     </div>
-    <div class="btns-wrap">
+    <div class="btns-wrap" id="play-wrap">
+        <button type="text" id="shuffle-btn">Shuffle</button>
         <button type="text" id="play-btn" data-play="false">Play</button>
+        <button type="text" id="reverse-btn">Reverse</button>
     </div>
     <div class="label-wrap">
-        <label for="length-wrap">Delay</label>
+        <label>Algorithm</label>
+    </div>
+    <div class="btns-wrap alg-wrap">
+        <button type="text" data-alg="bubbleSort" class="alg-btn">Bubble</button>
+        <button type="text" data-alg="insertSort" class="alg-btn">Insert</button>
+        <button type="text" data-alg="quickSort" class="alg-btn">Quick</button>
+        <button type="text" data-alg="mergeSort" class="alg-btn">Merge</button>
+    </div>
+    <div class="btns-wrap alg-wrap">
+        <button type="text" data-alg="heapSort" class="alg-btn">Heap</button>
+        <button type="text" data-alg="selectSort" class="alg-btn">Select</button>
+        <button type="text" data-alg="shellSort" class="alg-btn">Shell</button>
+        <button type="text" data-alg="shakerSort" class="alg-btn">Shaker</button>
+    </div>
+    <div class="label-wrap">
+        <label for="delay-wrap">Delay(ms)</label>
     </div>
     <div class="btns-wrap" id="delay-wrap">
         <button type="text" class="delay-btn" data-delay="0">0</button>
@@ -138,32 +181,19 @@
         <button type="text" class="delay-btn" data-delay="1000">1000</button>
     </div>
     <div class="label-wrap">
-        <label for="length-wrap">Length</label>
+        <label for="count-wrap">Count</label>
     </div>
-    <div class="btns-wrap" id="length-wrap">
-        <button type="text" class="length-btn" data-length="10">10</button>
-        <button type="text" class="length-btn" data-length="20">20</button>
-        <button type="text" class="length-btn" data-length="40">40</button>
-        <button type="text" class="length-btn" data-length="80">80</button>
-        <button type="text" class="length-btn" data-length="160">160</button>
-        <button type="text" class="length-btn" data-length="320">320</button>
+    <div class="btns-wrap" id="count-wrap">
+        <button type="text" class="count-btn" data-count="10">10</button>
+        <button type="text" class="count-btn" data-count="20">20</button>
+        <button type="text" class="count-btn" data-count="40">40</button>
+        <button type="text" class="count-btn" data-count="80">80</button>
+        <button type="text" class="count-btn" data-count="160">160</button>
+        <button type="text" class="count-btn" data-count="320">320</button>
     </div>
-    <div class="label-wrap">
-        <label>Algorithm</label>
-    </div>
-    <div class="btns-wrap alg-wrap">
-        <button type="text" data-alg="bubbleSort" class="alg-btn">Bubble</button>
-        <button type="text" data-alg="insertSort" class="alg-btn">Insert</button>
-        <!--<button type="text" data-alg="binaryInsertSort" class="alg-btn">binaryInsert</button>-->
-        <button type="text" data-alg="quickSort" class="alg-btn">Quick</button>
-        <button type="text" data-alg="mergeSort" class="alg-btn">Merge</button>
-    </div>
-    <div class="btns-wrap alg-wrap">
-        <button type="text" data-alg="heapSort" class="alg-btn">Heap</button>
-        <button type="text" data-alg="selectSort" class="alg-btn">Select</button>
-        <button type="text" data-alg="shellSort" class="alg-btn">Shell</button>
-        <button type="text" data-alg="shakerSort" class="alg-btn">Shaker</button>
-    </div>
+    <p id="copyright">
+        <a href="http://fanglin.name/" target="_blank">fanglin.name</a> &copy; 2014
+    </p>
 </div>
 </body>
 </html>

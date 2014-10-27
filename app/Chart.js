@@ -21,7 +21,7 @@
     };
 
     _proto_.erasure = function () {
-        this.canvas.fillStyle = '#fff';
+        this.canvas.fillStyle = '#eeeeee';
         this.canvas.fillRect(0, 0, this.width, this.height);
     };
 
@@ -42,17 +42,17 @@
             cWidth = this.width / list.length;
 
             list.forEach(function (num, i) {
-                canvas.fillStyle = '#333';
+                canvas.fillStyle = '#333333';
                 if (compare && compare.indexOf(i) !== -1)
-                    canvas.fillStyle = '#3f3';
+                    canvas.fillStyle = '#00ae42';
                 if (swap && swap.indexOf(i) !== -1)
-                    canvas.fillStyle = '#f33';
+                    canvas.fillStyle = '#fe471a';
                 canvas.fillRect(cWidth * i, height - cHeight * num, cWidth, cHeight * num);
             });
 
         } else {
             cWidth = this.width / ele.length;
-            canvas.fillStyle = '#333';
+            canvas.fillStyle = '#333333';
             ele.forEach(function (num, i) {
                 canvas.fillRect(cWidth * i, height - cHeight * num, cWidth, cHeight * num);
             });

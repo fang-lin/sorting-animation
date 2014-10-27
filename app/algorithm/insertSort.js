@@ -17,7 +17,7 @@
                 for (var j = i - 1; j >= 0 && next < list[j]; j--) {
                     steps.push({
                         list: list.slice(),
-                        compare: [i, j]
+                        compare: [j]
                     });
                     list[j + 1] = list[j];
                     steps.push({

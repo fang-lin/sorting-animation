@@ -8,9 +8,9 @@
 
     $(function () {
 
-        var length = 40;
+        var count = 80;
         var delay = 0;
-        var list = createList(length);
+        var list = createList(count);
         var chart = createChat(list);
         var queue = [];
         var algorithm = 'bubbleSort';
@@ -18,7 +18,7 @@
 
         function
             createList(len) {
-            length = len;
+            count = len;
             var list = [];
             for (var i = 1; i <= len; ++i) {
                 list.push(i);
@@ -31,7 +31,7 @@
         }
 
         function reset() {
-            list = _.shuffle(createList(length));
+            list = _.shuffle(createList(count));
             chart = createChat(list).render(list);
             queue = [];
             pause();
@@ -51,7 +51,7 @@
                         intervalFn();
                     }, delay);
                 } else {
-                    $('#play-btn').attr('data-play', 'reset').html('Reset');
+                    pause();
                 }
             })();
         }
@@ -74,18 +74,19 @@
         $('.alg-btn').click(function (event) {
             $('.alg-btn').removeClass('active');
             algorithm = $(event.currentTarget).addClass('active').attr('data-alg');
+            var _list = queue.shift();
             reset();
         });
 
         $('.alg-btn[data-alg=' + algorithm + ']').click();
 
-        $('.length-btn').click(function (event) {
-            $('.length-btn').removeClass('active');
-            length = $(event.currentTarget).addClass('active').attr('data-length');
+        $('.count-btn').click(function (event) {
+            $('.count-btn').removeClass('active');
+            count = $(event.currentTarget).addClass('active').attr('data-count');
             reset();
         });
 
-        $('.length-btn[data-length=' + length + ']').click();
+        $('.count-btn[data-count=' + count + ']').click();
 
         $('#play-btn').click(function (event) {
             var $this = $(event.currentTarget);
@@ -99,6 +100,17 @@
             } else {
                 reset();
             }
+        });
+
+        $('#shuffle-btn').click(function () {
+            reset();
+        });
+
+        $('#reverse-btn').click(function () {
+            list = list.reverse();
+            chart = createChat(list).render(list);
+            queue = [];
+            pause();
         });
 
     });
