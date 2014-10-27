@@ -18,7 +18,7 @@
 
             while (i < mid && j < high) {
                 steps.push({
-                    list: _.clone(list),
+                    list: list.slice(),
                     compare: [i, j]
                 });
                 if (list[i] <= list[j]) {
@@ -30,7 +30,7 @@
 
             while (i < mid) {
                 steps.push({
-                    list: _.clone(list),
+                    list: list.slice(),
                     compare: [i]
                 });
                 ordered[k++] = list[i++];
@@ -38,7 +38,7 @@
 
             while (j < high) {
                 steps.push({
-                    list: _.clone(list),
+                    list: list.slice(),
                     compare: [j]
                 });
                 ordered[k++] = list[j++];
@@ -47,7 +47,7 @@
             for (k = 0, len = ordered.length; k < len; k++) {
                 list[k + low] = ordered[k];
                 steps.push({
-                    list: _.clone(list),
+                    list: list.slice(),
                     swap: [k + low]
                 });
             }

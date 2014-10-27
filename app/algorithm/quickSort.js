@@ -20,7 +20,7 @@
                 do {
                     do {
                         steps.push({
-                            list: _.clone(list),
+                            list: list.slice(),
                             compare: [pivot, i]
                         });
                         i++;
@@ -28,14 +28,14 @@
 
                     do {
                         steps.push({
-                            list: _.clone(list),
+                            list: list.slice(),
                             compare: [pivot, j]
                         });
                         j--;
                     } while (list[j] > pivot);
 
                     steps.push({
-                        list: _.clone(list),
+                        list: list.slice(),
                         compare: [i, j]
                     });
 
@@ -44,7 +44,7 @@
                         list[i] = list[j];
                         list[j] = tmp;
                         steps.push({
-                            list: _.clone(list),
+                            list: list.slice(),
                             swap: [i, j]
                         });
                     }
@@ -55,7 +55,7 @@
                 list[j] = tmp;
 
                 steps.push({
-                    list: _.clone(list),
+                    list: list.slice(),
                     swap: [left, j]
                 });
                 _quickSort_(list, left, j - 1);

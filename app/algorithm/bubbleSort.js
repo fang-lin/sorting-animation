@@ -12,7 +12,7 @@
             for (var i = list.length; i > 0; i--) {
                 for (var j = 0; j < i; j++) {
                     steps.push({
-                        list: _.clone(list),
+                        list: list.slice(),
                         compare: [j, j + 1]
                     });
                     if (list[j] > list[j + 1]) {
@@ -20,7 +20,7 @@
                         list[j] = list[j + 1];
                         list[j + 1] = tmp;
                         steps.push({
-                            list: _.clone(list),
+                            list: list.slice(),
                             swap: [j, j + 1]
                         });
                     }
