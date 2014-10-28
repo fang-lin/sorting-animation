@@ -64,7 +64,6 @@
         }
 
         _quickSort_(list, 0, list.length - 1);
-
         return steps;
     }
 })(window);

@@ -15,6 +15,7 @@
   "dependencies": {
     "underscore": "~1.6.0",
     "d3": "~3.4.13",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "Font-Awesome": "~4.2.0"
   }
 }

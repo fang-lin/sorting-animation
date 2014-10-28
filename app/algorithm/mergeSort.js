@@ -6,7 +6,6 @@
 (function (window) {
 
     window.mergeSort = function (list) {
-
         var steps = [],
             len = list.length;
 
@@ -70,7 +69,6 @@
         }
 
         _mergeSort_(list);
-
         return steps;
     }
 })(window);

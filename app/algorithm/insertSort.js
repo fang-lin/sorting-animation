@@ -34,7 +34,6 @@
         }
 
         _insertSort_(list);
-
         return steps;
     }
 })(window);
