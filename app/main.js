@@ -13,7 +13,7 @@
         var list = createList(count);
         var chart = createChat(list);
         var queue = [];
-        var algorithm = 'bubbleSort';
+        var algorithm = 'heapSort'; //bubbleSort
         var setTimeoutId, intervalFn;
 
         function

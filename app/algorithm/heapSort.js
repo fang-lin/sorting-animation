@@ -6,53 +6,70 @@
 (function (window) {
 
     window.heapSort = function (list) {
+        var steps = [];
 
-        var steps = [],
-            len = list.length;
+        function _createHeap_(list, low, high) {
 
-        function _adjust_(low, high) {
+//            console.log(low, high);
+
+            console.log(list.length);
+
             var i = low,
-                j = 2 * i;
-            var tmp = list[i];
+                j = 2 * i,
+                tmp = list[i];
 
             while (j <= high) {
-                if (j < high && list[j] < list[j + 1])
-                    j++;
-                if (tmp >= list[j]) {
-                    break;
-                } else {
-                    list[i] = list[j];
+                if (j < high && list[j] < list[j + 1]) {
+                    steps.push({
+                        list: list.slice(),
+                        compare: [j, j + 1]
+                    });
+                    j++; //从左右子节点中选出较大的节点
+                }
+                if (tmp < list[j]) {
+                    list[i - 1] = list[j - 1];
                     i = j;
                     j = 2 * i;
-//                    steps.push(_.clone(list));
+                    steps.push({
+                        list: list.slice(),
+                        swap: [i]
+                    });
+                } else {
+                    break;
                 }
-
             }
-            list[i] = tmp;
-//            steps.push(_.clone(list));
+            list[i - 1] = tmp;
+            steps.push({
+                list: list.slice(),
+                swap: [i]
+            });                       //被筛选的元素放在最终的位置上
         }
 
-        function _heapSort_() {
+        function _heapSort_(list) {
             var i,
-                tmp;
+                tmp,
+                len = list.length;
 
-            for (i = parseInt(len / 2); i > 0; i--) {
-                _adjust_(i, len);
-//                steps.push(_.clone(list));
+            for (i = len / 2 | 0; i > 0; i--) {
+                _createHeap_(list, i, len);
             }
-
-            for (i = len - 1; i > 0; i--) {
-                tmp = list[1];
-                list[1] = list[i + 1];
-                list[i + 1] = tmp;
-                _adjust_(1, i);
-//                steps.push(_.clone(list));
+            for (i = len; i > 0; i--) {
+                tmp = list[0];
+                list[0] = list[i];
+                list[i] = tmp;
+//                steps.push({
+//                    list: list.slice(),
+//                    swap: [0, i]
+//                });
+                _createHeap_(list, 1, i);
             }
         }
 
-        _heapSort_();
-        steps.push(_.clone(list));
+        _heapSort_(list);
+
+        console.log(list)
 
         return steps;
     }
-})(window);
+})
+(window);

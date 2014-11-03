@@ -6,8 +6,7 @@
 (function (window) {
 
     window.mergeSort = function (list) {
-        var steps = [],
-            len = list.length;
+        var steps = [];
 
         function _merge_(list, low, mid, high) {
             var ordered = [],

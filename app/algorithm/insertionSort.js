@@ -4,10 +4,10 @@
  */
 
 (function (window) {
-    window.insertSort = function (list) {
+    window.insertionSort = function (list) {
         var steps = [];
 
-        function _insertSort_(list) {
+        function _insertionSort_(list) {
             var next,
                 len = list.length;
 
@@ -33,7 +33,7 @@
             }
         }
 
-        _insertSort_(list);
+        _insertionSort_(list);
         return steps;
     }
 })(window);
