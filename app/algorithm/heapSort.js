@@ -8,68 +8,59 @@
     window.heapSort = function (list) {
         var steps = [];
 
-        function _createHeap_(list, low, high) {
+        function _adjust_(list, root, len) {
 
-//            console.log(low, high);
+            var p = root,
+                chd = 2 * root,
+                tmp = list[root];
 
-            console.log(list.length);
-
-            var i = low,
-                j = 2 * i,
-                tmp = list[i];
-
-            while (j <= high) {
-                if (j < high && list[j] < list[j + 1]) {
-                    steps.push({
-                        list: list.slice(),
-                        compare: [j, j + 1]
-                    });
-                    j++; //从左右子节点中选出较大的节点
+            while (chd < len) {
+                steps.push({
+                    list: list.slice(),
+                    compare: [chd, chd + 1]
+                });
+                if (chd < len && list[chd] < list[chd + 1]) {
+                    chd++;
                 }
-                if (tmp < list[j]) {
-                    list[i - 1] = list[j - 1];
-                    i = j;
-                    j = 2 * i;
+                if (tmp < list[chd]) {
+                    list[p] = list[chd];
                     steps.push({
                         list: list.slice(),
-                        swap: [i]
+                        swap: [chd / 2, chd]
                     });
+                    p = chd;
+                    chd = 2 * p;
                 } else {
                     break;
                 }
             }
-            list[i - 1] = tmp;
+            list[p] = tmp;
             steps.push({
                 list: list.slice(),
-                swap: [i]
-            });                       //被筛选的元素放在最终的位置上
+                swap: [p]
+            });
         }
 
         function _heapSort_(list) {
-            var i,
-                tmp,
-                len = list.length;
+            var i, tmp,
+                len = list.length - 1;
 
-            for (i = len / 2 | 0; i > 0; i--) {
-                _createHeap_(list, i, len);
+            for (i = len / 2 | 0; i >= 0; i--) {
+                _adjust_(list, i, len);
             }
             for (i = len; i > 0; i--) {
                 tmp = list[0];
                 list[0] = list[i];
                 list[i] = tmp;
-//                steps.push({
-//                    list: list.slice(),
-//                    swap: [0, i]
-//                });
-                _createHeap_(list, 1, i);
+                steps.push({
+                    list: list.slice(),
+                    swap: [0, i]
+                });
+                _adjust_(list, 0, i - 1);
             }
         }
 
         _heapSort_(list);
-
-        console.log(list)
-
         return steps;
     }
-})
-(window);
+})(window);

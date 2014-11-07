@@ -10,8 +10,7 @@
 
         function _merge_(list, low, mid, high) {
             var ordered = [],
-                i = low,
-                j = mid,
+                i = low, j = mid,
                 k = 0, len;
 
             while (i < mid && j < high) {

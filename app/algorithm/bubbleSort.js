@@ -29,7 +29,6 @@
         }
 
         _bubbleSort_(list);
-
         return steps;
     }
 })(window);

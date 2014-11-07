@@ -8,11 +8,9 @@
         var steps = [];
 
         function _shakerSort_(list) {
-            var i,
-                left = 0,
+            var i, left = 0,
                 right = list.length,
-                k = 0;
-            var tmp;
+                k = 0, tmp;
 
             while (left < right) {
 

@@ -2,7 +2,6 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="bowers/Font-Awesome/css/font-awesome.css"/>
     <style>
         html, body {
             margin: 0;
@@ -95,7 +94,7 @@
         }
 
         .alg-wrap button {
-            width: 24.99%;
+            width: 33.32%;
         }
 
         #body {
@@ -135,7 +134,8 @@
 
     <script src="app/Chart.js"></script>
     <script src="app/algorithm/bubbleSort.js"></script>
-    <script src="app/algorithm/insertionSort.js"></script>
+    <script src="app/algorithm/insertSort.js"></script>
+    <script src="app/algorithm/binaryInsertSort.js"></script>
     <script src="app/algorithm/quickSort.js"></script>
     <script src="app/algorithm/mergeSort.js"></script>
     <script src="app/algorithm/shakerSort.js"></script>
@@ -163,14 +163,17 @@
     <div class="btns-wrap alg-wrap">
         <button type="text" data-alg="bubbleSort" class="alg-btn">Bubble</button>
         <button type="text" data-alg="shakerSort" class="alg-btn">Shaker</button>
-        <button type="text" data-alg="insertionSort" class="alg-btn">Insertion</button>
+        <button type="text" data-alg="selectSort" class="alg-btn">Select</button>
+    </div>
+    <div class="btns-wrap alg-wrap">
+        <button type="text" data-alg="insertSort" class="alg-btn">Insert</button>
+        <button type="text" data-alg="binaryInsertSort" class="alg-btn">Binary Insert</button>
         <button type="text" data-alg="shellSort" class="alg-btn">Shell</button>
     </div>
     <div class="btns-wrap alg-wrap">
         <button type="text" data-alg="heapSort" class="alg-btn">Heap</button>
-        <button type="text" data-alg="selectSort" class="alg-btn">Select</button>
-        <button type="text" data-alg="quickSort" class="alg-btn">Quick</button>
         <button type="text" data-alg="mergeSort" class="alg-btn">Merge</button>
+        <button type="text" data-alg="quickSort" class="alg-btn">Quick</button>
     </div>
     <div class="label-wrap">
         <label for="delay-wrap">Delay(ms)</label>
