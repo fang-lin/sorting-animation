@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Site Information -->
+    <meta name="description" content="{{info.description}}"/>
+    <meta name="keywords" content="{{info.keywords}}"/>
+    <meta name="generator" content="{{info.generator}}"/>
+    <meta name="version" content="{{info.version}}"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="/lib/html5shiv/dist/html5shiv.min.js"></script>
+    <script src="/lib/respond/dest/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/main.css"/>
+
+    <title ng-bind="info.title">admin.oglen.net</title>
+</head>
+<body>
+<header id="logo" class="container-fluid">
+    <span ng-bind="info.title">title</span>
+    <a href="/blog" target="_blank">Blog</a>
+    <span ng-if="isLogin">
+        <span ng-bind="user._id">id</span> |
+        <span ng-bind="user.username">username</span> |
+        <a ng-href="#/logout">Logout</a>
+    </span>
+</header>
+<i class="fa fa-flag fa-5x"></i> fa-camera-retro
+<div ng-if="isLogin" id="menu">
+    <menu menu="menu">loading</menu>
+</div>
+<div ng-view>loading</div>
+
+<footer>
+    <span ng-bind="info.copyright">copyright</span>
+</footer>
+<script type="text/javascript" data-main="init" src="/lib/requirejs/require.js"></script>
+</body>
+</html>
