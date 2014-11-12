@@ -1,3 +1,5 @@
+@import '../lib/normalize-css/normalize.css';
+@import '../lib/font-awesome/css/font-awesome.css';
 /**
  * Copyright 2006-2014 GrapeCity inc
  * Author: isaac.fang@grapecity.com
@@ -11,4 +13,7 @@ body {
 html input,
 body input {
   border: solid 2px #333;
+}
+header li.active {
+  background: #a9debf;
 }

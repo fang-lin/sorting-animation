@@ -15,7 +15,7 @@ var app = express();
 if (config.development()) {
 
     app.use(compression());
-    app.use(express.static(config.app));
+    app.use(express.static(config.client));
     app.use(morgan(config.morgan));
 
     app.listen(config.port);

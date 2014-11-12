@@ -5,7 +5,7 @@
 
 module.exports = {
     morgan: 'short',
-    app: 'app',
+    client: 'client',
     dist: 'dist',
     port: 8000,
     development: function () {

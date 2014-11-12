@@ -9,15 +9,16 @@ requirejs.config({
         'jquery': '/lib/jquery/dist/jquery',
         'underscore': '/lib/underscore/underscore',
         'angular': '/lib/angular/angular',
-        'angular-route': '/lib/angular-route/angular-route',
+//        'angular-route': '/lib/angular-route/angular-route',
         'angular-animate': '/lib/angular-animate/angular-animate',
+        'angular-ui-router': '/lib/angular-ui-router/release/angular-ui-router',
         // Apps
-        'app': 'app',
-        'controllers': 'controllers',
-        'routes': 'routes',
-        'directives': 'directives',
-        'filters': 'filters',
-        'constants': 'constants'
+        'app': 'app/app',
+        'controllers': 'app/controllers',
+        'routes': 'app/routes',
+        'directives': 'app/directives',
+        'filters': 'app/filters',
+        'constants': 'app/constants'
     },
     shim: {
         bootstrap: {
@@ -26,10 +27,7 @@ requirejs.config({
         angular: {
             deps: ['jquery']
         },
-        'angular-resource': {
-            deps: ['angular']
-        },
-        'angular-route': {
+        'angular-ui-router': {
             deps: ['angular']
         },
         'angular-animate': {
@@ -43,9 +41,5 @@ require([
     'app'
 ], function () {
     'use strict';
-
-    var config = {
-        name: 'sorting-algorithm-animate'
-    };
-    angular.bootstrap(document, [config.name]);
+    angular.bootstrap(document, [APP_NAME]);
 });
