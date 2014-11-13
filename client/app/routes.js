@@ -16,31 +16,28 @@ define([
             'ALGORITHMS',
             function ($stateProvider, $urlRouterProvider, ALGORITHMS) {
 
-//                $urlRouterProvider.otherwise('/algorithm/' + ALGORITHMS[0].key);
+                $urlRouterProvider.otherwise('/' + ALGORITHMS[0].key);
 
-                $stateProvider
-                    .state('algorithm', {
-                        url: '/algorithm',
-                        templateUrl: 'app/views/bubble.html',
-                        controller: ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
-                            console.log('xxxxxx', $stateParams)
-                        }]
-                    })
-                    .state('algorithm.key', {
-                        url: '/algorithm/:key',
-                        views: {
-                            '': {
-                                templateUrl: 'app/views/insert.html',
-                                controller: ['$scope', '$stateParams', function ($scope, $stateParams) {
-                                    console.log($stateParams);
-                                }]
+                ALGORITHMS.reduce(function ($stateProvider, algorithm) {
+                    return $stateProvider
+                        .state(algorithm.key, {
+                            url: '/' + algorithm.key,
+                            views: {
+                                'code': {
+                                    templateUrl: 'app/partials/' + algorithm.key + '.html',
+                                    controller: ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
+                                        console.log($stateParams);
+                                    }]
+                                },
+                                'canvas': {
+                                    templateUrl: 'app/partials/' + algorithm.key + '.html',
+                                    controller: ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
+                                        console.log($stateParams);
+                                    }]
+                                }
                             }
-                        }
-//                        templateUrl: 'app/views/insert.html',
-//                        controller: ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
-//                            console.log($stateParams)
-//                        }]
-                    });
+                        })
+                }, $stateProvider);
 
 //                ALGORITHMS.reduce(function ($stateProvider, algorithm) {
 //                    return $stateProvider

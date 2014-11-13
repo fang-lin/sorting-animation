@@ -27,12 +27,12 @@
 <body>
 <header>
     <ul>
-        <li ng-repeat="algorithm in ALGORITHMS" ui-sref-active="active"><a ui-sref="algorithm.key({key:algorithm.key})" ng-bind="algorithm.name">Bubble</a></li>
+        <li ng-repeat="algorithm in ALGORITHMS"><a ui-sref="{{algorithm.key}}" ng-bind="algorithm.name"></a></li>
     </ul>
 </header>
 
-<div ui-view>loading</div>
-
+<div ui-view="code">loading</div>
+<div ui-view="canvas">loading</div>
 
 <footer>
     <span ng-bind="SITE_INFO.copyright">copyright</span>
