@@ -14,11 +14,13 @@ requirejs.config({
         'angular-ui-router': '/lib/angular-ui-router/release/angular-ui-router',
         // Apps
         'app': 'app/app',
+        'algorithms': 'app/algorithms',
         'controllers': 'app/controllers',
         'routes': 'app/routes',
         'directives': 'app/directives',
         'filters': 'app/filters',
-        'constants': 'app/constants'
+        'constants': 'app/constants',
+        'steps': 'app/steps'
     },
     shim: {
         bootstrap: {

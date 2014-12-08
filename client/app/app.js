@@ -22,7 +22,7 @@ define([
             'ngAnimate',
                 APP_NAME + '.routes',
 //                APP_NAME + '.controllers',
-//                APP_NAME + '.directives',
+                APP_NAME + '.directives',
 //                APP_NAME + '.filters',
 //                APP_NAME + '.services',
                 APP_NAME + '.constants'
