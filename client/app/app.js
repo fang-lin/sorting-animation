@@ -9,22 +9,17 @@ define([
     'angular-sanitize',
     'angular-animate',
     'routes',
-    'controllers',
     'directives',
-    'filters',
-//    'services',
     'constants'
 ], function () {
     'use strict';
 
     var app = angular
         .module(APP_NAME, [
-//            'ngAnimate',
+            'ngAnimate',
             'ngSanitize',
                 APP_NAME + '.routes',
-//                APP_NAME + '.controllers',
                 APP_NAME + '.directives',
-//                APP_NAME + '.filters',
                 APP_NAME + '.constants'
         ])
         .run([

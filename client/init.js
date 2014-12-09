@@ -15,10 +15,8 @@ requirejs.config({
         // Apps
         'app': 'app/app',
         'algorithms': 'app/algorithms',
-        'controllers': 'app/controllers',
         'routes': 'app/routes',
         'directives': 'app/directives',
-        'filters': 'app/filters',
         'constants': 'app/constants',
         'services': 'app/services'
     },
