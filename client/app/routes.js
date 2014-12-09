@@ -5,13 +5,14 @@
 
 define([
     'angular',
-    'steps'
+    'services'
 ], function () {
     'use strict';
 
     angular.module(APP_NAME + '.routes', [
+        'ui.router',
             APP_NAME + '.constants',
-            APP_NAME + '.steps'
+            APP_NAME + '.services'
     ])
         .config([
             '$stateProvider',
@@ -28,13 +29,13 @@ define([
                             views: {
                                 'code': {
                                     templateUrl: 'app/partials/' + algorithm.key + '.html',
-                                    controller: ['$scope', '$state', '$stateParams', 'steps', function ($scope, $state, $stateParams, steps) {
+                                    controller: ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
 //                                        console.log(steps.quick([9, 0, 5, 2, 6, 4, 1, 3, 8, 7]));
 //                                        console.log($stateParams);
                                     }]
                                 },
                                 'canvas': {
-                                    template: '<div chart sort="sort"></div>',
+                                    template: '<div dir-chart sort="sort"></div>',
                                     controller: ['$scope', '$state', 'steps', function ($scope, $state, steps) {
                                         var key = $state.current.name;
                                         $scope.sort = steps[key] || steps.quick;

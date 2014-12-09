@@ -6,6 +6,7 @@
 define([
     'angular',
     'angular-ui-router',
+    'angular-sanitize',
     'angular-animate',
     'routes',
     'controllers',
@@ -18,13 +19,12 @@ define([
 
     var app = angular
         .module(APP_NAME, [
-            'ui.router',
-            'ngAnimate',
+//            'ngAnimate',
+            'ngSanitize',
                 APP_NAME + '.routes',
 //                APP_NAME + '.controllers',
                 APP_NAME + '.directives',
 //                APP_NAME + '.filters',
-//                APP_NAME + '.services',
                 APP_NAME + '.constants'
         ])
         .run([
@@ -33,9 +33,13 @@ define([
             '$log',
             'SITE_INFO',
             'ALGORITHMS',
-            function ($rootScope, $location, $log, SITE_INFO, ALGORITHMS) {
+            'DELAYS',
+            'COUNTS',
+            function ($rootScope, $location, $log, SITE_INFO, ALGORITHMS, DELAYS, COUNTS) {
                 $rootScope.SITE_INFO = SITE_INFO;
                 $rootScope.ALGORITHMS = ALGORITHMS;
+                $rootScope.DELAY = DELAYS[1];
+                $rootScope.COUNT = COUNTS[1];
             }
         ]);
 });

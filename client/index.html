@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="css/main.css"/>
 
-    <title ng-bind="SITE_INFO.title">title</title>
+    <title ng-bind="SITE_INFO.TITLE">TITLE</title>
 
     <script>
         var APP_NAME = 'sorting-algorithm-animate';
@@ -27,7 +27,7 @@
 <body>
 <header>
     <ul>
-        <li ng-repeat="algorithm in ALGORITHMS"><a ui-sref="{{algorithm.key}}" ng-bind="algorithm.name"></a></li>
+        <li ng-repeat="algorithm in ALGORITHMS" ui-sref-active="active"><a ui-sref="{{algorithm.key}}" ng-bind="algorithm.name"></a></li>
     </ul>
 </header>
 
@@ -35,7 +35,7 @@
 <div ui-view="code">loading</div>
 
 <footer>
-    <span ng-bind="SITE_INFO.copyright">copyright</span>
+    <span ng-bind-html="SITE_INFO.COPYRIGHT">COPYRIGHT</span>
 </footer>
 <script type="text/javascript" data-main="init" src="/lib/requirejs/require.js"></script>
 </body>

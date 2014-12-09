@@ -12,6 +12,7 @@ requirejs.config({
 //        'angular-route': '/lib/angular-route/angular-route',
         'angular-animate': '/lib/angular-animate/angular-animate',
         'angular-ui-router': '/lib/angular-ui-router/release/angular-ui-router',
+        'angular-sanitize': '/lib/angular-sanitize/angular-sanitize',
         // Apps
         'app': 'app/app',
         'algorithms': 'app/algorithms',
@@ -20,7 +21,7 @@ requirejs.config({
         'directives': 'app/directives',
         'filters': 'app/filters',
         'constants': 'app/constants',
-        'steps': 'app/steps'
+        'services': 'app/services'
     },
     shim: {
         bootstrap: {
@@ -33,6 +34,9 @@ requirejs.config({
             deps: ['angular']
         },
         'angular-animate': {
+            deps: ['angular']
+        },
+        'angular-sanitize': {
             deps: ['angular']
         }
     }

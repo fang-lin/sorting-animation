@@ -10,8 +10,11 @@ define([
 
     return angular.module(APP_NAME + '.constants', [])
         .constant('SITE_INFO', {
-            title: 'sorting-algorithm-animate'
+            TITLE: 'sorting-algorithm-animate',
+            COPYRIGHT: '<a href="http://fanglin.name/" target="_blank">fanglin.name</a> &copy; 2014'
         })
+        .constant('DELAYS', [0, 50, 100, 200, 500, 1000])
+        .constant('COUNTS', [10, 20, 40, 80, 160, 320])
         .constant('ALGORITHMS', [
             {
                 key: 'bubble',
