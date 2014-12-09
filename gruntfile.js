@@ -31,7 +31,7 @@ module.exports = function (grunt) {
         },
 
         less: {
-            dev: {
+            all: {
                 files: {
                     'client/css/main.css': 'client/css/main.less'
                 }
@@ -99,6 +99,5 @@ module.exports = function (grunt) {
     });
 
     //alias tasks
-    grunt.registerTask('jshint:all', ['jshint:client', 'jshint:server']);
     grunt.registerTask('build', ['clean', 'less', 'uglify', 'requirejs', 'copy', 'cssmin']);
 };
