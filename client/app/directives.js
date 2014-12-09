@@ -63,7 +63,10 @@ define([
                         }
 
                         scope.toggle = function () {
-                            scope.playing ? pause() : play();
+                            if (scope.playing)
+                                pause();
+                            else
+                                play();
                         };
 
                         scope.setDelay = function (delay) {

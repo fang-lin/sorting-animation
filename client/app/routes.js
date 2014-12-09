@@ -42,7 +42,7 @@ define([
                                     }]
                                 }
                             }
-                        })
+                        });
                 }, $stateProvider);
 
 //                ALGORITHMS.reduce(function ($stateProvider, algorithm) {

@@ -31,6 +31,7 @@ function mergePass(list, len, n) {
     for (i = 0; i < n - 2 * len; i += 2 * len) {
         merge(list, i, i + len, i + 2 * len);
     }
+
     if (i + len < n) {
         merge(list, i, i + len, n);
     }

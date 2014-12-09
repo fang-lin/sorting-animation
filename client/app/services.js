@@ -20,6 +20,7 @@ define([
     return angular.module(APP_NAME + '.services', [])
         .factory('steps', [function () {
             return {
+                binaryInsert: binaryInsert,
                 bubble: bubble,
                 heap: heap,
                 insert: insert,
@@ -90,7 +91,7 @@ define([
                             canvas.fillStyle = '#00ae42';
                         }
                         if (swap && swap.indexOf(i) !== -1) {
-                            canvas.fillStyle = '#fe471a'
+                            canvas.fillStyle = '#fe471a';
                         }
                         canvas.fillRect(cWidth * i, height - cHeight * num, cWidth, cHeight * num);
                     });
@@ -108,6 +109,6 @@ define([
 
             return function (canvas, max) {
                 return new Chart(canvas, max);
-            }
+            };
         }]);
 });

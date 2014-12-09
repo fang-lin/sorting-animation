@@ -9,7 +9,6 @@ requirejs.config({
         'jquery': '/lib/jquery/dist/jquery',
         'underscore': '/lib/underscore/underscore',
         'angular': '/lib/angular/angular',
-//        'angular-route': '/lib/angular-route/angular-route',
         'angular-animate': '/lib/angular-animate/angular-animate',
         'angular-ui-router': '/lib/angular-ui-router/release/angular-ui-router',
         'angular-sanitize': '/lib/angular-sanitize/angular-sanitize',
