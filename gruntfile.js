@@ -66,13 +66,6 @@ module.exports = function (grunt) {
                 files: {
                     'dist/css/main.css': ['client/css/main.css']
                 }
-            },
-            minify: {
-                expand: true,
-                cwd: 'dist/css/',
-                src: ['main.css'],
-                dest: 'dist/css/',
-                ext: '.css'
             }
         },
 
@@ -80,7 +73,6 @@ module.exports = function (grunt) {
             main: {
                 files: [
                     {src: 'client/index.html', dest: 'dist/index.html'},
-                    {src: 'client/css/main.css', dest: 'dist/css/main.css'},
                     {expand: true, flatten: true, src: ['client/app/views/*'], dest: 'dist/app/views/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['client/app/partials/*'], dest: 'dist/app/partials/', filter: 'isFile'}
                 ]

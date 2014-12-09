@@ -11,6 +11,10 @@ define([
     return angular.module(APP_NAME + '.constants', [])
         .constant('SITE_INFO', {
             TITLE: 'sorting-algorithm-animate',
+            DESCRIPTION: '',
+            KEYWORDS: '',
+            GENERATOR: '',
+            VERSION: '',
             COPYRIGHT: '<a href="http://fanglin.name/" target="_blank">fanglin.name</a> &copy; 2014'
         })
         .constant('DELAYS', [0, 50, 100, 200, 500, 1000])
