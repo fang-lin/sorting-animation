@@ -1,8 +1,10 @@
 {
     "name": "sorting-algorithm-animation",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "sorting algorithm animation",
-    "main": "main.js",
+    "author": "",
+    "license": "MIT",
+    "main": "server.js",
     "scripts": {
         "start": "node server.js",
         "postinstall": "bower install && grunt build",
@@ -11,8 +13,10 @@
     "engines": {
         "node": ">=0.10"
     },
-    "author": "",
-    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/oglen/sorting-algorithm-animation.git"
+    },
     "dependencies": {
         "bower": "^1.3.12",
         "compression": "^1.2.0",
