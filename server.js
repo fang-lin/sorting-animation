@@ -27,7 +27,8 @@ if (config.development()) {
     app.use(express.static(config.dist));
     app.use(morgan(config.morgan));
 
-    app.listen(80);
-    console.log('[server]', '[express]', 'Http server listening on port 80');
+    app.listen(80, function () {
+        console.log('[server]', '[express]', 'Http server listening on port 80');
+    });
 }
 

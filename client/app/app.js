@@ -34,7 +34,7 @@ define([
                 $rootScope.SITE_INFO = SITE_INFO;
                 $rootScope.ALGORITHMS = ALGORITHMS;
                 $rootScope.DELAY = DELAYS[1];
-                $rootScope.COUNT = COUNTS[1];
+                $rootScope.COUNT = COUNTS[2];
             }
         ]);
 });

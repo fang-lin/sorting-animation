@@ -26,13 +26,15 @@
 </head>
 <body>
 <header>
-    <ul>
+    <ul id="menu">
         <li ng-repeat="algorithm in ALGORITHMS" ui-sref-active="active"><a ui-sref="{{algorithm.key}}" ng-bind="algorithm.name"></a></li>
     </ul>
 </header>
 
-<div ui-view="canvas" class="toggle">LOADING</div>
-<div ui-view="code" class="toggle">LOADING</div>
+<div id="content">
+    <div ui-view="canvas" id="canvas">LOADING</div>
+    <div ui-view="code" id="code">LOADING</div>
+</div>
 
 <footer>
     <span ng-bind-html="SITE_INFO.COPYRIGHT">COPYRIGHT</span>

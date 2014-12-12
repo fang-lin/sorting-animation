@@ -1,27 +1,27 @@
 {
-    "name": "sorting-algorithm-animation",
-    "version": "0.2.0",
-    "authors": [
-        "IsaacFang <isaac.fang@grapecity.com>"
-    ],
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "angular": "~1.3.6",
-        "angular-animate": "~1.3.6",
-        "angular-ui-router": "~0.2.11",
-        "angular-sanitize": "~1.3.6",
-        "requirejs": "~2.1.15",
-        "jquery": "~2.1.1",
-        "underscore": "~1.6.0",
-        "html5shiv": "~3.7.2",
-        "respond": "~1.4.2",
-        "normalize-css": "~3.0.1"
-    }
+  "name": "sorting-algorithm-animation",
+  "version": "0.2.0",
+  "authors": [
+    "IsaacFang <isaac.fang@grapecity.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.6",
+    "angular-animate": "~1.3.6",
+    "angular-ui-router": "~0.2.11",
+    "angular-sanitize": "~1.3.6",
+    "requirejs": "~2.1.15",
+    "jquery": "~2.1.1",
+    "underscore": "~1.6.0",
+    "html5shiv": "~3.7.2",
+    "respond": "~1.4.2",
+    "normalize-css": "~3.0.1"
+  }
 }

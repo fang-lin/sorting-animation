@@ -8,6 +8,7 @@ requirejs.config({
         // Libs
         'jquery': 'client/lib/jquery/dist/jquery.min',
         'underscore': 'client/lib/underscore/underscore',
+        'highlight': 'client/highlight/highlight.pack',
         'angular': 'client/lib/angular/angular.min',
         'angular-animate': 'client/lib/angular-animate/angular-animate.min',
         'angular-ui-router': 'client/lib/angular-ui-router/release/angular-ui-router.min',

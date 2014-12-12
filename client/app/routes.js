@@ -5,6 +5,7 @@
 
 define([
     'angular',
+    'highlight',
     'services'
 ], function () {
     'use strict';
@@ -28,7 +29,10 @@ define([
                             url: '/' + algorithm.key,
                             views: {
                                 'code': {
-                                    templateUrl: 'app/partials/' + algorithm.key + '.html'
+                                    templateUrl: 'app/partials/' + algorithm.key + '.html',
+                                    controller: [function () {
+                                        hljs.highlightBlock($('pre', '#code')[0]);
+                                    }]
                                 },
                                 'canvas': {
                                     template: '<div dir-chart sort="sort"></div>',

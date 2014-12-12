@@ -1,6 +1,5 @@
 @import '../lib/normalize-css/normalize.css';
-@import '../lib/font-awesome/css/font-awesome.css';
-@import 'ng-animation.css';
+@import '../highlight/styles/mono-blue.css';
 /**
  * Copyright 2006-2014 GrapeCity inc
  * Author: isaac.fang@grapecity.com
@@ -17,6 +16,26 @@ body input {
 }
 header li.active {
   background: #a9debf;
+}
+#menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#menu li {
+  padding: 0;
+  margin: 0;
+}
+#content #canvas,
+#content #code {
+  float: left;
+}
+#content:after {
+  content: ' ';
+  height: 0;
+  line-height: 0;
+  display: block;
+  clear: both;
 }
 .btns-wrap .active {
   background-color: #006544;
