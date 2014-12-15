@@ -102,7 +102,7 @@ define([
 
                     } else {
                         cWidth = this.width / item.length;
-                        canvas.fillStyle = '#333333';
+                        canvas.fillStyle = COLORS.NORMAL_BAR;
                         item.forEach(function (num, i) {
                             canvas.fillRect(cWidth * i, height - cHeight * num, cWidth, cHeight * num);
                         });

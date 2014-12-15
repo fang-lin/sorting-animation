@@ -12,11 +12,12 @@ define([
         .directive('dirChart', [
             '$rootScope',
             '$timeout',
+            'ALGORITHMS',
             'DELAYS',
             'COUNTS',
             'orderedList',
             'chartFactory',
-            function ($rootScope, $timeout, DELAYS, COUNTS, orderedList, chartFactory) {
+            function ($rootScope, $timeout, ALGORITHMS, DELAYS, COUNTS, orderedList, chartFactory) {
                 return {
                     restrict: 'A',
                     templateUrl: 'app/views/chart.html',
@@ -26,6 +27,7 @@ define([
                     },
                     link: function (scope, element, attrs) {
 
+                        scope.ALGORITHMS = ALGORITHMS;
                         scope.DELAYS = DELAYS;
                         scope.COUNTS = COUNTS;
 

@@ -20,10 +20,10 @@ define([
         .constant('DELAYS', [0, 50, 100, 200, 500, 1000])
         .constant('COUNTS', [10, 20, 40, 80, 160, 320])
         .constant('COLORS', {
-            BACKGROUND: '#eeeeee',
-            NORMAL_BAR: '#333333',
-            COMPARE_BAR: '#00ae42',
-            SWAP_BAR: '#fe471a'
+            BACKGROUND: '#eaeef3',
+            NORMAL_BAR: '#00193a',
+            COMPARE_BAR: '#0048ab',
+            SWAP_BAR: '#f92672'
         })
         .constant('ALGORITHMS', [
             {

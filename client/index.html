@@ -26,19 +26,17 @@
 </head>
 <body>
 <header>
-    <ul id="menu">
-        <li ng-repeat="algorithm in ALGORITHMS" ui-sref-active="active"><a ui-sref="{{algorithm.key}}" ng-bind="algorithm.name"></a></li>
-    </ul>
+    <h1 ng-bind="SITE_INFO.TITLE"></h1>
 </header>
-
 <div id="content">
-    <div ui-view="canvas" id="canvas">LOADING</div>
+    <div id="canvas">
+        <div ui-view="canvas">LOADING</div>
+        <footer>
+            <span ng-bind-html="SITE_INFO.COPYRIGHT">COPYRIGHT</span>
+        </footer>
+    </div>
     <div ui-view="code" id="code">LOADING</div>
 </div>
-
-<footer>
-    <span ng-bind-html="SITE_INFO.COPYRIGHT">COPYRIGHT</span>
-</footer>
 <script type="text/javascript" data-main="init" src="/lib/requirejs/require.js"></script>
 </body>
 </html>

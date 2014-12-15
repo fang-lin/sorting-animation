@@ -1,9 +1,19 @@
 <div>
     <canvas id="chart" width="320" height="320"></canvas>
-
+    <div class="label-wrap">
+        <label for="delay-wrap">Handle</label>
+    </div>
     <div class="btns-wrap" id="play-wrap">
         <button type="text" id="shuffle-btn" ng-click="shuffle()">Shuffle</button>
         <button type="text" id="play-btn" ng-click="toggle()" ng-bind="playing ? 'Pause' : 'Play'"></button>
+    </div>
+    <div class="label-wrap">
+        <label for="delay-wrap">Algorithms</label>
+    </div>
+    <div class="btns-wrap" id="algorithm-wrap">
+        <button ng-repeat="algorithm in ALGORITHMS" type="text" class="delay-btn" ui-sref-active="active">
+            <a ui-sref="{{algorithm.key}}" ng-bind="algorithm.name"></a>
+        </button>
     </div>
     <div class="label-wrap">
         <label for="delay-wrap">Delay(ms)</label>
