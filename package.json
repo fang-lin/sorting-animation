@@ -7,7 +7,7 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "postinstall": "bower install && grunt build",
+        "postinstall": "grunt build",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "engines": {
@@ -23,17 +23,18 @@
         "errorhandler": "^1.2.2",
         "express": "^4.10.2",
         "grunt": "^0.4.5",
+        "grunt-bower-task": "^0.4.0",
+        "grunt-cli": "^0.1.13",
         "grunt-contrib-clean": "^0.6.0",
         "grunt-contrib-copy": "^0.7.0",
         "grunt-contrib-cssmin": "^0.10.0",
         "grunt-contrib-jshint": "^0.10.0",
+        "grunt-contrib-less": "^0.12.0",
         "grunt-contrib-requirejs": "^0.4.4",
         "grunt-contrib-uglify": "^0.6.0",
-        "grunt-shell": "^1.1.1",
-        "grunt-cli": "^0.1.13",
-        "grunt-contrib-less": "^0.12.0",
         "grunt-contrib-watch": "^0.6.1",
         "grunt-nodemon": "^0.3.0",
+        "grunt-shell": "^1.1.1",
         "load-grunt-tasks": "^1.0.0",
         "morgan": "^1.5.0",
         "send": "^0.10.1"

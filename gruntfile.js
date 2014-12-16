@@ -49,6 +49,20 @@ module.exports = function (grunt) {
             }
         },
 
+        bower: {
+            install: {
+                options: {
+                    targetDir: 'client/lib',
+                    layout: 'byComponent',
+                    install: true,
+                    verbose: false,
+                    cleanTargetDir: true,
+                    cleanBowerDir: false,
+                    bowerOptions: {}
+                }
+            }
+        },
+
         requirejs: {
             dist: {
                 options: {
@@ -99,5 +113,6 @@ module.exports = function (grunt) {
     });
 
     //alias tasks
-    grunt.registerTask('build', ['clean', 'less', 'uglify', 'requirejs', 'copy', 'cssmin']);
+    grunt.registerTask('dev-build', ['clean', 'less', 'uglify', 'requirejs', 'copy', 'cssmin']);
+    grunt.registerTask('build', ['bower', 'clean', 'less', 'uglify', 'requirejs', 'copy', 'cssmin']);
 };
