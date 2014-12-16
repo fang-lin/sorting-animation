@@ -45,7 +45,7 @@ header h1 {
 }
 #content #canvas .btns-wrap button {
   border: solid 1px #00193a;
-  outline: none medium;
+  outline: none;
   font-size: 12px;
   margin: 3px;
   padding: 3px 8px;

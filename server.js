@@ -18,8 +18,10 @@ if (config.development()) {
     app.use(express.static(config.client));
     app.use(morgan(config.morgan));
 
-    app.listen(config.port);
-    console.log('[server]', '[express]', 'Http server listening on port', config.port);
+    app.listen(config.port, function () {
+        console.log('[server]', '[express]', 'Http server listening on port', config.port);
+    });
+
 
 } else {
 
