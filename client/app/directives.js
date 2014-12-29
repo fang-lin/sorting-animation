@@ -82,6 +82,11 @@ define([
                         scope.shuffle = function () {
                             init(scope.count, scope.delay);
                         };
+
+                        scope.$on('$destroy', function () {
+                            pause();
+                            scope.steps = [];
+                        });
                     }
                 };
             }]);
