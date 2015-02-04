@@ -15,7 +15,7 @@ define([
             KEYWORDS: '',
             GENERATOR: '',
             VERSION: '',
-            COPYRIGHT: '<a href="http://fanglin.name/" target="_blank">fanglin.name</a> &copy; 2014'
+            COPYRIGHT: '<a href="http://fanglin.name/" target="_blank">fanglin.name</a> &copy; 2015'
         })
         .constant('DELAYS', [0, 50, 100, 200, 500, 1000])
         .constant('COUNTS', [10, 20, 40, 80, 160, 320])
