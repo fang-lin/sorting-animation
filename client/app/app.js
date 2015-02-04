@@ -14,7 +14,7 @@ define([
 ], function () {
     'use strict';
 
-    var app = angular
+    angular
         .module(APP_NAME, [
             'ngAnimate',
             'ngSanitize',
