@@ -28,9 +28,9 @@ if (config.development()) {
     app.use(errorhandler());
     app.use(express.static(config.dist));
     app.use(morgan(config.morgan));
-
-    app.listen(80, function () {
-        console.log('[server]', '[express]', 'Http server listening on port 80');
+    var port = process.env.PORT || 3000;
+    app.listen(port, function () {
+        console.log('[server]', '[express]', 'Http server listening on port', port);
     });
 }
 
