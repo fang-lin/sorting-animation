@@ -20,7 +20,6 @@ define([
             '$urlRouterProvider',
             'ALGORITHMS',
             function ($stateProvider, $urlRouterProvider, ALGORITHMS) {
-
                 $urlRouterProvider.otherwise('/' + ALGORITHMS[0].key);
 
                 ALGORITHMS.reduce(function ($stateProvider, algorithm) {
