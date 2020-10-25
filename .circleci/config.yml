@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  node: circleci/node@2.0.1
+  aws-s3: circleci/aws-s3@1.0.15
+jobs:
+  lint:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run lint
+  deploy-to-s3:
+    docker:
+      - image: circleci/buildpack-deps:latest
+    steps:
+      - checkout
+      - run: curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+      - run: sudo apt install nodejs
+      - run: npm install
+      - run: npm run build
+      - aws-s3/sync:
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          aws-access-key-id: AWS_ACCESS_KEY_ID_BLUE
+          aws-region: AWS_REGION_BLUE
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY_BLUE
+          from: dist
+          overwrite: true
+          to: 's3://sorting-animation.fanglin.me/'
+workflows:
+  lint-and-deploy:
+    jobs:
+      - deploy-to-s3:
+          requires:
+            - lint
+          filters:
+            branches:
+              only: master
+      - lint

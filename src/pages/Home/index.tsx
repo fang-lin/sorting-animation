@@ -1,10 +1,13 @@
-import React, {Component, ReactNode} from 'react';
+import React, {FunctionComponent} from 'react';
+import {NavLink} from 'react-router-dom';
 
-export default class Home extends Component {
-    render(): ReactNode {
-        return <div>homepage</div>;
-    }
-}
+const Index: FunctionComponent = () => {
+    return <div>
+        <NavLink to="/algorithms">Enter</NavLink>
+    </div>;
+};
+
+export default Index;
 
 
 

@@ -1,17 +1,17 @@
 import {render} from 'react-dom';
 import React from 'react';
-import {Redirect, Route, Router, Switch} from 'react-router';
-import {createHashHistory} from 'history';
+import {Redirect, Route, HashRouter, Switch} from 'react-router-dom';
+import Algorithms from './pages/Algorithms';
 import Home from './pages/Home';
 
 const dom = document.getElementById('root');
 
 if (dom) {
-    const history = createHashHistory();
-    render(<Router {...{history}}>
+    render(<HashRouter>
         <Switch>
-            <Route path="/" component={Home} exact/>
+            <Route path="/algorithms"><Algorithms/></Route>
+            <Route path="/" exact><Home/></Route>
             <Redirect to="/"/>
         </Switch>
-    </Router>, dom);
+    </HashRouter>, dom);
 }

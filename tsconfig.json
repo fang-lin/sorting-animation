@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "lib": [
       "es2018",
       "dom",
@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "jsx": "react",
-    "module": "es6",
+    "module": "es2015",
     "allowJs": true
   },
   "include": [
