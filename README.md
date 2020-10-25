@@ -1,21 +1,15 @@
-sorting-algorithm-animation 排序算法动画演示
-=====
+# 🚀 Welcome to your new awesome project!
 
-Prerequisites
------
+This project has been created using **webpack scaffold**, you can now run
 
-* `npm install`
-* `[npm install -g grunt-cli bower karma]`
-* `bower install`
+```
+npm run build
+```
 
-Folder structure
------
+or
 
-* `client/*:` source code
-* `app/lib/*:` frontend modules
-* `dist/*:` build dir
+```
+yarn build
+```
 
-Running
------
-
-* `npm run start`
+to bundle your application
