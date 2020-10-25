@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {Route, Switch, Link, useRouteMatch, Redirect} from 'react-router-dom';
+import {Route, Switch, NavLink, useRouteMatch, Redirect} from 'react-router-dom';
 import * as BinaryInsert from './BinaryInsert';
 import * as Bubble from './Bubble';
 import * as Heap from './Heap';
@@ -9,6 +9,7 @@ import * as Quick from './Quick';
 import * as Select from './Select';
 import * as Shaker from './Shaker';
 import * as Shell from './Shell';
+import './styles.css';
 
 export const pages = [
     BinaryInsert,
@@ -23,30 +24,32 @@ export const pages = [
 ];
 
 export function formatPageName(name: string): string {
-    return name.replace(/\s/g, '_');
+    return name.replace(/\s/g, '_').toLowerCase();
 }
 
-const Index: FunctionComponent = () => {
-
-    const {path, url} = useRouteMatch();
-    console.log(path, url);
-
+const Navigator: FunctionComponent = () => {
+    const {path} = useRouteMatch();
     return <div>
         <ul>
-            {
-                pages.map(({name}, index) =>
-                    <li key={index}><Link to={`${url}/${formatPageName(name)}`}>{name}</Link></li>
-                )
-            }
+            <li><NavLink to="/">Home</NavLink></li>
+            {pages.map(({name}, index) =>
+                <li key={index}><NavLink to={`${path}/${formatPageName(name)}`}>{name}</NavLink></li>
+            )}
         </ul>
+    </div>;
+};
+
+const Index: FunctionComponent = () => {
+    const {path} = useRouteMatch();
+
+    return <div>
+        <Navigator/>
         <div>
             <Switch>
-                {
-                    pages.map(({name, default: component}, index) =>
-                        <Route key={index} path={`${path}/${formatPageName(name)}`}>{component}</Route>
-                    )
-                }
-                <Redirect to={`${url}/${formatPageName(pages[0].name)}`}/>
+                {pages.map(({name, default: component}, index) =>
+                    <Route key={index} path={`${path}/${formatPageName(name)}`}>{component}</Route>
+                )}
+                <Redirect to={`${path}/${formatPageName(pages[0].name)}`}/>
             </Switch>
         </div>
     </div>;

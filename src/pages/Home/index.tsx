@@ -3,7 +3,9 @@ import {NavLink} from 'react-router-dom';
 
 const Index: FunctionComponent = () => {
     return <div>
-        <NavLink to="/algorithms">Enter</NavLink>
+        <ul>
+            <li><NavLink to="/algorithms">Enter</NavLink></li>
+        </ul>
     </div>;
 };
 

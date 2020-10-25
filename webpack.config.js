@@ -45,6 +45,19 @@ module.exports = (env, argv) => {
                 loader: 'ts-loader',
                 include: [path.resolve(__dirname, 'src')],
                 exclude: [/node_modules/]
+            }, {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            }, {
+                test: /\.(woff2)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+
+                        },
+                    },
+                ],
             }]
         },
 

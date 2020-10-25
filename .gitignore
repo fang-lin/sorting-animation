@@ -1,6 +1,6 @@
-.idea/
-.git/
-node_modules/
+.idea
+.git
+node_modules
 client/lib
-dist/
-tmp/
+dist
+tmp
