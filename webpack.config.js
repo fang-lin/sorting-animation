@@ -76,7 +76,7 @@ module.exports = (env, argv) => {
             splitChunks: {
                 cacheGroups: {
                     commons: {
-                        test: /[\\/]node_modules[\\/]/,
+                        test: /([\\/]node_modules[\\/]|[\\/]fonts)/,
                         name: 'vendors',
                         chunks: 'all'
                     }
