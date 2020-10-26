@@ -9,6 +9,8 @@ module.exports = (env, argv) => {
     const config = {
         entry: './src/index.tsx',
 
+        devtool: 'source-map',
+
         output: {
             filename: 'js/[name].[chunkhash:8].js',
             path: path.resolve(__dirname, 'dist'),
@@ -49,13 +51,14 @@ module.exports = (env, argv) => {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             }, {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'source-map-loader'
+            }, {
                 test: /\.(woff2)$/i,
                 use: [
                     {
                         loader: 'url-loader',
-                        options: {
-
-                        },
                     },
                 ],
             }]

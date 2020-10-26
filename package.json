@@ -5,7 +5,7 @@
   "author": "Lin fang",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --mode development",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack --mode production && cp -R error dist/"
@@ -31,12 +31,14 @@
     "history": "^5.0.0",
     "html-webpack-plugin": "^4.5.0",
     "lodash": "^4.17.20",
+    "normalize.css": "^8.0.1",
     "postcss": "^8.1.4",
     "postcss-loader": "^4.0.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "sass": "^1.27.0",
     "source-map-loader": "^1.1.1",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.0",

@@ -1,3 +1,6 @@
+export const name = 'Binary Insert';
+export const key = 'binary-insert';
+
 export const code = `
 function binaryInsertSort(list: Array<number>): void {
 

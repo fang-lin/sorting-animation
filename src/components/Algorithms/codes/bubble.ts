@@ -1,3 +1,6 @@
+export const name = 'Bubble';
+export const key = 'bubble';
+
 export const code = `
 function bubbleSort(list: Array<number>): void {
 

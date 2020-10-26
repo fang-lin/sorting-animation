@@ -1,37 +1,42 @@
-import React, {Component, ReactNode, RefObject} from 'react';
-import Codemirror from 'codemirror';
+import React, {FunctionComponent, useEffect, useState, useRef} from 'react';
+import Codemirror, {Editor} from 'codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
-import 'codemirror/theme/the-matrix.css';
+import {CodeMirrorStyle} from './styles';
+import {queryTheme, Theme, ThemeKey} from '../Theme';
 
 interface CodeAreaProps {
     code: string
+    themeKey: ThemeKey;
+    applyTheme: (theme: Theme) => void;
 }
 
-export default class CodeArea extends Component<CodeAreaProps> {
-    codeRef: RefObject<HTMLDivElement>;
+const CodeAreaFn: FunctionComponent<CodeAreaProps> = ({themeKey, code, applyTheme}) => {
+    const codeRef = useRef<HTMLDivElement>(null);
+    const [codemirror, setCodemirror] = useState<Editor>();
 
-    constructor(props: CodeAreaProps) {
-        super(props);
-        this.codeRef = React.createRef();
-    }
-
-    componentDidMount(): void {
-        if (this.codeRef.current) {
-            const codemirror = Codemirror(this.codeRef.current, {
-                value: this.props.code,
-                mode: 'javascript',
-                theme: 'the-matrix'
-            });
-            setTimeout(() => {
-                codemirror.refresh();
-            }, 100);
+    useEffect(() => {
+        if (codeRef.current) {
+            const current = codeRef.current;
+            if (codemirror) {
+                codemirror.setOption('theme', themeKey);
+                codemirror.setOption('value', code);
+            } else {
+                const _codemirror_ = Codemirror(current, {
+                    value: code,
+                    mode: 'javascript',
+                    theme: themeKey,
+                });
+                _codemirror_.setSize(null, 'auto');
+                setCodemirror(_codemirror_);
+            }
+            applyTheme(queryTheme(current));
         }
-    }
+    }, [applyTheme, themeKey, code, codemirror]);
 
-    render(): ReactNode {
-        return <div ref={this.codeRef}/>;
-    }
-}
+    return <><CodeMirrorStyle/>
+        <div ref={codeRef}/>
+    </>;
+};
 
-export const name = 'Binary Insert';
+export default CodeAreaFn;

@@ -1,3 +1,6 @@
+export const name = 'Insert';
+export const key = 'insert';
+
 export const code = `
 function insertSort(list: Array<number>): void {
 

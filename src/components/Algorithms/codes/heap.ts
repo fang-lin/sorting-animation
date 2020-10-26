@@ -1,3 +1,6 @@
+export const name = 'Heap';
+export const key = 'heap';
+
 export const code = `
 function adjustHeap(list: Array<number>, root: number, length: number): void {
 
