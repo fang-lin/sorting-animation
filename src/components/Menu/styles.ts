@@ -8,7 +8,11 @@ export const List = styled.ul<Theme>`
     padding: 0;
     font-weight: bold;
     margin: 0 -10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     @media ${device.tablet} {
+      display: block;
       margin: -20px 0;
       text-align: right;
     }
@@ -16,19 +20,15 @@ export const List = styled.ul<Theme>`
 export const ListItem = styled.li<Theme>`
     font-size: 24px;
     line-height: 24px;
-    text-transform: uppercase; 
-    display: inline-block;
-    @media ${device.tablet} {
-      display: block;
-    }
+    text-transform: uppercase;
     a {
       padding: 10px;
+      display: block;
+      text-decoration: none;
+      color: ${({keywordColor}) => keywordColor};
       @media ${device.tablet} {
         padding: 20px 30px;
       }
-      display: inline-block;
-      text-decoration: none;
-      color: ${({keywordColor}) => keywordColor};
       &:hover {
         text-decoration: underline;
       }
