@@ -1,5 +1,4 @@
 export const name = 'Merge';
-export const key = 'merge';
 
 export const code = `
 function merge(list: Array<number>, low: number, mid: number, high: number): void {

@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import {Theme} from '../Theme';
+import {device} from '../Algorithms/styles';
 
 export const List = styled.ul<Theme>`
     list-style: none;
     padding: 0;
-    margin: 0;
-    width: 180px;
-    //text-align: right;
+    margin: -3px;
+    width: unset;
+    @media ${device.tablet} {  
+       width: 180px;
+    }
 `;
 export const ListItem = styled.li<Theme>`
     display: inline-block;

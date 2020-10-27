@@ -1,5 +1,4 @@
 export const name = 'Select';
-export const key = 'select';
 
 export const code = `
 function selectSort(list: Array<number>): void {

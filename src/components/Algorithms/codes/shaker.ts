@@ -1,5 +1,4 @@
 export const name = 'Shaker';
-export const key = 'shaker';
 
 export const code = `
 function shakerSort(list: Array<number>): void {

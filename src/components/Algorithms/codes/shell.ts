@@ -1,5 +1,4 @@
 export const name = 'Shell';
-export const key = 'shell';
 
 export const code = `
 function shellSort(list: Array<number>): void {

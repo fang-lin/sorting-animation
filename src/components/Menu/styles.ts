@@ -1,27 +1,41 @@
 import styled from 'styled-components';
 import {Theme} from '../Theme';
+import {device} from '../Algorithms/styles';
 
 export const List = styled.ul<Theme>`
     color: ${({codeColor}) => codeColor};
     list-style: none;
     padding: 0;
-    margin: -20px 0;
-    font-weight: 700;
-    text-align: right;
+    font-weight: bold;
+    margin: 0 -10px;
+    @media ${device.tablet} {
+      margin: -20px 0;
+      text-align: right;
+    }
 `;
 export const ListItem = styled.li<Theme>`
     font-size: 24px;
     line-height: 24px;
-    margin: 20px 0;
+    text-transform: uppercase; 
+    display: inline-block;
+    @media ${device.tablet} {
+      display: block;
+    }
     a {
+      padding: 10px;
+      @media ${device.tablet} {
+        padding: 20px 30px;
+      }
+      display: inline-block;
       text-decoration: none;
       color: ${({keywordColor}) => keywordColor};
       &:hover {
         text-decoration: underline;
       }
       &.active {
-        color: ${({defColor}) => defColor};
+        // color: ${({defColor}) => defColor};
         text-decoration: none;
+        background: ${({defColor}) => defColor};
       }
     }
 `;

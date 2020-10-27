@@ -1,5 +1,4 @@
 export const name = 'Quick';
-export const key = 'quick';
 
 export const code = `
 function quickSort(list: Array<number>, left: number, right: number): void {

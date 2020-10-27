@@ -7,13 +7,11 @@ import {List, ListItem} from './styles';
 
 const Menu: FunctionComponent<Theme> = (theme) => {
     const {params: {themeKey}} = useRouteMatch<Params>();
-    return <div>
-        <List {...theme}>
-            {Array.from(algorithms).map(([key, {name}]) =>
-                <ListItem {...theme} key={key}><NavLink to={`/${themeKey}/${key}`}>{name}</NavLink></ListItem>
-            )}
-        </List>
-    </div>;
+    return <List {...theme}>
+        {Array.from(algorithms).map(([key, {name}]) =>
+            <ListItem {...theme} key={key}><NavLink to={`/${themeKey}/${key}`}>{name}</NavLink></ListItem>
+        )}
+    </List>;
 };
 
 export default Menu;

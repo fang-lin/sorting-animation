@@ -14,7 +14,7 @@ export interface Code {
 }
 
 const algorithms = new Map<string, Code>([
-    ['binaryInsert', binaryInsert],
+    ['binary-insert', binaryInsert],
     ['bubble', bubble],
     ['heap', heap],
     ['insert', insert],

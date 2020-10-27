@@ -21,7 +21,5 @@ export const CodeWrapper = styled.div`
 
 export const ThemeWrapper = styled.div`
     overflow: hidden;
-    position: fixed;
-    top: -9999px;
-    z-index: -9999;
+    height: 0;
 `;
