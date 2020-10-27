@@ -7,7 +7,7 @@ export const List = styled.ul<Theme>`
     padding: 0;
     margin: -3px;
     width: unset;
-    @media ${device.tablet} {  
+    @media ${device.laptop} {  
        width: 180px;
     }
 `;

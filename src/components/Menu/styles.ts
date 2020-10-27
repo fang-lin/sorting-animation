@@ -11,7 +11,7 @@ export const List = styled.ul<Theme>`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    @media ${device.tablet} {
+    @media ${device.laptop} {
       display: block;
       margin: -20px 0;
       text-align: right;
@@ -26,7 +26,7 @@ export const ListItem = styled.li<Theme>`
       display: block;
       text-decoration: none;
       color: ${({keywordColor}) => keywordColor};
-      @media ${device.tablet} {
+      @media ${device.laptop} {
         padding: 20px 30px;
         display: inline-block;
       }

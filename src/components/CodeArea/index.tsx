@@ -3,6 +3,7 @@ import Codemirror, {Editor} from 'codemirror';
 import trim from 'lodash/trim';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
+import 'codemirror/addon/edit/matchbrackets';
 import {CodeMirrorStyle, CodeWrapper, ThemeWrapper} from './styles';
 import {queryTheme, Theme, ThemeKey} from '../Theme';
 
@@ -28,8 +29,9 @@ const CodeAreaFn: FunctionComponent<CodeAreaProps> = ({themeKey, code, applyThem
             } else {
                 const _codemirror_ = Codemirror(codeDom, {
                     value: trim(code),
-                    mode: 'javascript',
+                    mode: 'text/typescript',
                     theme: themeKey,
+                    matchBrackets: true,
                     lineWrapping: true
                 });
                 _codemirror_.setSize('null', 'auto');

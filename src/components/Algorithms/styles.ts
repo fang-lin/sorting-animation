@@ -73,7 +73,7 @@ export const AlgorithmsWrapper = styled.div`
     justify-content: space-between;
     padding: 0 0 30px 0;
     flex-direction: column;
-    @media ${device.tablet} {
+    @media ${device.laptop} {
       flex-direction: row;
       padding: 30px 0;
     }
@@ -83,7 +83,7 @@ export const CodeAreaWrapper = styled.div`
     flex: 1;
     order: 1;
     margin: 30px 0;
-    @media ${device.tablet} {
+    @media ${device.laptop} {
       order: unset;
       margin: 0;   
     }
@@ -91,7 +91,7 @@ export const CodeAreaWrapper = styled.div`
 
 export const MenuWrapper = styled.div`
     order: 0;
-    @media ${device.tablet} {
+    @media ${device.laptop} {
       order: unset;
       margin: 0 30px;
     }
@@ -99,7 +99,7 @@ export const MenuWrapper = styled.div`
 
 export const ThemeBarWrapper = styled.div`
     order: 2;
-    @media ${device.tablet} {  
+    @media ${device.laptop} {  
       order: unset;
     }
 `;
