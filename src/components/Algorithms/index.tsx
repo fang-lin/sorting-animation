@@ -51,8 +51,8 @@ const Algorithms: FunctionComponent = () => {
                 &nbsp;|&nbsp;
                 <a href="#">Lin Fang in {(new Date()).getFullYear()}</a>
                 &nbsp;|&nbsp;
-                <a href="https://www.diagraph.fun" target="_blank"
-                    rel="noopener noreferrer">diagraph.fun</a>
+                <a href="https://www.plotter.fun" target="_blank"
+                    rel="noopener noreferrer">plotter.fun</a>
             </Footer>
         </Wrapper>;
     }

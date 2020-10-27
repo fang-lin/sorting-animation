@@ -2,9 +2,17 @@ import styled, {createGlobalStyle} from 'styled-components';
 import {Theme} from '../Theme';
 
 export const GlobalStyle = createGlobalStyle<Theme>`
-    html, body, #root {
+    html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Source Code Pro', monospace;
+        height: 100%;
+    }
+    html {
         background: ${({background}) => background};
         transition: background 1s;
+    }
+    #root {
         height: 100%;
     }
 `;
@@ -21,16 +29,6 @@ export const Head1 = styled.h1<Theme>`
         color: ${({defColor}) => defColor};
       }
     }
-`;
-
-export const Label = styled.label<Theme>`
-    margin: 0 0 30px 0;
-    font-size: 42px;
-    color: ${({variableColor}) => variableColor};
-`;
-
-export const Head3 = styled.h3<Theme>`
-    color: ${({variableColor}) => variableColor};
 `;
 
 export const Wrapper = styled.section`
