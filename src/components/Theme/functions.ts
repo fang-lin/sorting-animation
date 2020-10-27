@@ -2,7 +2,6 @@ import 'codemirror/theme/3024-day.css';
 import 'codemirror/theme/3024-night.css';
 import 'codemirror/theme/abcdef.css';
 import 'codemirror/theme/ambiance.css';
-import 'codemirror/theme/ambiance-mobile.css';
 import 'codemirror/theme/ayu-dark.css';
 import 'codemirror/theme/ayu-mirage.css';
 import 'codemirror/theme/base16-dark.css';
@@ -65,7 +64,7 @@ import random from 'lodash/random';
 
 export const ThemeKeys = [
     '3024-day', '3024-night', 'abcdef',
-    'ambiance', 'ambiance-mobile', 'ayu-dark',
+    'ambiance', 'ayu-dark',
     'ayu-mirage', 'base16-dark', 'base16-light',
     'bespin', 'blackboard', 'cobalt',
     'colorforth', 'darcula', 'dracula',
