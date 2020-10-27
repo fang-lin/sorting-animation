@@ -33,7 +33,7 @@ const Algorithms: FunctionComponent = () => {
             <AlgorithmsWrapper>
                 <GlobalStyle {...theme}/>
                 <CodeAreaWrapper>
-                    <Head1  {...theme}>{name}</Head1>
+                    <Head1  {...theme}>{name}<sup> with <span>{themeKey}</span></sup></Head1>
                     <CodeArea {...{themeKey, code, applyTheme}}/>
                 </CodeAreaWrapper>
                 <MenuWrapper>

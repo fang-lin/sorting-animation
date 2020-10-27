@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         font-family: 'Source Code Pro', monospace;
+        background: #777;
     }
     
     button {

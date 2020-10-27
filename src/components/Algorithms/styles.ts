@@ -13,7 +13,22 @@ export const Head1 = styled.h1<Theme>`
     margin: 0 0 30px 0;
     font-size: 42px;
     color: ${({variableColor}) => variableColor};
+    sup {
+      font-size: 12px;
+      top: -24px;
+      color: ${({codeColor}) => codeColor};
+      span {
+        color: ${({defColor}) => defColor};
+      }
+    }
 `;
+
+export const Label = styled.label<Theme>`
+    margin: 0 0 30px 0;
+    font-size: 42px;
+    color: ${({variableColor}) => variableColor};
+`;
+
 export const Head3 = styled.h3<Theme>`
     color: ${({variableColor}) => variableColor};
 `;
