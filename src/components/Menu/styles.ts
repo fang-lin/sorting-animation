@@ -28,6 +28,7 @@ export const ListItem = styled.li<Theme>`
       color: ${({keywordColor}) => keywordColor};
       @media ${device.tablet} {
         padding: 20px 30px;
+        display: inline-block;
       }
       &:hover {
         text-decoration: underline;
