@@ -104,13 +104,13 @@ export interface Theme {
 }
 
 export const defaultTheme: Theme = {
-    background: 'white',
-    keywordColor: 'back',
-    variableColor: 'back',
-    defColor: 'back',
-    operatorColor: 'back',
-    numberColor: 'back',
-    codeColor: 'back'
+    background: 'black',
+    keywordColor: 'black',
+    variableColor: 'black',
+    defColor: 'black',
+    operatorColor: 'black',
+    numberColor: 'black',
+    codeColor: 'black'
 };
 
 export function queryTheme(element: HTMLDivElement): Theme {
@@ -125,33 +125,26 @@ export function queryTheme(element: HTMLDivElement): Theme {
     } = defaultTheme;
 
     const cmDom = element.querySelector('.CodeMirror');
-    if (cmDom) {
+    if (cmDom)
         background = getComputedStyle(cmDom).background;
-    }
     const cmKeywordDom = element.querySelector('.cm-keyword');
-    if (cmKeywordDom) {
+    if (cmKeywordDom)
         keywordColor = getComputedStyle(cmKeywordDom).color;
-    }
     const cmVariableDom = element.querySelector('.cm-variable');
-    if (cmVariableDom) {
+    if (cmVariableDom)
         variableColor = getComputedStyle(cmVariableDom).color;
-    }
     const cmDefDom = element.querySelector('.cm-def');
-    if (cmDefDom) {
+    if (cmDefDom)
         defColor = getComputedStyle(cmDefDom).color;
-    }
     const cmOperatorDom = element.querySelector('.cm-operator');
-    if (cmOperatorDom) {
+    if (cmOperatorDom)
         operatorColor = getComputedStyle(cmOperatorDom).color;
-    }
     const cmNumberDom = element.querySelector('.cm-number');
-    if (cmNumberDom) {
+    if (cmNumberDom)
         numberColor = getComputedStyle(cmNumberDom).color;
-    }
     const cmColorDom = element.querySelector('.CodeMirror-line ');
-    if (cmColorDom) {
+    if (cmColorDom)
         codeColor = getComputedStyle(cmColorDom).color;
-    }
 
     return {
         background,

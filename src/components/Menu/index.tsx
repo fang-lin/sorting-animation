@@ -9,7 +9,7 @@ const Menu: FunctionComponent<Theme> = (theme) => {
     const {params: {themeKey}} = useRouteMatch<Params>();
     return <div>
         <List {...theme}>
-            <ListItem {...theme}><Link to="/">Home</Link></ListItem>
+            {/*<ListItem {...theme}><Link to="/">Home</Link></ListItem>*/}
             {Array.from(algorithms).map(([key, {name}]) =>
                 <ListItem {...theme} key={key}><NavLink to={`/${themeKey}/${key}`}>{name}</NavLink></ListItem>
             )}

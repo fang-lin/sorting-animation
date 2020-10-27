@@ -2,23 +2,24 @@ import styled from 'styled-components';
 import {Theme} from '../Theme';
 
 export const List = styled.ul<Theme>`
-    color: ${({codeColor}) => codeColor};
-    display: flex;
     list-style: none;
-    flex-wrap: wrap;
-    font-size: 12px;
-    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    width: 180px;
+    //text-align: right;
 `;
 export const ListItem = styled.li<Theme>`
+    display: inline-block;
     margin: 3px;
+    font-size: 12px;
     a {
       text-decoration: none;
-      color: ${({defColor}) => defColor};
+      color: ${({codeColor}) => codeColor};
       &:hover {
         text-decoration: underline;
       }
       &.active{
-        color: ${({keywordColor}) => keywordColor};
+        color: ${({operatorColor}) => operatorColor};
         text-decoration: underline;
       }
     }

@@ -1,10 +1,20 @@
 import React, {FunctionComponent, useState} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import random from 'lodash/random';
+import {version} from '../../../package.json';
 import algorithms, {Code} from './codes';
 import CodeArea from '../CodeArea';
 import {ThemeKeys, defaultTheme, Theme, ThemeKey} from '../Theme';
-import {GlobalStyle, Head3} from './styles';
+import {
+    GlobalStyle,
+    Wrapper,
+    Head1,
+    MenuWrapper,
+    AlgorithmsWrapper,
+    CodeAreaWrapper,
+    ThemeBarWrapper,
+    Footer
+} from './styles';
 import Menu from '../Menu';
 import ThemeBar from '../Theme';
 
@@ -19,16 +29,32 @@ const Algorithms: FunctionComponent = () => {
 
     if (algorithms.has(algorithmKey) && ThemeKeys.includes(themeKey)) {
         const {name, code} = algorithms.get(algorithmKey) as Code;
-        return <div>
-            <GlobalStyle {...theme}/>
-            <Menu {...theme}/>
-            <Head3  {...theme}>{name} meeting {themeKey}</Head3>
-            <CodeArea {...{themeKey, code, applyTheme}}/>
-            <footer>
-                <Head3 {...theme}>Themes</Head3>
-                <ThemeBar {...theme}/>
-            </footer>
-        </div>;
+        return <Wrapper>
+            <AlgorithmsWrapper>
+                <GlobalStyle {...theme}/>
+                <CodeAreaWrapper>
+                    <Head1  {...theme}>{name}</Head1>
+                    <CodeArea {...{themeKey, code, applyTheme}}/>
+                </CodeAreaWrapper>
+                <MenuWrapper>
+                    <Menu {...theme}/>
+                </MenuWrapper>
+                <ThemeBarWrapper>
+                    <ThemeBar {...theme}/>
+                </ThemeBarWrapper>
+            </AlgorithmsWrapper>
+            <Footer {...theme}>
+                <a href="/">Sorting Animation {version}</a>
+                &nbsp;|&nbsp;
+                <a href="https://github.com/fang-lin/sorting-animation" target="_blank"
+                    rel="noopener noreferrer">GitHub</a>
+                &nbsp;|&nbsp;
+                <a href="#">Lin Fang in {(new Date()).getFullYear()}</a>
+                &nbsp;|&nbsp;
+                <a href="https://www.diagraph.fun" target="_blank"
+                    rel="noopener noreferrer">diagraph.fun</a>
+            </Footer>
+        </Wrapper>;
     }
     push('/');
     return null;

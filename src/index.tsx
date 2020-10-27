@@ -1,11 +1,11 @@
 import {render} from 'react-dom';
 import React from 'react';
 import {Redirect, Route, HashRouter, Switch} from 'react-router-dom';
-import Algorithms from './components/Algorithms';
-import Home from './components/Home';
+import Algorithms, {getRandomAlgorithmKey} from './components/Algorithms';
 import injectFonts from './fonts';
 import 'normalize.css/normalize.css';
 import {GlobalStyle} from './styles';
+import {getRandomThemeKey} from './components/Theme';
 
 const dom = document.getElementById('root');
 
@@ -14,8 +14,7 @@ if (dom) {
         <GlobalStyle/>
         <Switch>
             <Route path="/:themeKey/:algorithmKey"><Algorithms/></Route>
-            <Route path="/" exact><Home/></Route>
-            <Redirect to="/"/>
+            <Redirect to={`/${getRandomThemeKey()}/${getRandomAlgorithmKey()}`}/>
         </Switch>
     </HashRouter>, dom);
 }
