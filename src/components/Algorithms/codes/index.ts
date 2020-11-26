@@ -8,9 +8,20 @@ import * as select from './select';
 import * as shaker from './shaker';
 import * as shell from './shell';
 
+export interface Frame {
+    list: Array<number>,
+    comparing?: Array<number>,
+    swap?: Array<number>
+}
+
+export interface Executor {
+    (list: Array<number>, collector: (frame: Frame) => void): void;
+}
+
 export interface Code {
     code: string;
     name: string;
+    executor: Executor;
 }
 
 const algorithms = new Map<string, Code>([

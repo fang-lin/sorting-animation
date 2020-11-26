@@ -29,9 +29,9 @@ const Algorithms: FunctionComponent = () => {
     const [theme, applyTheme] = useState<Theme>(defaultTheme);
 
     if (algorithms.has(algorithmKey) && ThemeKeys.includes(themeKey)) {
-        const {name, code} = algorithms.get(algorithmKey) as Code;
+        const {name, code, executor} = algorithms.get(algorithmKey) as Code;
         return <>
-            <CanvasTarget {...{theme, code}}/>
+            <CanvasTarget {...{theme, executor}}/>
             <Wrapper>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
