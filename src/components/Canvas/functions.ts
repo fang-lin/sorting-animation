@@ -67,7 +67,7 @@ function getLayout(size: Size): Layout {
 export function animationPlayer(context: CanvasRenderingContext2D | null, size: Size, theme: Theme, executor: Executor): number {
     if (context) {
         const layout = getLayout(size);
-        const frames = collectFrames(shuffle(range(1, layout.barCount)), executor);
+        const frames = collectFrames(shuffle(range(1, layout.barCount + 1)), executor);
         let i = 0;
         const animationId = setInterval(() => {
             if (frames[i]) {
@@ -76,7 +76,7 @@ export function animationPlayer(context: CanvasRenderingContext2D | null, size: 
                 clearInterval(animationId);
             }
             i++;
-        }, 100);
+        }, 0);
 
         return animationId;
     }
