@@ -26,15 +26,15 @@ export const GlobalStyle = createGlobalStyle<Theme>`
     html, body {
         margin: 0;
         padding: 0;
+        min-height: 100vh;
         font-family: 'Source Code Pro', monospace;
-        height: 100%;
     }
     html {
         background: ${({background}) => background};
         transition: background 1s;
     }
     #root {
-        height: 100%;
+      min-height: 100vh;
     }
 `;
 
@@ -63,7 +63,7 @@ export const Wrapper = styled.section`
     justify-content: space-between;
     margin: 0 auto;
     padding: 0 10px;
-    height: 100%;
+    min-height: 100vh;
     box-sizing: border-box;
 `;
 

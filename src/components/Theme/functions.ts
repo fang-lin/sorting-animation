@@ -100,6 +100,7 @@ export interface Theme {
     operatorColor: string;
     numberColor: string;
     codeColor: string;
+    themeKey: string;
 }
 
 export const defaultTheme: Theme = {
@@ -109,10 +110,11 @@ export const defaultTheme: Theme = {
     defColor: 'black',
     operatorColor: 'black',
     numberColor: 'black',
-    codeColor: 'black'
+    codeColor: 'black',
+    themeKey: 'unknown'
 };
 
-export function queryTheme(element: HTMLDivElement): Theme {
+export function queryTheme(element: HTMLDivElement, themeKey: ThemeKey): Theme {
     let {
         background,
         keywordColor,
@@ -152,6 +154,7 @@ export function queryTheme(element: HTMLDivElement): Theme {
         defColor,
         operatorColor,
         numberColor,
-        codeColor
+        codeColor,
+        themeKey
     };
 }

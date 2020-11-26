@@ -53,7 +53,7 @@ const CodeAreaFn: FunctionComponent<CodeAreaProps> = ({themeKey, code, applyThem
                 _themeMirror_.setSize('null', 'auto');
                 setThemeMirror(_themeMirror_);
             }
-            applyTheme(queryTheme(themeDom));
+            applyTheme(queryTheme(themeDom, themeKey));
         }
     }, [applyTheme, themeKey, code, themeMirror, codeMirror]);
 
