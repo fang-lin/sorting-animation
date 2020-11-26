@@ -2,8 +2,6 @@ import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
 import debounce from 'lodash/debounce';
 import shuffle from 'lodash/shuffle';
 import range from 'lodash/range';
-import {useRouteMatch} from 'react-router-dom';
-import {Params} from '../Algorithms';
 import {Theme} from '../Theme';
 import {CanvasWrapper, CanvasStage} from './styles';
 
@@ -11,10 +9,12 @@ import {CanvasWrapper, CanvasStage} from './styles';
 //     list: Array<number>;
 //     highlightIndexes: Array<number>
 // }
-//
-// interface CanvasProps {
-//     frames: Array<Frame>;
-// }
+
+interface CanvasProps {
+    // frames: Array<Frame>;
+    theme: Theme;
+    code: string;
+}
 
 type Size = [number, number];
 
@@ -24,24 +24,27 @@ function rgba(rgb: string): string {
     return rgb.replace('rgb', 'rgba').replace(')', ', .15)');
 }
 
-function draw(context: CanvasRenderingContext2D | null, size: Size, count: number, theme: Theme) {
+function draw(context: CanvasRenderingContext2D | null, size: Size, theme: Theme) {
     if (context) {
-        const unit = [(size[0] / count) | 0, (size[1] / count) | 0];
+        const barWidth = 16 * deviceRatio;
+        const barGap = deviceRatio;
+        const barCount = (size[0] / (barWidth + barGap)) | 0;
+        const barUnit = (size[1] / barCount) | 0;
+        const left = (size[0] - barCount * (barWidth + barGap)) / 2;
         context.clearRect(0, 0, size[0], size[1]);
         context.fillStyle = rgba(theme.defColor);
-        shuffle(range(0, count)).forEach((value, i) => {
+        shuffle(range(1, barCount + 1)).forEach((value, i) => {
             context.fillRect(
-                unit[0] * i + deviceRatio,
-                size[1] - unit[1] * value,
-                unit[0] - deviceRatio,
-                unit[1] * value
+                left + barGap / 2 + (barWidth + barGap) * i,
+                size[1] - barUnit * value,
+                barWidth,
+                barUnit * value
             );
         });
     }
 }
 
-const Canvas: FunctionComponent<Theme> = (theme) => {
-    const {params: {algorithmKey}} = useRouteMatch<Params>();
+const Canvas: FunctionComponent<CanvasProps> = ({theme, code}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [size, setSize] = useState<Size>([0, 0]);
 
@@ -62,7 +65,7 @@ const Canvas: FunctionComponent<Theme> = (theme) => {
 
     useEffect(() => {
         if (canvasRef.current) {
-            draw(canvasRef.current.getContext('2d'), size, 100, theme);
+            draw(canvasRef.current.getContext('2d'), size, theme);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [size, theme.themeKey]);
@@ -70,7 +73,7 @@ const Canvas: FunctionComponent<Theme> = (theme) => {
     useEffect(() => {
         onResizing();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [algorithmKey]);
+    }, [code]);
 
     return <CanvasWrapper>
         <CanvasStage ref={canvasRef} width={size[0]} height={size[1]}/>

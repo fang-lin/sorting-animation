@@ -31,7 +31,7 @@ const Algorithms: FunctionComponent = () => {
     if (algorithms.has(algorithmKey) && ThemeKeys.includes(themeKey)) {
         const {name, code} = algorithms.get(algorithmKey) as Code;
         return <>
-            <CanvasTarget {...theme}/>
+            <CanvasTarget {...{theme, code}}/>
             <Wrapper>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
