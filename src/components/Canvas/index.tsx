@@ -1,9 +1,8 @@
 import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
-import debounce from 'lodash/debounce';
 import {Theme} from '../Theme';
 import {CanvasStage, CanvasWrapper} from './styles';
 import {Executor} from '../Algorithms/codes';
-import {deviceRatio, animationPlayer, Size} from './functions';
+import {deviceRatio, AnimationPlayer, Size} from './functions';
 
 interface CanvasProps {
     theme: Theme;
@@ -13,35 +12,32 @@ interface CanvasProps {
 const Canvas: FunctionComponent<CanvasProps> = ({theme, executor}) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [size, setSize] = useState<Size>([0, 0]);
-    const [animationId, setAnimationId] = useState<number>(NaN);
+    const [animationPlayer, setAnimationPlayer] = useState<AnimationPlayer>();
 
-    const onResizing = debounce(() => {
+    useEffect(() => {
         if (canvasRef.current) {
             const {width, height} = canvasRef.current.getBoundingClientRect();
             setSize([width * deviceRatio, height * deviceRatio]);
+            const context = canvasRef.current.getContext('2d');
+            if (context) {
+                const _animationPlayer = new AnimationPlayer(context);
+                _animationPlayer.size = [width * deviceRatio, height * deviceRatio];
+                setAnimationPlayer(_animationPlayer);
+            }
         }
-    }, 200);
+    }, [canvasRef]);
 
     useEffect(() => {
-        window.addEventListener('resize', onResizing);
-        return () => {
-            window.removeEventListener('resize', onResizing);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    useEffect(() => {
-        if (canvasRef.current) {
-            clearInterval(animationId);
-            setAnimationId(animationPlayer(canvasRef.current.getContext('2d'), size, theme, executor));
+        if (animationPlayer) {
+            animationPlayer.theme = theme;
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [size, theme.themeKey]);
+    }, [animationPlayer, theme]);
 
     useEffect(() => {
-        onResizing();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [executor]);
+        if (animationPlayer) {
+            animationPlayer.executor = executor;
+        }
+    }, [animationPlayer, executor]);
 
     return <CanvasWrapper>
         <CanvasStage ref={canvasRef} width={size[0]} height={size[1]}/>

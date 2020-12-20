@@ -1,7 +1,7 @@
 import {Theme} from '../Theme';
 import {Executor, Frame} from '../Algorithms/codes';
-import shuffle from 'lodash/shuffle';
 import range from 'lodash/range';
+import shuffle from 'lodash/shuffle';
 
 export type Size = [number, number];
 
@@ -20,65 +20,93 @@ function rgba(rgb: string, alpha = .2): string {
     return rgb.replace('rgb', 'rgba').replace(')', `, ${alpha})`);
 }
 
-function collectFrames(list: Array<number>, executor: Executor): Array<Frame> {
+export function collectFrames(disorderedList: Array<number>, executor: Executor): Array<Frame> {
     const frames: Array<Frame> = [];
-    executor(list, (_) => frames.push(JSON.parse(JSON.stringify(_))));
+    executor(disorderedList, (_) => frames.push(JSON.parse(JSON.stringify(_))));
     return frames;
 }
 
-function drawFrame(context: CanvasRenderingContext2D, frame: Frame, theme: Theme, layout: Layout) {
-    const {size, left, barGap, barWidth, barUnit} = layout;
-    context.clearRect(0, 0, size[0], size[1]);
+export class AnimationPlayer {
+    private _frames: Array<Frame> = [];
+    private _executor: Executor = () => undefined;
+    private context: CanvasRenderingContext2D;
+    private _size?: Size;
+    private _theme?: Theme;
+    private playId = NaN;
+    private left = 0;
+    private barUnit = 0;
+    private barCount = 0;
+    private barGap = 0;
+    private barWidth = 0;
 
-    frame.list.forEach((value, i) => {
-        if (frame.swap?.includes(i)) {
-            context.fillStyle = rgba(theme.keywordColor, .3);
-        } else if (frame.comparing?.includes(i)) {
-            context.fillStyle = rgba(theme.variableColor, .3);
-        } else {
-            context.fillStyle = rgba(theme.defColor);
-        }
-        context.fillRect(
-            left + barGap / 2 + (barWidth + barGap) * i,
-            size[1] - barUnit * value,
-            barWidth,
-            barUnit * value
-        );
-    });
-}
-
-function getLayout(size: Size): Layout {
-    const barWidth = 16 * deviceRatio;
-    const barGap = deviceRatio;
-    const barCount = (size[0] / (barWidth + barGap)) | 0;
-    const barUnit = (size[1] / barCount) | 0;
-    const left = (size[0] - barCount * (barWidth + barGap)) / 2;
-
-    return {
-        barWidth,
-        barGap,
-        barUnit,
-        barCount,
-        left,
-        size
-    };
-}
-
-export function animationPlayer(context: CanvasRenderingContext2D | null, size: Size, theme: Theme, executor: Executor): number {
-    if (context) {
-        const layout = getLayout(size);
-        const frames = collectFrames(shuffle(range(1, layout.barCount + 1)), executor);
-        let i = 0;
-        const animationId = setInterval(() => {
-            if (frames[i]) {
-                drawFrame(context, frames[i], theme, layout);
-            } else {
-                clearInterval(animationId);
-            }
-            i++;
-        }, 0);
-
-        return animationId;
+    constructor(context: CanvasRenderingContext2D) {
+        this.context = context;
     }
-    return NaN;
+
+    set size(size: Size) {
+        this._size = size;
+        this.getLayout();
+    }
+
+    set executor(executor: Executor) {
+        this._executor = executor;
+        if (this._frames[0]) {
+            this._frames = collectFrames(this._frames[0].list, executor);
+        } else {
+            this._frames = collectFrames(shuffle(range(1, this.barCount + 1)), executor);
+        }
+        this.play();
+    }
+
+    set theme(theme: Theme) {
+        this._theme = theme;
+    }
+
+    drawFrame(frame: Frame): void {
+        if (this._size && this._theme) {
+            const {keywordColor, variableColor, defColor} = this._theme;
+            this.context.clearRect(0, 0, this._size[0], this._size[1]);
+            frame.list.forEach((value, i) => {
+                if (frame.swap?.includes(i)) {
+                    this.context.fillStyle = rgba(keywordColor, .3);
+                } else if (frame.comparing?.includes(i)) {
+                    this.context.fillStyle = rgba(variableColor, .3);
+                } else {
+                    this.context.fillStyle = rgba(defColor);
+                }
+                if (this._size)
+                    this.context.fillRect(
+                        this.left + this.barGap / 2 + (this.barWidth + this.barGap) * i,
+                        this._size[1] - this.barUnit * value,
+                        this.barWidth,
+                        this.barUnit * value
+                    );
+            });
+        }
+    }
+
+    private getLayout(): void {
+        this.barWidth = 16 * deviceRatio;
+        this.barGap = deviceRatio;
+        if (this._size) {
+            this.barCount = (this._size[0] / (this.barWidth + this.barGap)) | 0;
+            this.barUnit = (this._size[1] / this.barCount) | 0;
+            this.left = (this._size[0] - this.barCount * (this.barWidth + this.barGap)) / 2;
+        }
+    }
+
+    play(): void {
+        clearInterval(this.playId);
+        if (this._frames.length === 0) {
+            this._frames = collectFrames(shuffle(range(1, this.barCount + 1)), this._executor);
+        }
+        this.playId = setInterval(() => {
+            const frame = this._frames.shift();
+            if (frame) {
+                this.drawFrame(frame);
+            } else {
+                this.play();
+            }
+        }, 10);
+    }
 }
