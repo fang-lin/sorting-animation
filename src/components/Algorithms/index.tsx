@@ -18,20 +18,28 @@ import {
 } from './styles';
 import Menu from '../Menu';
 import ThemeBar from '../Theme';
+import SpeedBar from '../SpeedBar';
+import ShuffleButton from '../ShuffleButton';
 
 export function getRandomAlgorithmKey(): string {
     return Array.from(algorithms)[random(0, algorithms.size - 1)][0];
 }
 
+function speedValid(speed: string): boolean {
+    const int = parseInt(speed);
+    return int > 0 && int === speed as never - 0;
+}
+
 const Algorithms: FunctionComponent = () => {
-    const {params: {themeKey, algorithmKey}} = useRouteMatch<Params>();
+    const {params: {themeKey, algorithmKey, speedKey}} = useRouteMatch<Params>();
     const {push} = useHistory();
     const [theme, applyTheme] = useState<Theme>(defaultTheme);
+    const [shuffle, triggerShuffle] = useState<number>(0);
 
-    if (algorithms.has(algorithmKey) && ThemeKeys.includes(themeKey)) {
+    if (algorithms.has(algorithmKey) && ThemeKeys.includes(themeKey) && speedValid(speedKey)) {
         const {name, code, executor} = algorithms.get(algorithmKey) as Code;
         return <>
-            <CanvasTarget {...{theme, executor}}/>
+            <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
             <Wrapper>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
@@ -41,6 +49,8 @@ const Algorithms: FunctionComponent = () => {
                     </CodeAreaWrapper>
                     <MenuWrapper>
                         <Menu {...theme}/>
+                        <SpeedBar {...{theme}}/>
+                        <ShuffleButton {...{theme, triggerShuffle}}/>
                     </MenuWrapper>
                     <ThemeBarWrapper>
                         <ThemeBar {...theme}/>
@@ -60,7 +70,9 @@ const Algorithms: FunctionComponent = () => {
             </Wrapper>
         </>;
     }
-    push('/');
+    setTimeout(() => {
+        push('/');
+    });
     return null;
 };
 
@@ -70,4 +82,5 @@ export default Algorithms;
 export interface Params {
     themeKey: ThemeKey;
     algorithmKey: string;
+    speedKey: string;
 }

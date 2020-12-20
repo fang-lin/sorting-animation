@@ -84,23 +84,29 @@ export const CodeAreaWrapper = styled.div`
     order: 1;
     margin: 30px 0;
     @media ${device.laptop} {
-      order: unset;
-      margin: 0;   
+        order: unset;
+        margin: 0;   
     }
 `;
 
 export const MenuWrapper = styled.div`
     order: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     @media ${device.laptop} {
-      order: unset;
-      margin: 0 30px;
+        order: unset;
+        margin: 0 30px;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: start;
     }
 `;
 
 export const ThemeBarWrapper = styled.div`
     order: 2;
     @media ${device.laptop} {  
-      order: unset;
+        order: unset;
     }
 `;
 

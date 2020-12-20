@@ -13,7 +13,7 @@ export const List = styled.ul<Theme>`
     justify-content: space-between;
     @media ${device.laptop} {
       display: block;
-      margin: -20px 0;
+      margin: -20px 0 0 0;
       text-align: right;
     }
 `;

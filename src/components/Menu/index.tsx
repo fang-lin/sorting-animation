@@ -6,10 +6,10 @@ import {Theme} from '../Theme';
 import {List, ListItem} from './styles';
 
 const Menu: FunctionComponent<Theme> = (theme) => {
-    const {params: {themeKey}} = useRouteMatch<Params>();
+    const {params: {themeKey, speedKey}} = useRouteMatch<Params>();
     return <List {...theme}>
         {Array.from(algorithms).map(([key, {name}]) =>
-            <ListItem {...theme} key={key}><NavLink to={`/${themeKey}/${key}`}>{name}</NavLink></ListItem>
+            <ListItem {...theme} key={key}><NavLink to={`/${themeKey}/${key}/${speedKey}`}>{name}</NavLink></ListItem>
         )}
     </List>;
 };

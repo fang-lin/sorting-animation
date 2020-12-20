@@ -39,6 +39,8 @@ export class AnimationPlayer {
     private barGap = 0;
     private barWidth = 0;
 
+    public speed = 100;
+
     constructor(context: CanvasRenderingContext2D) {
         this.context = context;
     }
@@ -95,18 +97,28 @@ export class AnimationPlayer {
         }
     }
 
-    play(): void {
-        clearInterval(this.playId);
-        if (this._frames.length === 0) {
-            this._frames = collectFrames(shuffle(range(1, this.barCount + 1)), this._executor);
-        }
-        this.playId = setInterval(() => {
+    _nextFrame(): void {
+        this.playId = setTimeout(() => {
             const frame = this._frames.shift();
             if (frame) {
                 this.drawFrame(frame);
+                this._nextFrame();
             } else {
                 this.play();
             }
-        }, 10);
+        }, this.speed);
+    }
+
+    play(): void {
+        clearTimeout(this.playId);
+        if (this._frames.length === 0) {
+            this._frames = collectFrames(shuffle(range(1, this.barCount + 1)), this._executor);
+        }
+        this._nextFrame();
+    }
+
+    replay():void {
+        this._frames = [];
+        this.play();
     }
 }

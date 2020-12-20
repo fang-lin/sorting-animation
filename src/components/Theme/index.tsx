@@ -5,12 +5,12 @@ import {Theme, ThemeKeys} from '../Theme';
 import {List, ListItem} from './styles';
 
 const ThemeBar: FunctionComponent<Theme> = (theme) => {
-    const {params: {algorithmKey}} = useRouteMatch<Params>();
+    const {params: {algorithmKey, speedKey}} = useRouteMatch<Params>();
     return <div>
         <List {...theme}>{
             ThemeKeys.map((themeKey, key) =>
                 <ListItem {...theme} key={key}>
-                    <NavLink key={key} to={`/${themeKey}/${algorithmKey}`}>{themeKey}</NavLink>
+                    <NavLink key={key} to={`/${themeKey}/${algorithmKey}/${speedKey}`}>{themeKey}</NavLink>
                 </ListItem>
             )
         }</List>

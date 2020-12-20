@@ -11,6 +11,7 @@
     "build": "npm run clean && webpack --mode production && cp -R error dist/"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "@types/codemirror": "0.0.98",
     "@types/css-font-loading-module": "0.0.4",
     "@types/history": "^4.7.8",

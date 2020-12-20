@@ -11,8 +11,8 @@ const dom = document.getElementById('root');
 if (dom) {
     render(<HashRouter>
         <Switch>
-            <Route path="/:themeKey/:algorithmKey"><Algorithms/></Route>
-            <Redirect to={`/${getRandomThemeKey()}/${getRandomAlgorithmKey()}`}/>
+            <Route path="/:themeKey/:algorithmKey/:speedKey"><Algorithms/></Route>
+            <Redirect to={`/${getRandomThemeKey()}/${getRandomAlgorithmKey()}/100`}/>
         </Switch>
     </HashRouter>, dom);
 }
