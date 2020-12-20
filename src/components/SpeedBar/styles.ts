@@ -8,19 +8,19 @@ export const OperationBarWrapper = styled.div`
 export const SpeedBarList = styled.ul`
     list-style: none;
     display: flex;
-    gap: 30px;
-    margin: 0;
+    margin: 0 -15px;
     padding: 0;
 `;
 
 export const SpeedBarItem = styled.li<Theme>`
-    a {
+    a {    
+    margin: 0 15px;
     cursor: pointer;
     display: block;
     svg {
         display: block;
         width: 32px;
-        height: 32px;Algorithms/index.tsx
+        height: 32px;
         fill: ${({codeColor}) => codeColor};
     }
     &.active {
