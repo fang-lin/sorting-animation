@@ -34,7 +34,6 @@ export const ListItem = styled.li<Theme>`
         text-decoration: underline;
       }
       &.active {
-        // color: ${({defColor}) => defColor};
         text-decoration: none;
         background: ${({defColor}) => defColor};
       }
