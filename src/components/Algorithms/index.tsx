@@ -62,7 +62,8 @@ const Algorithms: FunctionComponent = () => {
                     <a href="https://github.com/fang-lin/sorting-animation" target="_blank"
                         rel="noopener noreferrer">GitHub</a>
                     &nbsp;|&nbsp;
-                    <a href="#">Lin Fang in {(new Date()).getFullYear()}</a>
+                    <a href="https://www.fanglin.me/" target="_blank"
+                        rel="noopener noreferrer">Lin Fang in {(new Date()).getFullYear()}</a>
                     &nbsp;|&nbsp;
                     <a href="https://www.plotter.fun" target="_blank"
                         rel="noopener noreferrer">plotter.fun</a>
