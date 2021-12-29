@@ -1,7 +1,6 @@
 import React, {FunctionComponent, useState} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import random from 'lodash/random';
-import {version} from '../../../package.json';
 import algorithms, {Code} from './codes';
 import CodeArea from '../CodeArea';
 import CanvasTarget from '../Canvas';
@@ -14,9 +13,9 @@ import {
     AlgorithmsWrapper,
     CodeAreaWrapper,
     ThemeBarWrapper,
-    Footer
 } from './styles';
 import Menu from '../Menu';
+import Footer from '../Footer';
 import ThemeBar from '../Theme';
 import SpeedBar from '../SpeedBar';
 import ShuffleButton from '../ShuffleButton';
@@ -56,18 +55,7 @@ const Algorithms: FunctionComponent = () => {
                         <ThemeBar {...theme}/>
                     </ThemeBarWrapper>
                 </AlgorithmsWrapper>
-                <Footer {...theme}>
-                    <a href="/">Sorting Animation {version}</a>
-                    &nbsp;|&nbsp;
-                    <a href="https://github.com/fang-lin/sorting-animation" target="_blank"
-                        rel="noopener noreferrer">GitHub</a>
-                    &nbsp;|&nbsp;
-                    <a href="https://www.fanglin.me/" target="_blank"
-                        rel="noopener noreferrer">Lin Fang in {(new Date()).getFullYear()}</a>
-                    &nbsp;|&nbsp;
-                    <a href="https://www.plotter.fun" target="_blank"
-                        rel="noopener noreferrer">plotter.fun</a>
-                </Footer>
+                <Footer {...theme}/>
             </Wrapper>
         </>;
     }

@@ -5,15 +5,6 @@ import shuffle from 'lodash/shuffle';
 
 export type Size = [number, number];
 
-export interface Layout {
-    barWidth: number;
-    barGap: number;
-    barUnit: number;
-    barCount: number;
-    left: number;
-    size: Size;
-}
-
 export const deviceRatio: number = ((): number => window.devicePixelRatio || 1)();
 
 function rgba(rgb: string, alpha = .2): string {
@@ -98,7 +89,7 @@ export class AnimationPlayer {
     }
 
     _nextFrame(): void {
-        this.playId = setTimeout(() => {
+        this.playId = window.setTimeout(() => {
             const frame = this._frames.shift();
             if (frame) {
                 this.drawFrame(frame);
