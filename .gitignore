@@ -1,6 +1,9 @@
 .idea
 .git
+.envrc
 node_modules
 client/lib
 dist
 tmp
+
+/bin/
