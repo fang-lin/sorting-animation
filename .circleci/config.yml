@@ -18,14 +18,12 @@ jobs:
   deploy:
     docker:
         - image: docker.mirror.hashicorp.services/hashicorp/terraform:1.1.2
+    environment:
+      AWS_ACCESS_KEY_ID: $AWS_TF_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_TF_SECRET_ACCESS_KEY
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Setup environment variables
-          command: |
-            export AWS_ACCESS_KEY_ID=${AWS_TF_ACCESS_KEY_ID} >> $BASH_ENV
-            export AWS_SECRET_ACCESS_KEY=${AWS_TF_SECRET_ACCESS_KEY} >> $BASH_ENV
       - run:
           name: terraform init & plan
           command: |
