@@ -13,7 +13,7 @@ variable "primary-domain" {
 variable "sub_domain" {
   type        = string
   description = "The sub domain name to use for the static site"
-  default     = "sorting-animation-dev"
+  default     = "sorting-animation"
 }
 
 variable "acm_certificate_arn" {
