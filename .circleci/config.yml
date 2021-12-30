@@ -16,7 +16,6 @@ jobs:
           paths:
             - .
   deploy:
-    working_directory: ~/project/terraform
     docker:
         - image: docker.mirror.hashicorp.services/hashicorp/terraform:1.1.2
     steps:
@@ -25,11 +24,12 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
+            cd terraform
             terraform init -input=false
             terraform plan -out tfapply
 workflows:
   version: 2
-  plan_approve_apply:
+  deploy_to_prod:
     jobs:
       - build
       - deploy:
