@@ -27,6 +27,10 @@ jobs:
             cd terraform
             terraform init -input=false
             terraform plan -out tfapply
+      - run:
+          name: terraform apply
+          command: |
+            terraform apply -auto-approve tfapply
 workflows:
   version: 2
   deploy_to_prod:
