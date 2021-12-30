@@ -1,15 +1,15 @@
-# 🚀 Welcome to your new awesome project!
+# [Sorting animation](http://sorting-animation.fanlin.me/) &middot; [![CircleCI Status](https://circleci.com/gh/fang-lin/sorting-animation.svg?style=shield)](https://app.circleci.com/pipelines/github/fang-lin/sorting-animation)
 
-This project has been created using **webpack scaffold**, you can now run
+An animation show of sorting algorithms:
+  - Binary Insert
+  - Bubble
+  - Heap
+  - Insert
+  - Merge
+  - Quick
+  - Select
+  - Shaker
+  - Shell
 
-```
-npm run build
-```
+And adopt [codemirror](https://codemirror.net/) shows codes with themes.
 
-or
-
-```
-yarn build
-```
-
-to bundle your application
