@@ -28,7 +28,7 @@ resource "aws_s3_bucket_object" "website_bucket_objects" {
   for_each     = fileset(path.module, "../dist/**/*.*")
   bucket       = aws_s3_bucket.website_bucket.bucket
   key          = trimprefix(each.value, "../dist/")
-  etag         = filemd5(each.value)
+  etag         = filemd5(file(each.value))
   content_type = lookup(local.mime_types, element(reverse(split(".", each.value)), 0))
   source       = each.value
 }
@@ -106,12 +106,12 @@ resource "aws_cloudfront_distribution" "website_bucket_distribution" {
   }
 }
 
-data "aws_route53_zone" "selected" {
+data "aws_route53_zone" "primary_zone" {
   name = var.primary-domain
 }
 
-resource "aws_route53_record" "www" {
-  zone_id = data.aws_route53_zone.selected.zone_id
+resource "aws_route53_record" "website_cname" {
+  zone_id = data.aws_route53_zone.primary_zone.zone_id
   name    = "${var.sub_domain}.${var.primary-domain}"
   type    = "CNAME"
   ttl     = "300"
