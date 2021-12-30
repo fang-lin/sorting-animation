@@ -28,7 +28,7 @@ resource "aws_s3_bucket_object" "website_bucket_objects" {
   for_each     = fileset(path.module, "../dist/**/*.*")
   bucket       = aws_s3_bucket.website_bucket.bucket
   key          = trimprefix(each.value, "../dist/")
-  etag         = filemd5(file(each.value))
+  etag         = filemd5(each.value)
   content_type = lookup(local.mime_types, element(reverse(split(".", each.value)), 0))
   source       = each.value
 }
@@ -62,16 +62,14 @@ locals {
   }
 }
 
-
 resource "aws_cloudfront_distribution" "website_bucket_distribution" {
   origin {
     domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
     origin_id   = "${var.sub_domain}.${var.primary-domain}"
   }
 
-  enabled         = true
-  is_ipv6_enabled = true
-  #  comment             = "Some comment"
+  enabled             = true
+  is_ipv6_enabled     = true
   default_root_object = "index.html"
 
   aliases = ["${var.sub_domain}.${var.primary-domain}"]
@@ -95,7 +93,7 @@ resource "aws_cloudfront_distribution" "website_bucket_distribution" {
   restrictions {
     geo_restriction {
       restriction_type = "whitelist"
-      locations        = ["DE"]
+      locations        = ["DE", "US", "CN"]
     }
   }
 
