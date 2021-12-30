@@ -16,7 +16,7 @@ jobs:
           paths:
             - .
   deploy:
-#    working_directory: /tmp/project
+    working_directory: ~/project/terraform
     docker:
         - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
@@ -25,7 +25,6 @@ jobs:
       - run:
           name: terraform init & plan
           command: |
-            cd terraform
             terraform init -input=false
             terraform plan -out tfapply -var-file variables.tfvars
 workflows:
