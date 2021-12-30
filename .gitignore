@@ -2,7 +2,6 @@
 .git
 .envrc
 .terraform
-terraform.tfstate*
 node_modules
 client/lib
 dist

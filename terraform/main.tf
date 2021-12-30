@@ -10,20 +10,9 @@ terraform {
     bucket         = "terraform-state.fanglin.me"
     key            = "sorting-animation/terraform.tfstate"
     region         = "ap-northeast-1"
-#    dynamodb_table = "terraform-state" https://technology.doximity.com/articles/terraform-s3-backend-best-practices
   }
 
   required_version = "1.1.2"
-}
-
-
-resource "aws_s3_bucket" "terraform-state" {
-  bucket = "terraform-state.fanglin.me"
-  acl    = "private"
-
-  versioning {
-    enabled = true
-  }
 }
 
 provider "aws" {
