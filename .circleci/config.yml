@@ -19,8 +19,8 @@ jobs:
     docker:
         - image: docker.mirror.hashicorp.services/hashicorp/terraform:1.1.2
     environment:
-      AWS_ACCESS_KEY_ID: $AWS_TF_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY: $AWS_TF_SECRET_ACCESS_KEY
+      AWS_ACCESS_KEY_ID: ${AWS_TF_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_TF_SECRET_ACCESS_KEY}
     steps:
       - attach_workspace:
           at: .
