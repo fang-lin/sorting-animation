@@ -30,6 +30,7 @@ jobs:
       - run:
           name: terraform apply
           command: |
+            cd terraform
             terraform apply -auto-approve tfapply
 workflows:
   version: 2
