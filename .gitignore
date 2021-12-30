@@ -1,6 +1,9 @@
 .idea
 .git
 .envrc
+.terraform
+.terraform.lock.*
+terraform.tfstate*
 node_modules
 client/lib
 dist
