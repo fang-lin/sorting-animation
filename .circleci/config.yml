@@ -18,7 +18,7 @@ jobs:
   deploy:
     working_directory: ~/project/terraform
     docker:
-        - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+        - image: docker.mirror.hashicorp.services/hashicorp/terraform:1.1.2
     steps:
       - attach_workspace:
           at: .
@@ -26,7 +26,7 @@ jobs:
           name: terraform init & plan
           command: |
             terraform init -input=false
-            terraform plan -out tfapply -var-file variables.tfvars
+            terraform plan -out tfapply
 workflows:
   version: 2
   plan_approve_apply:
