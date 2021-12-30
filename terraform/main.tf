@@ -6,17 +6,34 @@ terraform {
     }
   }
 
+  backend "s3" {
+    bucket         = "terraform-state.fanglin.me"
+    key            = "sorting-animation/terraform.tfstate"
+    region         = "ap-northeast-1"
+#    dynamodb_table = "terraform-state" https://technology.doximity.com/articles/terraform-s3-backend-best-practices
+  }
+
   required_version = "1.1.2"
 }
 
+
+resource "aws_s3_bucket" "terraform-state" {
+  bucket = "terraform-state.fanglin.me"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
+}
+
 provider "aws" {
-  profile = "default"
   region  = var.aws_region
 }
 
 resource "aws_s3_bucket" "website_bucket" {
   bucket = "${var.sub_domain}.${var.primary-domain}"
   acl    = "public-read"
+  force_destroy               = true
 
   website {
     index_document = "index.html"
