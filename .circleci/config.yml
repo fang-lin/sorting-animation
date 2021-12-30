@@ -33,4 +33,6 @@ workflows:
   plan_approve_apply:
     jobs:
       - build
-      - deploy
+      - deploy:
+          requires:
+            - build
