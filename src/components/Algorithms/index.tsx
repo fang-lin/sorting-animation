@@ -19,6 +19,7 @@ import Footer from '../Footer';
 import ThemeBar from '../Theme';
 import SpeedBar from '../SpeedBar';
 import ShuffleButton from '../ShuffleButton';
+import AudioButton from '../AudioButton';
 
 export function getRandomAlgorithmKey(): string {
     return Array.from(algorithms)[random(0, algorithms.size - 1)][0];
@@ -34,11 +35,12 @@ const Algorithms: FunctionComponent = () => {
     const {push} = useHistory();
     const [theme, applyTheme] = useState<Theme>(defaultTheme);
     const [shuffle, triggerShuffle] = useState<number>(0);
+    const [audioIsEnabled, triggerAudioIsEnabled] = useState<boolean>(false);
 
     if (algorithms.has(algorithmKey) && ThemeKeys.includes(themeKey) && speedValid(speedKey)) {
         const {name, code, executor} = algorithms.get(algorithmKey) as Code;
         return <>
-            <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
+            <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle, audioIsEnabled}}/>
             <Wrapper>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
@@ -50,6 +52,7 @@ const Algorithms: FunctionComponent = () => {
                         <Menu {...theme}/>
                         <SpeedBar {...{theme}}/>
                         <ShuffleButton {...{theme, triggerShuffle}}/>
+                        <AudioButton {...{theme, audioIsEnabled, triggerAudioIsEnabled}}/>
                     </MenuWrapper>
                     <ThemeBarWrapper>
                         <ThemeBar {...theme}/>
