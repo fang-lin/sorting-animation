@@ -86,7 +86,7 @@ export class AnimationPlayer {
             const frame = this._frames.shift();
             if (frame) {
                 if (this.audioPlayer) {
-                    this.audioPlayer.play(frame, this.speed);
+                    this.audioPlayer.play(frame, this.speed, this.barCount);
                 }
                 this.drawFrame(frame);
                 this._nextFrame();
@@ -120,63 +120,55 @@ export class AnimationPlayer {
     }
 }
 
-// export class Audio {
-//     public start;
-//     public stop;
-//
-//     constructor() {
-//         const audioContext = new AudioContext();
-//         const oscillator = audioContext.createOscillator();
-//         const gain = audioContext.createGain();
-//
-//         oscillator.type = 'sine';
-//         oscillator.frequency.value = 500;
-//         oscillator.type = 'sine';
-//         oscillator.connect(gain);
-//         gain.connect(audioContext.destination);
-//
-//         this.start = () => oscillator.start();
-//         this.stop = () => oscillator.stop();
-//     }
-// }
 
 export class AudioPlayer {
     public isEnabled = false;
     private audioContext: AudioContext;
-    private gain: GainNode;
+
+    // private readonly gain: GainNode;
 
     constructor() {
         this.audioContext = new AudioContext();
-        this.gain = this.audioContext.createGain();
-        this.gain.connect(this.audioContext.destination);
     }
 
-    play(frame: Frame, duration: number): void {
+    play(frame: Frame, duration: number, barCount: number): void {
         if (this.isEnabled) {
             if (frame.swap) {
-                const oscillator = this.audioContext.createOscillator();
+                console.log(frame.swap);
+                if (frame.swap[0]) {
+                    this.beep('square', 300 + (3400 - 300) * (frame.swap[0] / barCount), 0, duration / 1000 / 2, 1);
+                }
+                if (frame.swap[1]) {
+                    this.beep('square', 300 + (3400 - 300) * (frame.swap[1] / barCount), duration / 1000 / 2, duration / 1000, 1);
+                }
 
-                oscillator.type = 'sawtooth';
-                oscillator.frequency.value = frame.swap[0] * 10;
-                oscillator.connect(this.gain);
-
-
-                oscillator.start();
-                setTimeout(() => {
-                    oscillator.stop();
-                }, duration);
             } else if (frame.comparing) {
-                // const oscillator = this.audioContext.createOscillator();
-                //
-                // oscillator.type = 'sine';
-                // oscillator.frequency.value = frame.comparing[0] * 10;
-                // oscillator.connect(this.gain);
-                //
-                // oscillator.start();
-                // setTimeout(() => {
-                //     oscillator.stop();
-                // }, duration);
+                if (frame.comparing[0]) {
+                    this.beep('sine', 300 + (3400 - 300) * (frame.comparing[0] / barCount), 0, duration / 1000 / 2, .1);
+                }
+                if (frame.comparing[1]) {
+                    this.beep('sine', 300 + (3400 - 300) * (frame.comparing[1] / barCount), duration / 1000 / 2, duration / 1000, .1);
+                }
             }
         }
+    }
+
+
+    private beep(type: OscillatorType, frequency: number, start: number, stop: number, value: number): void {
+
+        const oscillator = this.audioContext.createOscillator();
+        const gain = this.audioContext.createGain();
+        gain.connect(this.audioContext.destination);
+
+        oscillator.type = type;
+        oscillator.frequency.value = frequency;
+
+        oscillator.connect(gain);
+
+        oscillator.start(this.audioContext.currentTime + start);
+        oscillator.stop(this.audioContext.currentTime + stop);
+
+        gain.gain.setValueAtTime(value, this.audioContext.currentTime + start);
+        gain.gain.exponentialRampToValueAtTime(0.00001, this.audioContext.currentTime + stop);
     }
 }
