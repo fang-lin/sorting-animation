@@ -1,10 +1,9 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
-import random from 'lodash/random';
-import algorithms, {Code} from './codes';
+import algorithms, {AlgorithmKey} from './codes';
 import CodeArea from '../CodeArea';
 import CanvasTarget from '../Canvas';
-import {ThemeKeys, defaultTheme, Theme, ThemeKey} from '../Theme';
+import {defaultTheme, Theme, ThemeKey, ThemeKeys} from '../Theme';
 import {
     GlobalStyle,
     Wrapper,
@@ -21,26 +20,26 @@ import SpeedBar from '../SpeedBar';
 import ShuffleButton from '../ShuffleButton';
 import AudioButton from '../AudioButton';
 
-export function getRandomAlgorithmKey(): string {
-    return Array.from(algorithms)[random(0, algorithms.size - 1)][0];
-}
-
-function speedValid(speed: string): boolean {
-    const int = parseInt(speed);
-    return int > 0 && int === speed as never - 0;
+function validParams({themeKey, algorithmKey, speedKey, audioIsEnabledKey}: Params): boolean {
+    return algorithms[algorithmKey] && ThemeKeys.includes(themeKey) && SpeedKey.includes(speedKey) && AudioIsEnabledKey.includes(audioIsEnabledKey);
 }
 
 const Algorithms: FunctionComponent = () => {
-    const {params: {themeKey, algorithmKey, speedKey}} = useRouteMatch<Params>();
+    const {params} = useRouteMatch<Params>();
+    const {themeKey, algorithmKey, speedKey} = params;
     const {push} = useHistory();
     const [theme, applyTheme] = useState<Theme>(defaultTheme);
     const [shuffle, triggerShuffle] = useState<number>(0);
-    const [audioIsEnabled, triggerAudioIsEnabled] = useState<boolean>(false);
 
-    if (algorithms.has(algorithmKey) && ThemeKeys.includes(themeKey) && speedValid(speedKey)) {
-        const {name, code, executor} = algorithms.get(algorithmKey) as Code;
+    useEffect(() => {
+        if (!validParams(params))
+            push('/');
+    }, [params, push]);
+
+    if (validParams(params)) {
+        const {name, code, executor} = algorithms[algorithmKey];
         return <>
-            <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle, audioIsEnabled}}/>
+            <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
             <Wrapper>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
@@ -52,7 +51,7 @@ const Algorithms: FunctionComponent = () => {
                         <Menu {...theme}/>
                         <SpeedBar {...{theme}}/>
                         <ShuffleButton {...{theme, triggerShuffle}}/>
-                        <AudioButton {...{theme, audioIsEnabled, triggerAudioIsEnabled}}/>
+                        <AudioButton {...{theme}}/>
                     </MenuWrapper>
                     <ThemeBarWrapper>
                         <ThemeBar {...theme}/>
@@ -62,17 +61,17 @@ const Algorithms: FunctionComponent = () => {
             </Wrapper>
         </>;
     }
-    setTimeout(() => {
-        push('/');
-    });
     return null;
 };
 
 export default Algorithms;
 
+const SpeedKey = ['1000', '100', '10'] as const;
+const AudioIsEnabledKey = ['1', '0'] as const;
 
 export interface Params {
     themeKey: ThemeKey;
-    algorithmKey: string;
-    speedKey: string;
+    algorithmKey: AlgorithmKey;
+    speedKey: typeof SpeedKey[number];
+    audioIsEnabledKey: typeof AudioIsEnabledKey[number]
 }

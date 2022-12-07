@@ -24,17 +24,28 @@ export interface Code {
     executor: Executor;
 }
 
-const algorithms = new Map<string, Code>([
-    ['binary-insert', binaryInsert],
-    ['bubble', bubble],
-    ['heap', heap],
-    ['insert', insert],
-    ['merge', merge],
-    ['quick', quick],
-    ['select', select],
-    ['shaker', shaker],
-    ['shell', shell],
-]);
+export enum AlgorithmKey {
+    binaryInsert = 'binary-insert',
+    bubble = 'bubble',
+    heap = 'heap',
+    insert = 'insert',
+    merge = 'merge',
+    quick = 'quick',
+    select = 'select',
+    shaker = 'shaker',
+    shell = 'shell',
+}
 
+const algorithms: Record<AlgorithmKey, Code> = {
+    [AlgorithmKey.binaryInsert]: binaryInsert,
+    [AlgorithmKey.bubble]: bubble,
+    [AlgorithmKey.heap]: heap,
+    [AlgorithmKey.insert]: insert,
+    [AlgorithmKey.merge]: merge,
+    [AlgorithmKey.quick]: quick,
+    [AlgorithmKey.select]: select,
+    [AlgorithmKey.shaker]: shaker,
+    [AlgorithmKey.shell]: shell,
+};
 
 export default algorithms;

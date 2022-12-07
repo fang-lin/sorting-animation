@@ -120,25 +120,25 @@ export class AnimationPlayer {
     }
 }
 
-export class Audio {
-    public start;
-    public stop;
-
-    constructor() {
-        const audioContext = new AudioContext();
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-
-        oscillator.type = 'sine';
-        oscillator.frequency.value = 500;
-        oscillator.type = 'sine';
-        oscillator.connect(gain);
-        gain.connect(audioContext.destination);
-
-        this.start = () => oscillator.start();
-        this.stop = () => oscillator.stop();
-    }
-}
+// export class Audio {
+//     public start;
+//     public stop;
+//
+//     constructor() {
+//         const audioContext = new AudioContext();
+//         const oscillator = audioContext.createOscillator();
+//         const gain = audioContext.createGain();
+//
+//         oscillator.type = 'sine';
+//         oscillator.frequency.value = 500;
+//         oscillator.type = 'sine';
+//         oscillator.connect(gain);
+//         gain.connect(audioContext.destination);
+//
+//         this.start = () => oscillator.start();
+//         this.stop = () => oscillator.stop();
+//     }
+// }
 
 export class AudioPlayer {
     public isEnabled = false;
@@ -151,7 +151,7 @@ export class AudioPlayer {
         this.gain.connect(this.audioContext.destination);
     }
 
-    play(frame: Frame, duration: number) {
+    play(frame: Frame, duration: number): void {
         if (this.isEnabled) {
             if (frame.swap) {
                 const oscillator = this.audioContext.createOscillator();
@@ -166,16 +166,16 @@ export class AudioPlayer {
                     oscillator.stop();
                 }, duration);
             } else if (frame.comparing) {
-                const oscillator = this.audioContext.createOscillator();
-
-                oscillator.type = 'sine';
-                oscillator.frequency.value = frame.comparing[0] * 10;
-                oscillator.connect(this.gain);
-
-                oscillator.start();
-                setTimeout(() => {
-                    oscillator.stop();
-                }, duration);
+                // const oscillator = this.audioContext.createOscillator();
+                //
+                // oscillator.type = 'sine';
+                // oscillator.frequency.value = frame.comparing[0] * 10;
+                // oscillator.connect(this.gain);
+                //
+                // oscillator.start();
+                // setTimeout(() => {
+                //     oscillator.stop();
+                // }, duration);
             }
         }
     }

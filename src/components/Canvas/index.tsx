@@ -3,16 +3,18 @@ import {Theme} from '../Theme';
 import {CanvasStage, CanvasWrapper} from './styles';
 import {Executor} from '../Algorithms/codes';
 import {deviceRatio, AnimationPlayer, Size, AudioPlayer} from './functions';
+import {useRouteMatch} from 'react-router-dom';
+import {Params} from '../Algorithms';
 
 interface CanvasProps {
     theme: Theme;
     speed: number;
     shuffle: number;
-    audioIsEnabled: boolean;
     executor: Executor;
 }
 
-const Canvas: FunctionComponent<CanvasProps> = ({theme, speed, executor, shuffle, audioIsEnabled}) => {
+const Canvas: FunctionComponent<CanvasProps> = ({theme, speed, executor, shuffle}) => {
+    const {params: {audioIsEnabledKey}} = useRouteMatch<Params>();
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [size, setSize] = useState<Size>([0, 0]);
     const [animationPlayer, setAnimationPlayer] = useState<AnimationPlayer>();
@@ -62,9 +64,9 @@ const Canvas: FunctionComponent<CanvasProps> = ({theme, speed, executor, shuffle
     
     useEffect(() => {
         if (autoPlayer) {
-            autoPlayer.isEnabled = audioIsEnabled;
+            autoPlayer.isEnabled = !!parseInt(audioIsEnabledKey);
         }
-    }, [autoPlayer, audioIsEnabled]);
+    }, [autoPlayer, audioIsEnabledKey]);
 
     return <CanvasWrapper>
         <CanvasStage ref={canvasRef} width={size[0]} height={size[1]}/>
