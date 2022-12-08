@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket         = "terraform-state.fanglin.me"
-    key            = "sorting-animation/terraform.tfstate"
+    key            = "algorythm/terraform.tfstate"
     region         = "ap-northeast-1"
   }
 
