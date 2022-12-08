@@ -27,7 +27,7 @@ if (dom) {
                 themeKey: getRandomThemeKey(),
                 algorithmKey: getRandomAlgorithmKey(),
                 speedKey: '100',
-                audioIsEnabledKey: '0'
+                audioIsEnabledKey: '1'
             })}/>
         </Switch>
     </HashRouter>, dom);

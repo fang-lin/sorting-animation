@@ -120,39 +120,32 @@ export class AnimationPlayer {
     }
 }
 
-
 export class AudioPlayer {
     public isEnabled = false;
     private audioContext: AudioContext;
-
-    // private readonly gain: GainNode;
 
     constructor() {
         this.audioContext = new AudioContext();
     }
 
+    private static frequency(value: number, upper: number) {
+        return 30 + (4200 - 30) * (value / upper);
+    }
+
     play(frame: Frame, duration: number, barCount: number): void {
         if (this.isEnabled) {
+            const timeSlice = duration < 100 ? .1 : .5;
             if (frame.swap) {
-                console.log(frame.swap);
-                if (frame.swap[0]) {
-                    this.beep('square', 300 + (3400 - 300) * (frame.swap[0] / barCount), 0, duration / 1000 / 2, 1);
-                }
-                if (frame.swap[1]) {
-                    this.beep('square', 300 + (3400 - 300) * (frame.swap[1] / barCount), duration / 1000 / 2, duration / 1000, 1);
-                }
-
+                frame.swap?.forEach((swap, index) => {
+                    this.beep('square', AudioPlayer.frequency(swap, barCount), index * timeSlice, (index + 1) * timeSlice, .1);
+                });
             } else if (frame.comparing) {
-                if (frame.comparing[0]) {
-                    this.beep('sine', 300 + (3400 - 300) * (frame.comparing[0] / barCount), 0, duration / 1000 / 2, .1);
-                }
-                if (frame.comparing[1]) {
-                    this.beep('sine', 300 + (3400 - 300) * (frame.comparing[1] / barCount), duration / 1000 / 2, duration / 1000, .1);
-                }
+                frame.comparing?.forEach((comparing, index) => {
+                    this.beep('sine', AudioPlayer.frequency(comparing, barCount), index * timeSlice, (index + 1) * timeSlice, .03);
+                });
             }
         }
     }
-
 
     private beep(type: OscillatorType, frequency: number, start: number, stop: number, value: number): void {
 
