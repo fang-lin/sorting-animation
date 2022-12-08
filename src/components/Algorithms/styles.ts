@@ -40,15 +40,17 @@ export const GlobalStyle = createGlobalStyle<Theme>`
   }
 `;
 
-
 export const Head1 = styled.h1<Theme>`
   margin: 0;
-  font-size: 72px;
+  font-size: 108px;
   color: ${({operatorColor}) => operatorColor};
   opacity: .3;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: -22px;
+  left: -5px;
+  right: 0;
+  z-index: -1;
+  word-wrap: break-word;
 `;
 
 export const Head2 = styled.h2<Theme>`

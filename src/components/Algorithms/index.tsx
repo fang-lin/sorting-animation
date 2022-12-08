@@ -11,7 +11,7 @@ import {
     MenuWrapper,
     AlgorithmsWrapper,
     CodeAreaWrapper,
-    ThemeBarWrapper, Head1,
+    ThemeBarWrapper, Head1, Head11,
 } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
@@ -38,11 +38,11 @@ const Algorithms: FunctionComponent = () => {
         const {name, code, executor} = algorithms[algorithmKey];
         return <>
             <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
+            <Head1 {...theme}>algoRYTHM</Head1>
             <Wrapper>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
                     <CodeAreaWrapper>
-                        <Head1 {...theme}>algoRYTHM</Head1>
                         <Head2 {...theme}> {name}<sup> with <span>{themeKey}</span></sup></Head2>
                         <CodeArea {...{themeKey, code, applyTheme}}/>
                     </CodeAreaWrapper>
