@@ -35,5 +35,9 @@ export const Item = styled.div<Theme>`
     &:hover {
       border-color: ${({keywordColor}) => keywordColor};
     }
+
+    &:active {
+      border-color: ${({defColor}) => defColor};
+    }
   }
 `;
