@@ -1,7 +1,7 @@
 import React, {Dispatch, FunctionComponent, SetStateAction} from 'react';
 import Rabbit from '../../icons/rabbit.svg';
 import Turtle from '../../icons/turtle.svg';
-import Snail from '../../icons/snail.svg';
+import Bear from '../../icons/bear.svg';
 import {Raw, Item, OperationBarWrapper} from './styles';
 import {Theme} from '../Theme';
 import {NavLink, useRouteMatch} from 'react-router-dom';
@@ -22,10 +22,10 @@ const SettingBar: FunctionComponent<SpeedBarProps> = ({theme, triggerShuffle}) =
     return <OperationBarWrapper>
         <Raw>
             <Item {...theme}>
-                <NavLink to={linker({...params, speedKey: '1000'})}><Snail/></NavLink>
+                <NavLink to={linker({...params, speedKey: '1000'})}><Turtle/></NavLink>
             </Item>
             <Item {...theme}>
-                <NavLink to={linker({...params, speedKey: '100'})}><Turtle/></NavLink>
+                <NavLink to={linker({...params, speedKey: '100'})}><Bear/></NavLink>
             </Item>
             <Item {...theme}>
                 <NavLink to={linker({...params, speedKey: '10'})}><Rabbit/></NavLink>
