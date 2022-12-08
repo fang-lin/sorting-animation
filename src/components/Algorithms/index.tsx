@@ -11,7 +11,7 @@ import {
     MenuWrapper,
     AlgorithmsWrapper,
     CodeAreaWrapper,
-    ThemeBarWrapper, Head1, Head11,
+    ThemeBarWrapper, Head1,
 } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
