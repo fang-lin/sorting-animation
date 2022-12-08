@@ -1,7 +1,10 @@
 .idea
 .git
 .envrc
+
 .terraform
+.terraform.lock.hcl
+
 node_modules
 client/lib
 dist

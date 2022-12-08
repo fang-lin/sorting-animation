@@ -1,6 +1,6 @@
-# [Sorting animation](http://sorting-animation.fanglin.me/) &middot; [![CircleCI Status](https://circleci.com/gh/fang-lin/sorting-animation.svg?style=shield)](https://app.circleci.com/pipelines/github/fang-lin/sorting-animation)
+# [algoRYTHM](http://algorythm.fanglin.me/) &middot; [![CircleCI Status](https://circleci.com/gh/fang-lin/sorting-animation.svg?style=shield)](https://app.circleci.com/pipelines/github/fang-lin/sorting-animation)
 
-An animation show of sorting algorithms:
+An animation and rhythm of sorting algorithms:
   - Binary Insert
   - Bubble
   - Heap
@@ -11,5 +11,5 @@ An animation show of sorting algorithms:
   - Shaker
   - Shell
 
-And adopt [codemirror](https://codemirror.net/) shows codes with themes.
+Adopt [codemirror](https://codemirror.net/) shows codes with themes.
 

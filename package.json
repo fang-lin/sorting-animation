@@ -10,6 +10,10 @@
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack --mode production && cp -R error dist/"
   },
+  "engines" : {
+    "npm" : "8.19.2",
+    "node" : "16.18.1"
+  },
   "dependencies": {
     "@svgr/webpack": "^5.5.0",
     "@types/codemirror": "0.0.98",
