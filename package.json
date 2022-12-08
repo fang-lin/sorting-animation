@@ -1,6 +1,6 @@
 {
   "name": "sorting-animation",
-  "version": "2.7.7",
+  "version": "2.7.8",
   "description": "sorting algorithm animation",
   "author": "Lin fang",
   "license": "MIT",
@@ -10,9 +10,9 @@
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack --mode production && cp -R error dist/"
   },
-  "engines" : {
-    "npm" : "8.19.2",
-    "node" : "16.18.1"
+  "engines": {
+    "npm": "8.19.2",
+    "node": "16.18.1"
   },
   "dependencies": {
     "@svgr/webpack": "^5.5.0",
