@@ -29,7 +29,7 @@ module.exports = (env, argv) => {
                     version,
                     developer: {
                         name: 'Lin Fang',
-                        url: 'http://www.fanglin.me'
+                        url: 'https://www.fanglin.me'
                     },
                     icons: [{
                         src: 'images/icon.png',

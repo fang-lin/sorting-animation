@@ -16,9 +16,7 @@ import {
 import Menu from '../Menu';
 import Footer from '../Footer';
 import ThemeBar from '../Theme';
-import SpeedBar from '../SpeedBar';
-import ShuffleButton from '../ShuffleButton';
-import AudioButton from '../AudioButton';
+import SettingBar from '../SettingBar';
 
 function validParams({themeKey, algorithmKey, speedKey, audioIsEnabledKey}: Params): boolean {
     return algorithms[algorithmKey] && ThemeKeys.includes(themeKey) && SpeedKey.includes(speedKey) && AudioIsEnabledKey.includes(audioIsEnabledKey);
@@ -49,9 +47,7 @@ const Algorithms: FunctionComponent = () => {
                     </CodeAreaWrapper>
                     <MenuWrapper>
                         <Menu {...theme}/>
-                        <SpeedBar {...{theme}}/>
-                        <ShuffleButton {...{theme, triggerShuffle}}/>
-                        <AudioButton {...{theme}}/>
+                        <SettingBar {...{theme, triggerShuffle}}/>
                     </MenuWrapper>
                     <ThemeBarWrapper>
                         <ThemeBar {...theme}/>
