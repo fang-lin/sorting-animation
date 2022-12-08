@@ -19,13 +19,13 @@ module.exports = (env, argv) => {
         plugins: [
             new webpack.ProgressPlugin(),
             new HtmlWebpackPlugin({
-                title: `Sorting animation ${version}`,
+                title: `algoRYTHM ${version}`,
                 template: 'src/index.html',
                 inject: false
             }),
             new ManifestPlugin({
                 seed: {
-                    name: 'Sorting animation',
+                    name: 'algoRYTHM',
                     version,
                     developer: {
                         name: 'Lin Fang',

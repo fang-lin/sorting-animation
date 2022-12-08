@@ -5,7 +5,7 @@ import {version} from '../../../package.json';
 
 const Footer: FunctionComponent<Theme> = (theme) => {
     return <FooterWrapper {...theme}>
-        <a href="/">Sorting Animation {version}</a>
+        <a href="/">algoRYTHM {version}</a>
         &nbsp;|&nbsp;
         <a href="https://github.com/fang-lin/sorting-animation" target="_blank"
             rel="noopener noreferrer">GitHub</a>

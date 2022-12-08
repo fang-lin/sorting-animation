@@ -7,11 +7,11 @@ import {defaultTheme, Theme, ThemeKey, ThemeKeys} from '../Theme';
 import {
     GlobalStyle,
     Wrapper,
-    Head1,
+    Head2,
     MenuWrapper,
     AlgorithmsWrapper,
     CodeAreaWrapper,
-    ThemeBarWrapper,
+    ThemeBarWrapper, Head1,
 } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
@@ -42,7 +42,8 @@ const Algorithms: FunctionComponent = () => {
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
                     <CodeAreaWrapper>
-                        <Head1 {...theme}>{name}<sup> with <span>{themeKey}</span></sup></Head1>
+                        <Head1 {...theme}>algoRYTHM</Head1>
+                        <Head2 {...theme}> {name}<sup> with <span>{themeKey}</span></sup></Head2>
                         <CodeArea {...{themeKey, code, applyTheme}}/>
                     </CodeAreaWrapper>
                     <MenuWrapper>
