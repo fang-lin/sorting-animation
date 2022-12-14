@@ -93,7 +93,7 @@ export function getRandomThemeKey(): ThemeKey {
 export type ThemeKey = typeof ThemeKeys[number];
 
 export interface Theme {
-    background: string;
+    backgroundColor: string;
     keywordColor: string;
     variableColor: string;
     defColor: string;
@@ -104,7 +104,7 @@ export interface Theme {
 }
 
 export const defaultTheme: Theme = {
-    background: 'black',
+    backgroundColor: 'black',
     keywordColor: 'black',
     variableColor: 'black',
     defColor: 'black',
@@ -116,7 +116,7 @@ export const defaultTheme: Theme = {
 
 export function queryTheme(element: HTMLDivElement, themeKey: ThemeKey): Theme {
     let {
-        background,
+        backgroundColor,
         keywordColor,
         variableColor,
         defColor,
@@ -126,8 +126,12 @@ export function queryTheme(element: HTMLDivElement, themeKey: ThemeKey): Theme {
     } = defaultTheme;
 
     const cmDom = element.querySelector('.CodeMirror');
-    if (cmDom)
-        background = getComputedStyle(cmDom).background;
+
+    if (cmDom) {
+        const exec = /rgb\([\d\s,]+\)/i.exec(getComputedStyle(cmDom).background);
+        if (exec && exec[0])
+            backgroundColor = exec[0];
+    }
     const cmKeywordDom = element.querySelector('.cm-keyword');
     if (cmKeywordDom)
         keywordColor = getComputedStyle(cmKeywordDom).color;
@@ -148,7 +152,7 @@ export function queryTheme(element: HTMLDivElement, themeKey: ThemeKey): Theme {
         codeColor = getComputedStyle(cmColorDom).color;
 
     return {
-        background,
+        backgroundColor,
         keywordColor,
         variableColor,
         defColor,

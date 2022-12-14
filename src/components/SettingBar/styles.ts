@@ -32,11 +32,11 @@ export const Item = styled.div<Theme>`
       background: ${({defColor}) => defColor};
     }
 
-    &:hover {
+    :hover {
       border-color: ${({keywordColor}) => keywordColor};
     }
 
-    &:active {
+    :active {
       border-color: ${({defColor}) => defColor};
     }
   }

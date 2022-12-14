@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle<Theme>`
   }
 
   html {
-    background: ${({background}) => background};
+    background: ${({backgroundColor}) => backgroundColor};
     transition: background 1s;
   }
 
@@ -73,15 +73,19 @@ export const Head2 = styled.h2<Theme>`
   }
 `;
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.section<{ firstShowAudioAlert: boolean }>`
   display: flex;
   flex-direction: column;
   max-width: 1280px;
   justify-content: space-between;
   margin: 0 auto;
   padding: 0 10px;
-  min-height: 100vh;
   box-sizing: border-box;
+
+  ${({firstShowAudioAlert}) => firstShowAudioAlert ?
+        `height: 100vh;
+         overflow: hidden;` :
+        'min-height: 100vh;'}
 `;
 
 export const AlgorithmsWrapper = styled.div`

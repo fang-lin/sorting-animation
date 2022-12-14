@@ -2,9 +2,10 @@ import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
 import {Theme} from '../Theme';
 import {CanvasStage, CanvasWrapper} from './styles';
 import {Executor} from '../Algorithms/codes';
-import {deviceRatio, AnimationPlayer, Size, AudioPlayer} from './functions';
+import {AnimationPlayer, Size, AudioPlayer} from './functions';
 import {useRouteMatch} from 'react-router-dom';
 import {Params} from '../Algorithms';
+import {deviceRatio} from "../../functions";
 
 interface CanvasProps {
     theme: Theme;
@@ -26,11 +27,10 @@ const Canvas: FunctionComponent<CanvasProps> = ({theme, speed, executor, shuffle
             setSize([width * deviceRatio, height * deviceRatio]);
             const context = canvasRef.current.getContext('2d');
             if (context) {
-                const _animationPlayer = new AnimationPlayer(context);
                 const _audioPlayer = new AudioPlayer();
+                const _animationPlayer = new AnimationPlayer(context, _audioPlayer);
 
                 _animationPlayer.size = [width * deviceRatio, height * deviceRatio];
-                _animationPlayer.audioPlayer = _audioPlayer;
 
                 setAnimationPlayer(_animationPlayer);
                 setAutoPlayer(_audioPlayer);
@@ -61,7 +61,7 @@ const Canvas: FunctionComponent<CanvasProps> = ({theme, speed, executor, shuffle
             animationPlayer.replay();
         }
     }, [animationPlayer, shuffle]);
-    
+
     useEffect(() => {
         if (autoPlayer) {
             autoPlayer.isEnabled = !!parseInt(audioIsEnabledKey);

@@ -17,6 +17,8 @@ import Menu from '../Menu';
 import Footer from '../Footer';
 import ThemeBar from '../Theme';
 import SettingBar from '../SettingBar';
+import AudioAlert from '../AudioAlert';
+import {isMobile} from '../../functions';
 
 function validParams({themeKey, algorithmKey, speedKey, audioIsEnabledKey}: Params): boolean {
     return algorithms[algorithmKey] && ThemeKeys.includes(themeKey) && SpeedKey.includes(speedKey) && AudioIsEnabledKey.includes(audioIsEnabledKey);
@@ -24,10 +26,11 @@ function validParams({themeKey, algorithmKey, speedKey, audioIsEnabledKey}: Para
 
 const Algorithms: FunctionComponent = () => {
     const {params} = useRouteMatch<Params>();
-    const {themeKey, algorithmKey, speedKey} = params;
+    const {themeKey, algorithmKey, speedKey, audioIsEnabledKey} = params;
     const {push} = useHistory();
     const [theme, applyTheme] = useState<Theme>(defaultTheme);
     const [shuffle, triggerShuffle] = useState<number>(0);
+    const [firstShowAudioAlert, setFirstShowAudioAlert] = useState<boolean>(audioIsEnabledKey === '1');
 
     useEffect(() => {
         if (!validParams(params))
@@ -39,7 +42,7 @@ const Algorithms: FunctionComponent = () => {
         return <>
             <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
             <Head1 {...theme}>algoRYTHM</Head1>
-            <Wrapper>
+            <Wrapper {...{firstShowAudioAlert}}>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
                     <CodeAreaWrapper>
@@ -56,6 +59,7 @@ const Algorithms: FunctionComponent = () => {
                 </AlgorithmsWrapper>
                 <Footer {...theme}/>
             </Wrapper>
+            {isMobile() && firstShowAudioAlert ? <AudioAlert {...{theme, setFirstShowAudioAlert}} /> : null}
         </>;
     }
     return null;

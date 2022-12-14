@@ -5,14 +5,14 @@ import {Params} from '../Algorithms';
 import {Theme} from '../Theme';
 import map from 'lodash/map';
 import {List, ListItem} from './styles';
-import {linker} from '../..';
+import {paramsToLink} from '../../functions';
 
 const Menu: FunctionComponent<Theme> = (theme) => {
     const {params} = useRouteMatch<Params>();
     return <List {...theme}>
         {map(algorithms, ({name}, key) =>
             <ListItem {...theme} key={key}><NavLink
-                to={linker({...params, algorithmKey: key as AlgorithmKey})}>{name}</NavLink></ListItem>)}
+                to={paramsToLink({...params, algorithmKey: key as AlgorithmKey})}>{name}</NavLink></ListItem>)}
     </List>;
 };
 

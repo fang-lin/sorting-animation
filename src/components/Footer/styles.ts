@@ -9,7 +9,7 @@ export const FooterWrapper = styled.footer<Theme>`
   a {
     color: ${({numberColor}) => numberColor};
     text-decoration: none;
-    &:hover {
+    :hover {
       text-decoration: underline;
     }
   }

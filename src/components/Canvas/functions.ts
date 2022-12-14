@@ -2,16 +2,11 @@ import {Theme} from '../Theme';
 import {Executor, Frame} from '../Algorithms/codes';
 import range from 'lodash/range';
 import shuffle from 'lodash/shuffle';
+import {deviceRatio, isMobile, rgba} from '../../functions';
 
 export type Size = [number, number];
 
-export const deviceRatio: number = ((): number => window.devicePixelRatio || 1)();
-
-function rgba(rgb: string, alpha = .2): string {
-    return rgb.replace('rgb', 'rgba').replace(')', `, ${alpha})`);
-}
-
-export function collectFrames(disorderedList: Array<number>, executor: Executor): Array<Frame> {
+function collectFrames(disorderedList: Array<number>, executor: Executor): Array<Frame> {
     const frames: Array<Frame> = [];
     executor(disorderedList, (_) => frames.push(JSON.parse(JSON.stringify(_))));
     return frames;
@@ -19,7 +14,7 @@ export function collectFrames(disorderedList: Array<number>, executor: Executor)
 
 export class AnimationPlayer {
     public speed = 100;
-    public audioPlayer?: AudioPlayer;
+    private audioPlayer: AudioPlayer;
     private _frames: Array<Frame> = [];
     private context: CanvasRenderingContext2D;
     private playId = NaN;
@@ -29,8 +24,9 @@ export class AnimationPlayer {
     private barGap = 0;
     private barWidth = 0;
 
-    constructor(context: CanvasRenderingContext2D) {
+    constructor(context: CanvasRenderingContext2D, audioPlayer: AudioPlayer) {
         this.context = context;
+        this.audioPlayer = audioPlayer;
     }
 
     private _executor: Executor = () => undefined;
@@ -85,9 +81,7 @@ export class AnimationPlayer {
         this.playId = window.setTimeout(() => {
             const frame = this._frames.shift();
             if (frame) {
-                if (this.audioPlayer) {
-                    this.audioPlayer.play(frame, this.speed, this.barCount);
-                }
+                this.audioPlayer.fresh(frame, this.speed, this.barCount);
                 this.drawFrame(frame);
                 this._nextFrame();
             } else {
@@ -120,48 +114,82 @@ export class AnimationPlayer {
     }
 }
 
+class GainedOscillator {
+    public oscillator: OscillatorNode;
+    public readonly gain: GainNode;
+
+    constructor(type: OscillatorType, audioContext: AudioContext) {
+        this.oscillator = audioContext.createOscillator();
+        this.gain = audioContext.createGain();
+
+        this.oscillator.type = type;
+        this.gain.connect(audioContext.destination);
+        this.oscillator.connect(this.gain);
+        this.gain.gain.setValueAtTime(.0000001, audioContext.currentTime);
+        if (isMobile()) {
+            document.querySelector('#audio-trigger-button')?.addEventListener('click', () => {
+                this.oscillator.start();
+            }, {once: true});
+        } else {
+            this.oscillator.start();
+        }
+    }
+}
+
 export class AudioPlayer {
     public isEnabled = false;
-    private audioContext: AudioContext;
+    private readonly audioContext: AudioContext;
+
+    private readonly swapGainedOscillators: [GainedOscillator, GainedOscillator];
+    private readonly comparingGainedOscillators: [GainedOscillator, GainedOscillator];
 
     constructor() {
         this.audioContext = new AudioContext();
+        this.swapGainedOscillators = [
+            new GainedOscillator('square', this.audioContext),
+            new GainedOscillator('square', this.audioContext)
+        ];
+        this.comparingGainedOscillators = [
+            new GainedOscillator('sine', this.audioContext),
+            new GainedOscillator('sine', this.audioContext)
+        ];
     }
 
     private static frequency(value: number, upper: number) {
         return 30 + (4200 - 30) * (value / upper);
     }
 
-    play(frame: Frame, duration: number, barCount: number): void {
+    fresh(frame: Frame, duration: number, barCount: number): void {
         if (this.isEnabled) {
-            const timeSlice = duration < 100 ? .1 : .5;
+            const timeSlice = duration < 100 ? .1 : .6;
             if (frame.swap) {
-                frame.swap?.forEach((swap, index) => {
-                    this.beep('square', AudioPlayer.frequency(swap, barCount), index * timeSlice, (index + 1) * timeSlice, .1);
-                });
+                frame.swap.forEach((swap, index) => this.beep(
+                    this.swapGainedOscillators[index],
+                    AudioPlayer.frequency(swap, barCount),
+                    index * timeSlice,
+                    (index + 1) * timeSlice,
+                    .1
+                ));
             } else if (frame.comparing) {
-                frame.comparing?.forEach((comparing, index) => {
-                    this.beep('sine', AudioPlayer.frequency(comparing, barCount), index * timeSlice, (index + 1) * timeSlice, .03);
-                });
+                frame.comparing.forEach((comparing, index) => this.beep(
+                    this.comparingGainedOscillators[index],
+                    AudioPlayer.frequency(comparing, barCount),
+                    index * timeSlice,
+                    (index + 1) * timeSlice,
+                    .03
+                ));
             }
+        } else {
+            this.swapGainedOscillators.map(o => o.gain.gain.setValueAtTime(.0000001, this.audioContext.currentTime));
+            this.comparingGainedOscillators.map(o => o.gain.gain.setValueAtTime(.0000001, this.audioContext.currentTime));
         }
     }
 
-    private beep(type: OscillatorType, frequency: number, start: number, stop: number, value: number): void {
-
-        const oscillator = this.audioContext.createOscillator();
-        const gain = this.audioContext.createGain();
-        gain.connect(this.audioContext.destination);
-
-        oscillator.type = type;
-        oscillator.frequency.value = frequency;
-
-        oscillator.connect(gain);
-
-        oscillator.start(this.audioContext.currentTime + start);
-        oscillator.stop(this.audioContext.currentTime + stop);
-
-        gain.gain.setValueAtTime(value, this.audioContext.currentTime + start);
-        gain.gain.exponentialRampToValueAtTime(0.00001, this.audioContext.currentTime + stop);
+    private beep(gainedOscillator: GainedOscillator, frequency: number, startTime: number, stopTime: number, gainValue: number): void {
+        if (gainedOscillator) {
+            gainedOscillator.oscillator.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
+            gainedOscillator.gain.gain.setValueAtTime(gainValue, this.audioContext.currentTime + startTime);
+            gainedOscillator.gain.gain.exponentialRampToValueAtTime(0.00001, this.audioContext.currentTime + stopTime);
+        }
     }
 }

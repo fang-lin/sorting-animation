@@ -18,7 +18,7 @@ export const ListItem = styled.li<Theme>`
     a {
       text-decoration: none;
       color: ${({codeColor}) => codeColor};
-      &:hover {
+      :hover {
         text-decoration: underline;
       }
       &.active{
