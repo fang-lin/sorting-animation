@@ -73,7 +73,7 @@ export const Head2 = styled.h2<Theme>`
   }
 `;
 
-export const Wrapper = styled.section<{ firstShowAudioAlert: boolean }>`
+export const Wrapper = styled.section<{ showAudioAlert: boolean }>`
   display: flex;
   flex-direction: column;
   max-width: 1280px;
@@ -82,7 +82,7 @@ export const Wrapper = styled.section<{ firstShowAudioAlert: boolean }>`
   padding: 0 10px;
   box-sizing: border-box;
 
-  ${({firstShowAudioAlert}) => firstShowAudioAlert ?
+  ${({showAudioAlert}) => showAudioAlert ?
         `height: 100vh;
          overflow: hidden;` :
         'min-height: 100vh;'}

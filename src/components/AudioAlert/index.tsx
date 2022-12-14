@@ -16,8 +16,8 @@ const AudioAlert: FunctionComponent<AudioAlertProps> = ({theme, setFirstShowAudi
     const history = useHistory();
     return <AudioAlertBackground {...theme}>
         <AudioAlterWrapper onClick={() => {
-            const b = document.querySelector<HTMLButtonElement>('#audio-trigger-button');
-            b?.click();
+            const button = document.querySelector<HTMLButtonElement>('#audio-trigger-button');
+            button?.click();
             history.push(paramsToLink({
                 ...params,
                 audioIsEnabledKey: '1'

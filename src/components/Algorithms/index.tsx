@@ -32,6 +32,8 @@ const Algorithms: FunctionComponent = () => {
     const [shuffle, triggerShuffle] = useState<number>(0);
     const [firstShowAudioAlert, setFirstShowAudioAlert] = useState<boolean>(audioIsEnabledKey === '1');
 
+    const showAudioAlert = isMobile() && firstShowAudioAlert;
+
     useEffect(() => {
         if (!validParams(params))
             push('/');
@@ -42,7 +44,7 @@ const Algorithms: FunctionComponent = () => {
         return <>
             <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
             <Head1 {...theme}>algoRYTHM</Head1>
-            <Wrapper {...{firstShowAudioAlert}}>
+            <Wrapper {...{showAudioAlert}}>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
                     <CodeAreaWrapper>
@@ -59,7 +61,7 @@ const Algorithms: FunctionComponent = () => {
                 </AlgorithmsWrapper>
                 <Footer {...theme}/>
             </Wrapper>
-            {isMobile() && firstShowAudioAlert ? <AudioAlert {...{theme, setFirstShowAudioAlert}} /> : null}
+            {showAudioAlert ? <AudioAlert {...{theme, setFirstShowAudioAlert}} /> : null}
         </>;
     }
     return null;
