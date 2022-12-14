@@ -4,7 +4,6 @@ import random from 'lodash/random';
 import {Params} from './components/Algorithms';
 
 export function isMobile(): boolean {
-    console.log((new UAParser()).getResult());
     return (new UAParser()).getDevice().type !== undefined;
 }
 
