@@ -93,7 +93,7 @@ resource "aws_cloudfront_distribution" "website_bucket_distribution" {
       }
     }
 
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
   }
 
   restrictions {
