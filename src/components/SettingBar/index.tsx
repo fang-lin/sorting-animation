@@ -10,7 +10,7 @@ import Shuffle from '../../icons/shuffle.svg';
 import MusicOff from '../../icons/music-off.svg';
 import MusicOn from '../../icons/music-on.svg';
 import ColorPalette from '../../icons/color-palette.svg';
-import {getRandomAlgorithmKey, paramsToLink} from '../../functions';
+import {paramsToLink} from '../../functions';
 
 interface SpeedBarProps {
     theme: Theme;
@@ -53,9 +53,5 @@ const SettingBar: FunctionComponent<SpeedBarProps> = ({theme, triggerShuffle}) =
         </Raw>
     </OperationBarWrapper>;
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded 123'); // 1st
-});
 
 export default SettingBar;

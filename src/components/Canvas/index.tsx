@@ -5,7 +5,7 @@ import {Executor} from '../Algorithms/codes';
 import {AnimationPlayer, Size, AudioPlayer} from './functions';
 import {useRouteMatch} from 'react-router-dom';
 import {Params} from '../Algorithms';
-import {deviceRatio} from "../../functions";
+import {deviceRatio} from '../../functions';
 
 interface CanvasProps {
     theme: Theme;
