@@ -1,8 +1,8 @@
-import React, {Dispatch, FunctionComponent, SetStateAction} from 'react';
+import React, {Dispatch, FunctionComponent, SetStateAction, useContext} from 'react';
 import {getRandomThemeKey, Theme} from '../Theme';
 import {AudioAlterWrapper, AudioAlertBackground, PlayButton, ChangeTheme} from './styles';
 import {useRouteMatch, useHistory, NavLink} from 'react-router-dom';
-import {Params} from '../Algorithms';
+import {AudioButtonContext, Params} from '../Algorithms';
 import Music from '../../icons/music.svg';
 import {paramsToLink} from '../../functions';
 
@@ -14,10 +14,10 @@ interface AudioAlertProps {
 const AudioAlert: FunctionComponent<AudioAlertProps> = ({theme, setFirstShowAudioAlert}) => {
     const {params} = useRouteMatch<Params>();
     const history = useHistory();
-    return <AudioAlertBackground {...theme}>
+    const audioButton = useContext(AudioButtonContext);
+    return audioButton ? <AudioAlertBackground {...theme}>
         <AudioAlterWrapper onClick={() => {
-            const button = document.querySelector<HTMLButtonElement>('#audio-trigger-button');
-            button?.click();
+            audioButton.click();
             history.push(paramsToLink({
                 ...params,
                 audioIsEnabledKey: '1'
@@ -34,8 +34,7 @@ const AudioAlert: FunctionComponent<AudioAlertProps> = ({theme, setFirstShowAudi
                 themeKey: getRandomThemeKey()
             })}>Change theme</NavLink>
         </ChangeTheme>
-
-    </AudioAlertBackground>;
+    </AudioAlertBackground> : null;
 };
 
 export default AudioAlert;

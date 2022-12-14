@@ -2,7 +2,7 @@ import {Theme} from '../Theme';
 import {Executor, Frame} from '../Algorithms/codes';
 import range from 'lodash/range';
 import shuffle from 'lodash/shuffle';
-import {deviceRatio, isMobile, rgba} from '../../functions';
+import {deviceRatio, rgba} from '../../functions';
 
 export type Size = [number, number];
 
@@ -118,7 +118,7 @@ class GainedOscillator {
     public oscillator: OscillatorNode;
     public readonly gain: GainNode;
 
-    constructor(type: OscillatorType, audioContext: AudioContext) {
+    constructor(type: OscillatorType, audioContext: AudioContext, audioButton: HTMLAnchorElement) {
         this.oscillator = audioContext.createOscillator();
         this.gain = audioContext.createGain();
 
@@ -126,13 +126,9 @@ class GainedOscillator {
         this.gain.connect(audioContext.destination);
         this.oscillator.connect(this.gain);
         this.gain.gain.setValueAtTime(.0000001, audioContext.currentTime);
-        if (isMobile()) {
-            document.querySelector('#audio-trigger-button')?.addEventListener('click', () => {
-                this.oscillator.start();
-            }, {once: true});
-        } else {
+        audioButton.addEventListener('click', () => {
             this.oscillator.start();
-        }
+        }, {once: true});
     }
 }
 
@@ -143,15 +139,15 @@ export class AudioPlayer {
     private readonly swapGainedOscillators: [GainedOscillator, GainedOscillator];
     private readonly comparingGainedOscillators: [GainedOscillator, GainedOscillator];
 
-    constructor() {
+    constructor(audioButton: HTMLAnchorElement) {
         this.audioContext = new AudioContext();
         this.swapGainedOscillators = [
-            new GainedOscillator('square', this.audioContext),
-            new GainedOscillator('square', this.audioContext)
+            new GainedOscillator('square', this.audioContext, audioButton),
+            new GainedOscillator('square', this.audioContext, audioButton)
         ];
         this.comparingGainedOscillators = [
-            new GainedOscillator('sine', this.audioContext),
-            new GainedOscillator('sine', this.audioContext)
+            new GainedOscillator('sine', this.audioContext, audioButton),
+            new GainedOscillator('sine', this.audioContext, audioButton)
         ];
     }
 

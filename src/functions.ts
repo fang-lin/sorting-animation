@@ -1,11 +1,6 @@
-import {UAParser} from 'ua-parser-js';
 import algorithms, {AlgorithmKey} from './components/Algorithms/codes';
 import random from 'lodash/random';
 import {Params} from './components/Algorithms';
-
-export function isMobile(): boolean {
-    return (new UAParser()).getDevice().type !== undefined;
-}
 
 export function getRandomAlgorithmKey(): AlgorithmKey {
     const keys = Object.keys(algorithms);

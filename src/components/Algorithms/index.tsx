@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {createContext, FunctionComponent, useEffect, useState} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import algorithms, {AlgorithmKey} from './codes';
 import CodeArea from '../CodeArea';
@@ -18,11 +18,13 @@ import Footer from '../Footer';
 import ThemeBar from '../Theme';
 import SettingBar from '../SettingBar';
 import AudioAlert from '../AudioAlert';
-import {isMobile} from '../../functions';
 
 function validParams({themeKey, algorithmKey, speedKey, audioIsEnabledKey}: Params): boolean {
     return algorithms[algorithmKey] && ThemeKeys.includes(themeKey) && SpeedKey.includes(speedKey) && AudioIsEnabledKey.includes(audioIsEnabledKey);
 }
+
+export type AudioButtonElement = HTMLAnchorElement | null;
+export const AudioButtonContext = createContext<AudioButtonElement>(null);
 
 const Algorithms: FunctionComponent = () => {
     const {params} = useRouteMatch<Params>();
@@ -31,8 +33,7 @@ const Algorithms: FunctionComponent = () => {
     const [theme, applyTheme] = useState<Theme>(defaultTheme);
     const [shuffle, triggerShuffle] = useState<number>(0);
     const [firstShowAudioAlert, setFirstShowAudioAlert] = useState<boolean>(audioIsEnabledKey === '1');
-
-    const showAudioAlert = isMobile() && firstShowAudioAlert;
+    const [audioButton, setAudioButton] = useState<AudioButtonElement>(null);
 
     useEffect(() => {
         if (!validParams(params))
@@ -41,10 +42,10 @@ const Algorithms: FunctionComponent = () => {
 
     if (validParams(params)) {
         const {name, code, executor} = algorithms[algorithmKey];
-        return <>
+        return <AudioButtonContext.Provider value={audioButton}>
             <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
             <Head1 {...theme}>algoRYTHM</Head1>
-            <Wrapper {...{showAudioAlert}}>
+            <Wrapper {...{firstShowAudioAlert}}>
                 <AlgorithmsWrapper>
                     <GlobalStyle {...theme}/>
                     <CodeAreaWrapper>
@@ -53,7 +54,7 @@ const Algorithms: FunctionComponent = () => {
                     </CodeAreaWrapper>
                     <MenuWrapper>
                         <Menu {...theme}/>
-                        <SettingBar {...{theme, triggerShuffle}}/>
+                        <SettingBar {...{theme, triggerShuffle, setAudioButton}}/>
                     </MenuWrapper>
                     <ThemeBarWrapper>
                         <ThemeBar {...theme}/>
@@ -61,8 +62,8 @@ const Algorithms: FunctionComponent = () => {
                 </AlgorithmsWrapper>
                 <Footer {...theme}/>
             </Wrapper>
-            {showAudioAlert ? <AudioAlert {...{theme, setFirstShowAudioAlert}} /> : null}
-        </>;
+            {firstShowAudioAlert ? <AudioAlert {...{theme, setFirstShowAudioAlert}} /> : null}
+        </AudioButtonContext.Provider>;
     }
     return null;
 };

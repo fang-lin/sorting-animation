@@ -1,10 +1,10 @@
-import React, {FunctionComponent, useEffect, useRef, useState} from 'react';
+import React, {FunctionComponent, useContext, useEffect, useRef, useState} from 'react';
 import {Theme} from '../Theme';
 import {CanvasStage, CanvasWrapper} from './styles';
 import {Executor} from '../Algorithms/codes';
 import {AnimationPlayer, Size, AudioPlayer} from './functions';
 import {useRouteMatch} from 'react-router-dom';
-import {Params} from '../Algorithms';
+import {AudioButtonContext, Params} from '../Algorithms';
 import {deviceRatio} from '../../functions';
 
 interface CanvasProps {
@@ -20,15 +20,16 @@ const Canvas: FunctionComponent<CanvasProps> = ({theme, speed, executor, shuffle
     const [size, setSize] = useState<Size>([0, 0]);
     const [animationPlayer, setAnimationPlayer] = useState<AnimationPlayer>();
     const [autoPlayer, setAutoPlayer] = useState<AudioPlayer>();
+    const audioButton = useContext(AudioButtonContext);
 
     useEffect(() => {
-        if (canvasRef.current) {
+        if (canvasRef.current && audioButton) {
             const {width, height} = canvasRef.current.getBoundingClientRect();
             setSize([width * deviceRatio, height * deviceRatio]);
-            const context = canvasRef.current.getContext('2d');
-            if (context) {
-                const _audioPlayer = new AudioPlayer();
-                const _animationPlayer = new AnimationPlayer(context, _audioPlayer);
+            const canvasContext = canvasRef.current.getContext('2d');
+            if (canvasContext) {
+                const _audioPlayer = new AudioPlayer(audioButton);
+                const _animationPlayer = new AnimationPlayer(canvasContext, _audioPlayer);
 
                 _animationPlayer.size = [width * deviceRatio, height * deviceRatio];
 
@@ -36,7 +37,7 @@ const Canvas: FunctionComponent<CanvasProps> = ({theme, speed, executor, shuffle
                 setAutoPlayer(_audioPlayer);
             }
         }
-    }, [canvasRef]);
+    }, [canvasRef, audioButton]);
 
     useEffect(() => {
         if (animationPlayer) {
