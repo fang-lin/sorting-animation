@@ -1,10 +1,12 @@
 import React, {Dispatch, FunctionComponent, SetStateAction, useContext} from 'react';
 import {getRandomThemeKey, Theme} from '../Theme';
-import {AudioAlterWrapper, AudioAlertBackground, PlayButton, ChangeTheme} from './styles';
+import {AudioAlterButton, AudioAlertBackground, CoinTossButton, Head3} from './styles';
 import {useRouteMatch, useHistory, NavLink} from 'react-router-dom';
 import {AudioButtonContext, Params} from '../Algorithms';
 import Music from '../../icons/music.svg';
-import {paramsToLink} from '../../functions';
+import CoinToss from '../../icons/coin-toss.svg';
+import {getRandomAlgorithmKey, paramsToLink} from '../../functions';
+import {version} from '../../../package.json';
 
 interface AudioAlertProps {
     theme: Theme;
@@ -16,7 +18,7 @@ const AudioAlert: FunctionComponent<AudioAlertProps> = ({theme, setFirstShowAudi
     const history = useHistory();
     const audioButton = useContext(AudioButtonContext);
     return audioButton ? <AudioAlertBackground {...theme}>
-        <AudioAlterWrapper onClick={() => {
+        <AudioAlterButton onClick={() => {
             audioButton.click();
             history.push(paramsToLink({
                 ...params,
@@ -25,15 +27,19 @@ const AudioAlert: FunctionComponent<AudioAlertProps> = ({theme, setFirstShowAudi
             setFirstShowAudioAlert(false);
         }} {...theme}>
             <Music/>
-            <PlayButton {...theme}>PLAY!
-            </PlayButton>
-        </AudioAlterWrapper>
-        <ChangeTheme {...theme}>
+            PLAY
+        </AudioAlterButton>
+        <CoinTossButton {...theme}>
             <NavLink to={paramsToLink({
                 ...params,
-                themeKey: getRandomThemeKey()
-            })}>Change theme</NavLink>
-        </ChangeTheme>
+                algorithmKey: getRandomAlgorithmKey(),
+                themeKey: getRandomThemeKey(),
+            })}>
+                <CoinToss/>
+                Toss
+            </NavLink>
+        </CoinTossButton>
+        <Head3 {...theme}>algoRYTHM {version}</Head3>
     </AudioAlertBackground> : null;
 };
 

@@ -62,7 +62,7 @@ const Algorithms: FunctionComponent = () => {
                 </AlgorithmsWrapper>
                 <Footer {...theme}/>
             </Wrapper>
-            {firstShowAudioAlert ? <AudioAlert {...{theme, setFirstShowAudioAlert}} /> : null}
+            {firstShowAudioAlert && <AudioAlert {...{theme, setFirstShowAudioAlert}}/>}
         </AudioButtonContext.Provider>;
     }
     return null;

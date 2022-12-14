@@ -10,26 +10,30 @@ export const AudioAlertBackground = styled.div<Theme>`
   left: 0;
   z-index: 2;
   display: flex;
+  gap: 30px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: ${({backgroundColor}) => rgba(backgroundColor, .75)};
+   background: ${({backgroundColor}) => rgba(backgroundColor, .75)};
 `;
 
-export const AudioAlterWrapper = styled.h2<Theme>`
+export const AudioAlterButton = styled.h2<Theme>`
   padding: 20px;
-  font-size: 12px;
   line-height: 20px;
   background: ${({defColor}) => defColor};
   color: ${({keywordColor}) => keywordColor};
-  z-index: 3;
   display: flex;
-  gap: 20px;
+  cursor: pointer;
+  gap: 16px;
   align-items: center;
   border: solid 5px transparent;
-  box-shadow: 0 3px 15px 3px rgba(0, 0, 0, .5);
   user-select: none;
-
+  font-size: 64px;
+  font-weight: bold;
+  margin: 0;
+  color: ${({keywordColor}) => keywordColor};
+  transition: background 1s;
+  
   :active {
     border-color: ${({keywordColor}) => keywordColor};
   }
@@ -42,23 +46,43 @@ export const AudioAlterWrapper = styled.h2<Theme>`
   }
 `;
 
-export const PlayButton = styled.span<Theme>`
-  font-size: 64px;
-  font-weight: bold;
-  color: ${({keywordColor}) => keywordColor};
-`;
-
-export const ChangeTheme = styled.h3<Theme>`
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-
+export const CoinTossButton = styled.h3<Theme>`
+  margin: 0;
   a {
+    background: ${({defColor}) => defColor};
     color: ${({keywordColor}) => keywordColor};
     text-decoration: none;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    gap: 4px;
+    cursor: pointer;
+    align-items: center;
+    border: solid 5px transparent;
+    user-select: none;
+    padding: 4px 10px 4px 4px;
+    transition: background 1s;
+    
+    :active {
+      border-color: ${({keywordColor}) => keywordColor};
+    }
 
-    :hover, :active {
-      text-decoration: underline;
+    svg {
+      display: block;
+      width: 32px;
+      height: 32px;
+      fill: ${({keywordColor}) => keywordColor};
     }
   }
+`;
+
+export const Head3 = styled.h3<Theme>`
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  font-size: 32px;
+  font-weight: bold;
+  color: ${({variableColor}) => variableColor};
+  opacity: .3;
 `;
