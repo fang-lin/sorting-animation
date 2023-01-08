@@ -15,6 +15,9 @@ const Footer: FunctionComponent<Theme> = (theme) => {
         &nbsp;|&nbsp;
         <a href="https://plotter.fanglin.me" target="_blank"
             rel="noopener noreferrer">Function Plotter</a>
+        &nbsp;|&nbsp;
+        <a href="https://game-of-life.fanglin.me/" target="_blank"
+            rel="noopener noreferrer">Game of Life</a>
     </FooterWrapper>;
 };
 
