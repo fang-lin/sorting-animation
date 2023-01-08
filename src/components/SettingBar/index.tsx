@@ -9,7 +9,7 @@ import {AudioButtonElement, Params} from '../Algorithms';
 import Shuffle from '../../icons/shuffle.svg';
 import MusicOff from '../../icons/music-off.svg';
 import MusicOn from '../../icons/music-on.svg';
-import ColorPalette from '../../icons/color-palette.svg';
+import Palette from '../../icons/palette.svg';
 import {paramsToLink} from '../../functions';
 
 interface SpeedBarProps {
@@ -54,7 +54,7 @@ const SettingBar: FunctionComponent<SpeedBarProps> = ({theme, triggerShuffle, se
                 <NavLink to={paramsToLink({
                     ...params,
                     themeKey: getRandomThemeKey()
-                })}><ColorPalette/></NavLink>
+                })}><Palette/></NavLink>
             </Item>
         </Raw>
     </OperationBarWrapper>;
