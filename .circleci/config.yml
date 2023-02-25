@@ -12,6 +12,8 @@ jobs:
           with-cache: true
       - run: npm run lint
       - run: npm run build
+      - run: npm run semantic-release
+      - run: npm run build
       - persist_to_workspace:
           root: .
           paths:
