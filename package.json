@@ -21,7 +21,7 @@
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "@semantic-release/git": "^10.0.1",
-    "@svgr/webpack": "^5.5.0",
+    "@svgr/webpack": "^6.5.1",
     "@types/codemirror": "0.0.98",
     "@types/css-font-loading-module": "0.0.4",
     "@types/history": "^4.7.8",
