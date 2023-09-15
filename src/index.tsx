@@ -17,7 +17,7 @@ if (dom) {
             <Redirect to={paramsToLink({
                 themeKey: getRandomThemeKey(),
                 algorithmKey: getRandomAlgorithmKey(),
-                speedKey: '100',
+                speedKey: '1',
                 audioIsEnabledKey: '1'
             })}/>
         </Switch>

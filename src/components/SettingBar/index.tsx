@@ -11,6 +11,7 @@ import MusicOff from '../../icons/music-off.svg';
 import MusicOn from '../../icons/music-on.svg';
 import Palette from '../../icons/palette.svg';
 import {paramsToLink} from '../../functions';
+import {SpeedKey} from '../Algorithms';
 
 interface SpeedBarProps {
     theme: Theme;
@@ -29,15 +30,13 @@ const SettingBar: FunctionComponent<SpeedBarProps> = ({theme, triggerShuffle, se
 
     return <OperationBarWrapper>
         <Raw>
-            <Item {...theme}>
-                <NavLink to={paramsToLink({...params, speedKey: '1000'})}><Turtle/></NavLink>
-            </Item>
-            <Item {...theme}>
-                <NavLink to={paramsToLink({...params, speedKey: '100'})}><Bear/></NavLink>
-            </Item>
-            <Item {...theme}>
-                <NavLink to={paramsToLink({...params, speedKey: '10'})}><Rabbit/></NavLink>
-            </Item>
+            {
+                [Turtle, Bear, Rabbit].map((Icon, index) => {
+                    const speedKey =  index.toString() as typeof SpeedKey[number];
+                    return <Item {...theme} key={index}>
+                        <NavLink to={paramsToLink({...params, speedKey})}><Icon/></NavLink>
+                    </Item>;
+                })}
         </Raw>
         <Raw>
             <Item  {...theme}>

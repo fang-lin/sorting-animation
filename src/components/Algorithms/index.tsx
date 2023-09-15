@@ -20,7 +20,11 @@ import SettingBar from '../SettingBar';
 import AudioAlert from '../AudioAlert';
 
 function validParams({themeKey, algorithmKey, speedKey, audioIsEnabledKey}: Params): boolean {
-    return algorithms[algorithmKey] && ThemeKeys.includes(themeKey) && SpeedKey.includes(speedKey) && AudioIsEnabledKey.includes(audioIsEnabledKey);
+    return algorithms[algorithmKey] && ThemeKeys.includes(themeKey) && validSpeedKey(speedKey) && AudioIsEnabledKey.includes(audioIsEnabledKey);
+}
+
+function validSpeedKey(speedKey: string): boolean {
+    return SpeedValue[parseInt(speedKey)] !== undefined;
 }
 
 export type AudioButtonElement = HTMLAnchorElement | null;
@@ -43,7 +47,7 @@ const Algorithms: FunctionComponent = () => {
     if (validParams(params)) {
         const {name, code, executor} = algorithms[algorithmKey];
         return <AudioButtonContext.Provider value={audioButton}>
-            <CanvasTarget {...{theme, speed: parseInt(speedKey), executor, shuffle}}/>
+            <CanvasTarget {...{theme, speed: SpeedValue[parseInt(speedKey)], executor, shuffle}}/>
             <Head1 {...theme}>algoRYTHM</Head1>
             <Wrapper {...{firstShowAudioAlert}}>
                 <AlgorithmsWrapper>
@@ -70,7 +74,8 @@ const Algorithms: FunctionComponent = () => {
 
 export default Algorithms;
 
-const SpeedKey = ['1000', '100', '10'] as const;
+export const SpeedKey = ['2', '1', '0'] as const;
+const SpeedValue = [1000, 100, 10] as const;
 const AudioIsEnabledKey = ['1', '0'] as const;
 
 export interface Params {
