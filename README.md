@@ -1,4 +1,4 @@
-# [algoRYTHM](http://algorythm.fanglin.me/) &middot; [![CircleCI Status](https://circleci.com/gh/fang-lin/sorting-animation.svg?style=shield)](https://app.circleci.com/pipelines/github/fang-lin/sorting-animation)
+# [algoRYTHM](http://algorythm.fanglin.me/) &middot; [![Build and Deploy](https://github.com/fang-lin/sorting-animation/actions/workflows/build-and-deploy.yml/badge.svg)](https://github.com/fang-lin/sorting-animation/actions/workflows/build-and-deploy.yml)
 
 An animation and rhythm of sorting algorithms:
   - Binary Insert
