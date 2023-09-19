@@ -7,7 +7,7 @@
 
 node_modules
 client/lib
-dist
+build
 tmp
 
 /bin/
