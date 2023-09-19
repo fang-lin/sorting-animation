@@ -1,6 +1,7 @@
 .idea
 .git
 .envrc
+.DS_Store
 
 .terraform
 .terraform.lock.hcl
