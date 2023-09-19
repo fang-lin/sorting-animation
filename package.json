@@ -9,7 +9,7 @@
     "start": "webpack-dev-server --mode development --host 0.0.0.0",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf dist",
-    "build": "npm run clean && webpack --mode production && cp -R error dist/ && npx copyfiles -u 1 ./src/icons/icon.png ./dist/",
+    "build": "npm run clean && export SET NODE_OPTIONS=--openssl-legacy-provider && webpack --mode production && cp -R error dist/ && npx copyfiles -u 1 ./src/icons/icon.png ./dist/",
     "prepare": "husky install",
     "semantic-release": "semantic-release"
   },
